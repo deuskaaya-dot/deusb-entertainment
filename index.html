@@ -3,234 +3,179 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DEUSB VISUALS | PORTFOLIO</title>
+    <title>DEUSB EVENTS STORE</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --accent-color: #ff3e3e;
-            --bg-dark: #0a0a0a;
-            --card-bg: #161616;
-            --text-main: #ffffff;
+            --whatsapp-green: #25d366;
+            --accent-color: #e67e22;
+            --card-shadow: 0 10px 20px rgba(0,0,0,0.08);
         }
 
         body { 
-            font-family: 'Inter', sans-serif; 
+            font-family: 'Inter', -apple-system, sans-serif; 
             margin: 0; 
-            background-color: var(--bg-dark); 
-            color: var(--text-main); 
-            overflow-x: hidden;
+            background-color: #f4f6f8; 
+            color: #1c1e21; 
         }
 
         header { 
-            height: 50vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1492691523567-6170c24e3fb9?auto=format&fit=crop&q=80');
-            background-size: cover;
-            background-position: center;
-            border-bottom: 2px solid #222;
+            background: #ffffff; 
+            padding: 25px; 
+            text-align: center; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
 
-        h1 { font-family: 'Syncopate', sans-serif; font-size: clamp(20px, 6vw, 40px); margin: 0; letter-spacing: 4px; }
-        .subtitle { color: var(--accent-color); font-weight: bold; margin-top: 10px; letter-spacing: 2px; font-size: 12px; text-transform: uppercase; }
+        .logo { width: 80px; height: auto; margin-bottom: 10px; }
+        .logo-light { display: inline-block; }
+        .logo-dark { display: none; }
 
-        .container { max-width: 1200px; margin: -50px auto 50px; padding: 0 20px; }
+        @media (min-width: 768px) {
+            .logo { width: 180px; }
+            header h1 { font-size: 32px; }
+        }
 
-        #multimedia-grid { 
+        @media (prefers-color-scheme: dark) {
+            .logo-light { display: none; }
+            .logo-dark { display: inline-block; }
+        }
+
+        header h1 { margin: 0; font-size: 24px; color: #000; text-transform: uppercase; }
+
+        .container { max-width: 1200px; margin: 30px auto; padding: 0 15px; }
+
+        #duka { 
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
         }
 
-        .mradi-card { 
-            background: var(--card-bg); 
-            border: 1px solid #222;
-            transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
+        .kadi { 
+            background: white; 
+            border-radius: 12px; 
+            box-shadow: var(--card-shadow);
+            overflow: hidden;
+            transition: 0.3s;
+            text-align: center;
             display: flex;
             flex-direction: column;
+            padding-bottom: 20px;
         }
 
-        .mradi-card:hover { border-color: var(--accent-color); transform: translateY(-5px); }
-
-        .media-container {
-            width: 100%;
-            height: 200px;
-            position: relative;
-            background: #000;
-            cursor: pointer;
-            overflow: hidden;
-        }
-
-        .media-container img { width: 100%; height: 100%; object-fit: cover; opacity: 0.7; transition: 0.5s; }
-        .mradi-card:hover .media-container img { opacity: 0.4; transform: scale(1.1); }
-
-        .play-icon {
-            position: absolute;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            width: 50px; height: 50px;
-            background: var(--accent-color);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 0 20px rgba(255, 62, 62, 0.4);
-        }
-
-        .info { padding: 20px; flex-grow: 1; }
-        .meta-data { display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px; }
-        .tag { font-size: 10px; color: var(--accent-color); font-weight: bold; text-transform: uppercase; letter-spacing: 1px; }
-        .date { font-size: 10px; color: #666; font-weight: bold; }
+        .kadi:hover { transform: translateY(-5px); }
+        .kadi img.product-img { width: 100%; height: 200px; object-fit: cover; display: block; margin-bottom: 15px; background: #eee; }
         
-        h3 { margin: 5px 0 10px 0; font-size: 18px; color: #fff; }
-        .desc { font-size: 13px; color: #aaa; margin-bottom: 20px; line-height: 1.4; }
-
-        .btn-group { display: flex; gap: 10px; margin-top: auto; }
-        .btn { 
-            flex: 1;
-            padding: 12px;
-            text-align: center;
+        .kadi-info { padding: 0 20px; flex-grow: 1; }
+        
+        .tarehe-tag {
+            background: #f0f0f0;
+            color: #555;
             font-size: 11px;
+            padding: 4px 10px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-bottom: 10px;
             font-weight: bold;
-            text-decoration: none;
-            border: 1px solid #333;
-            color: white;
-            transition: 0.3s;
-            cursor: pointer;
-            background: transparent;
         }
-        .btn-main { background: var(--accent-color); border-color: var(--accent-color); }
 
-        #videoModal {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.95);
-            z-index: 2000;
-            justify-content: center;
+        .kadi-info h3 { margin: 0 0 8px 0; font-size: 18px; color: #333; }
+        
+        .maelezo { color: #666; font-size: 13px; line-height: 1.4; margin-bottom: 15px; }
+
+        .action-btns {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            padding: 0 20px;
+        }
+
+        .btn-nunua, .btn-video { 
+            display: inline-flex; 
             align-items: center;
-            padding: 20px;
+            justify-content: center;
+            gap: 8px;
+            padding: 10px 16px; 
+            text-decoration: none; 
+            font-weight: bold; 
+            font-size: 13px;
+            border-radius: 50px;
+            transition: 0.3s;
         }
 
-        .modal-content { width: 100%; max-width: 900px; aspect-ratio: 16/9; position: relative; }
-        .close-modal { position: absolute; top: -45px; right: 0; color: white; font-size: 35px; cursor: pointer; }
-        iframe { width: 100%; height: 100%; border: none; }
+        .btn-nunua { background: var(--whatsapp-green); color: white; }
+        .btn-nunua:hover { background: #128c7e; transform: scale(1.05); }
 
-        footer { padding: 80px 20px; text-align: center; border-top: 1px solid #222; margin-top: 50px; background: #050505; }
-        .contact-link { color: var(--accent-color); font-weight: bold; text-decoration: none; font-size: 18px; display: block; margin-top: 10px; }
-        .loading { text-align: center; padding: 100px; color: var(--accent-color); font-family: 'Syncopate'; letter-spacing: 2px; }
+        .btn-video { background: #000; color: white; }
+        .btn-video:hover { opacity: 0.8; }
+
+        .btn-icon-small { width: 18px !important; height: 18px !important; object-fit: contain; }
+
+        footer { 
+            background: #1a1a1a; 
+            padding: 50px 20px; 
+            text-align: center; 
+            color: white;
+            margin-top: 50px;
+        }
+
+        .social-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin: 25px 0; }
+        .social-btn { display: flex; align-items: center; gap: 8px; background: #2a2a2a; padding: 8px 14px; border-radius: 50px; text-decoration: none; color: white; font-weight: bold; font-size: 13px; border: 1px solid #444; }
+        .social-icon { width: 18px; height: 18px; object-fit: contain; }
+        .loading { text-align: center; padding: 100px; font-size: 20px; color: #888; }
     </style>
 </head>
 <body>
 
     <header>
-        <img src="https://i.ibb.co/dsKnm82D/logo.png" alt="DEUSB Logo" style="width: 80px; margin-bottom: 20px;">
-        <h1>DEUSB VISUALS</h1>
-        <div class="subtitle">Multimedia Production & Creative Arts</div>
+        <img src="https://i.ibb.co/rRZvchrH/transparent-logo.png" alt="DEUSB Logo" class="logo logo-light">
+        <img src="https://i.ibb.co/v4rqWHrN/transparent-logo-for-black-theme-people.png" alt="DEUSB Logo" class="logo logo-dark">
+        <h1>DEUSB ENTERTAINMENT EVENTS</h1>
     </header>
 
     <div class="container">
-        <div id="multimedia-grid">
-            <div class="loading">LOADING PROJECTS...</div>
-        </div>
-    </div>
-
-    <div id="videoModal">
-        <div class="modal-content">
-            <span class="close-modal" onclick="closeVideo()">&times;</span>
-            <div id="videoPlayer"></div>
+        <div id="duka">
+            <div class="loading">Inapakia matukio...</div>
         </div>
     </div>
 
     <footer>
-        <p style="color: #666; margin-bottom: 5px;">TUONGEE KUHUSU MRADI WAKO</p>
-        <a href="https://wa.me/255748666409" class="contact-link">WHATSAPP: +255 748 666 409</a>
-        <p style="font-size: 11px; color: #333; margin-top: 40px; letter-spacing: 2px;">&copy; 2026 DEUSB STORE. ALL RIGHTS RESERVED.</p>
+        <h3 style="margin-bottom: 10px;">Wasiliana Nasi</h3>
+        <p style="color: #ccc; margin-bottom: 20px;">Tufuate kwenye mitandao ya kijamii</p>
+        
+        <div class="social-container">
+            <a href="https://wa.me/255748666409" class="social-btn"><img src="https://i.ibb.co/tP3xXKN0/whatsapp.png" class="social-icon"> WhatsApp</a>
+            <a href="https://www.instagram.com/deusb_entertainment" target="_blank" class="social-btn"><img src="https://i.ibb.co/PZF184kz/instagram.png" class="social-icon"> Instagram</a>
+            <a href="https://tiktok.com/@deusbentertainment" target="_blank" class="social-btn"><img src="https://i.ibb.co/nMGgVbsT/tik-tok.png" class="social-icon"> TikTok</a>
+            <a href="https://x.com/Deusb17" target="_blank" class="social-btn"><img src="https://i.ibb.co/FbWvjMxb/twitter.png" class="social-icon"> Twitter</a>
+            <a href="https://youtube.com/@deusbentertainment" target="_blank" class="social-btn"><img src="https://upload.wikimedia.org/wikipedia/commons/e/ef/Youtube_logo.png" class="social-icon"> YouTube</a>
+        </div>
+
+        <p style="color: #ffffff; font-size: 14px; margin-top: 20px;">Email: deusbentertainment@gmail.com</p>
+        <p style="font-size: 12px; color: #555; margin-top: 30px;">&copy; 2026 DEUSB STORE. Haki zote zimehifadhiwa.</p>
     </footer>
 
     <script>
-        // Link yako ya Google Sheet uliyotoa
-        const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTcSf-wDzTtrBdh5VNSOTSdevvJD2j2utvUledCjr7LwVjxYj1tjHI5pUkgplmRQjEnkkkzwu9cQ5RP/pub?gid=0&single=true&output=csv';
+        // Link yako mpya ya Google Sheet
+        const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRu93VHqm-2hTtaaNWbRMuhgqIki7Fv_EMu9EaZqZb41EXkGAFOWuEldPh0CvkSHv7EYZ94tF2XQMvL/pub?gid=699655056&single=true&output=csv';
 
-        function loadPortfolio() {
+        function loadEvents() {
             Papa.parse(sheetUrl, {
                 download: true,
                 header: true,
                 complete: function(results) {
                     const data = results.data;
-                    const grid = document.getElementById('multimedia-grid');
+                    const dukaDiv = document.getElementById('duka');
                     let html = '';
                     
                     data.forEach(mradi => {
                         if(mradi.Jina) {
-                            const picha = mradi.PichaURL ? mradi.PichaURL.trim() : 'https://via.placeholder.com/600x400/161616/ffffff?text=Deusb+Visuals';
-                            const videoUrl = mradi.VideoURL ? mradi.VideoURL.trim() : ''; 
-                            const tarehe = mradi.Tarehe || '';
-                            const maelezo = mradi.Maelezo || 'Multimedia Production project.';
+                            const jina = mradi.Jina;
+                            const tarehe = mradi.Tarehe || 'Leo';
+                            const picha = mradi.PichaURL ? mradi.PichaURL.trim() : 'https://via.placeholder.com/400x250?text=Deusb+Visuals';
+                            const video = mradi.VideoURL ? mradi.VideoURL.trim() : '';
+                            const maelezo = mradi.Maelezo || 'Bonyeza kitufe cha WhatsApp kupata huduma hii.';
                             
-                            html += `
-                                <div class="mradi-card">
-                                    <div class="media-container" onclick="openVideo('${videoUrl}')">
-                                        <img src="${picha}" alt="${mradi.Jina}">
-                                        ${videoUrl ? `<div class="play-icon"><span style="color:white; font-size:14px;">▶</span></div>` : ''}
-                                    </div>
-                                    <div class="info">
-                                        <div class="meta-data">
-                                            <span class="tag">Production</span>
-                                            <span class="date">${tarehe}</span>
-                                        </div>
-                                        <h3>${mradi.Jina}</h3>
-                                        <p class="desc">${maelezo}</p>
-                                        <div class="btn-group">
-                                            ${videoUrl ? `<button class="btn btn-main" onclick="openVideo('${videoUrl}')">ANGALIA KAZI</button>` : ''}
-                                            <a href="https://wa.me/255748666409?text=Habari Deusb, nimeona kazi yako ya ${mradi.Jina} ya tarehe ${tarehe} - nahitaji huduma yako." class="btn">HIRE ME</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            `;
-                        }
-                    });
-                    grid.innerHTML = html || '<div class="loading">HAKUNA KAZI ZILIZOPATIKANA.</div>';
-                }
-            });
-        }
-
-        function openVideo(url) {
-            if(!url || url === "" || url === "0") return alert("Link ya video haijawekwa kwenye Google Sheet!");
-            
-            let embedUrl = url;
-            if(url.includes('youtube.com/watch?v=')) {
-                const vidId = url.split('v=')[1].split('&')[0];
-                embedUrl = `https://www.youtube.com/embed/${vidId}`;
-            } else if(url.includes('youtu.be/')) {
-                const vidId = url.split('youtu.be/')[1].split('?')[0];
-                embedUrl = `https://www.youtube.com/embed/${vidId}`;
-            } else if(url.includes('vimeo.com/')) {
-                const vidId = url.split('vimeo.com/')[1];
-                embedUrl = `https://player.vimeo.com/video/${vidId}`;
-            }
-
-            document.getElementById('videoPlayer').innerHTML = `<iframe src="${embedUrl}?autoplay=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
-            document.getElementById('videoModal').style.display = 'flex';
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeVideo() {
-            document.getElementById('videoModal').style.display = 'none';
-            document.getElementById('videoPlayer').innerHTML = ''; 
-            document.body.style.overflow = 'auto';
-        }
-
-        window.onclick = function(event) {
-            if (event.target == document.getElementById('videoModal')) closeVideo();
-        }
-
-        window.onload = loadPortfolio;
-    </script>
-</body>
-</html>
+                            // Kutengeneza ujumbe wa WhatsApp wenye maelezo kam

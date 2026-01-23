@@ -36,7 +36,8 @@
         }
 
         .logo { width: 100px; margin-bottom: 10px; }
-        h1 { color: var(--brand-blue); text-transform: uppercase; margin: 0 0 15px 0; font-size: 1.5rem; letter-spacing: 2px; }
+        h1 { color: var(--brand-blue); text-transform: uppercase; margin: 0; font-size: 1.5rem; letter-spacing: 2px; }
+        .tagline { font-style: italic; color: var(--brand-red); font-size: 14px; margin-bottom: 15px; display: block; }
 
         .search-container {
             width: 100%;
@@ -143,6 +144,7 @@
     <header>
         <img src="https://i.ibb.co/rRZvchrH/transparent-logo.png" alt="DEUSB Logo" class="logo">
         <h1>DEUSB ENTERTAINMENT</h1>
+        <span class="tagline">"The Standard of Story"</span>
         <div class="search-container">
             <input type="text" id="searchInput" placeholder="Search projects or store..." onkeyup="filterContent()">
             <div class="nav-actions">
@@ -295,7 +297,7 @@
                             <button class="btn-req" onclick="openBrief('Graphics Premium')">Requirement List</button>
                         </div>
                     </div>
-                    <p style="font-size: 12px; font-style: italic; margin-top: 15px;">Why the time difference? Basic is "design-on-demand." Standard/Premium involves market research and custom typography to ensure your logo is unique to your business.</p>
+                    <p style="font-size: 12px; font-style: italic; margin-top: 15px;">Why the time difference? Basic is "design-on-demand." Standard/Premium involves market research and custom typography to ensure your logo isn't just "pretty," but unique to your business.</p>
                 </div>
 
                 <div class="service-section">
@@ -304,23 +306,23 @@
                     <div class="tier-grid">
                         <div class="tier-card">
                             <h3>BASIC</h3>
-                            <span class="tier-price">40,000-60,000</span>
+                            <span class="tier-price">40,000 - 60,000</span>
                             <span class="tier-time">2-5 Hours</span>
                             <p>Focus: Simple cuts, background music, and basic color correction. Ideal for: Quick daily updates and personal vlogs.</p>
                             <button class="btn-req" onclick="openBrief('Video Basic')">Requirement List</button>
                         </div>
                         <div class="tier-card">
                             <h3>STANDARD</h3>
-                            <span class="tier-price">80,000-150,000</span>
+                            <span class="tier-price">80,000 - 150,000</span>
                             <span class="tier-time">1-2 Days</span>
-                            <p>Focus: Smooth transitions, professional color grading, and subtitles. Ideal for: Small business ads and professional social media content.</p>
+                            <p>Focus: Smooth transitions, professional color grading, and subtitles (essential for silent scrolling). Ideal for: Small business ads and professional social media content.</p>
                             <button class="btn-req" onclick="openBrief('Video Standard')">Requirement List</button>
                         </div>
                         <div class="tier-card">
                             <h3>PREMIUM</h3>
                             <span class="tier-price">200,000 – 400,000</span>
                             <span class="tier-time">3-7 Days</span>
-                            <p>Focus: Full production including Scripting + B-roll + Professional Voiceover. Ideal for: TV Commercials.</p>
+                            <p>Focus: Full production including Scripting + B-roll (extra footage) + Professional Voiceover. Ideal for: High-budget marketing campaigns and TV Commercials.</p>
                             <button class="btn-req" onclick="openBrief('Video Premium')">Requirement List</button>
                         </div>
                     </div>
@@ -341,14 +343,14 @@
                             <h3>STANDARD</h3>
                             <span class="tier-price">150,000 – 250,000</span>
                             <span class="tier-time">3-5 Days</span>
-                            <p>Deliverable: 30-second 2D Explainer Video. Usage: Perfect for teaching customers how to use your app or service.</p>
+                            <p>Deliverable: 30-second 2D Explainer Video (using characters/icons). Usage: Perfect for teaching customers how to use your app or service.</p>
                             <button class="btn-req" onclick="openBrief('Motion Standard')">Requirement List</button>
                         </div>
                         <div class="tier-card">
                             <h3>PREMIUM</h3>
                             <span class="tier-price">350,000 – 600,000</span>
                             <span class="tier-time">2-3 Weeks</span>
-                            <p>Deliverable: 1-minute Full Motion Graphic Ad. Usage: A high-end asset for corporate presentations.</p>
+                            <p>Deliverable: 1-minute Full Motion Graphic Ad (Custom Storytelling). Usage: A high-end asset for corporate presentations or viral marketing.</p>
                             <button class="btn-req" onclick="openBrief('Motion Premium')">Requirement List</button>
                         </div>
                     </div>
@@ -361,19 +363,19 @@
                         <div class="tier-card">
                             <h3>LITE PLAN</h3>
                             <span class="tier-price">250,000 – 400,000/mo</span>
-                            <p>Content: 12 Posts per month. Goal: Keeping your page active.</p>
+                            <p>Platforms: 1-2 (FB/IG). Content: 12 Posts per month + Caption writing. Goal: Keeping your page active so customers know you are open.</p>
                             <button class="btn-req" onclick="openBrief('Social Lite')">Requirement List</button>
                         </div>
                         <div class="tier-card">
                             <h3>GROWTH PLAN</h3>
                             <span class="tier-price">500,000 – 850,000/mo</span>
-                            <p>Content: 20 Posts per month (4 Reels). Strategy: Hashtag research & engagement.</p>
+                            <p>Platforms: 3 (FB, IG, TikTok). Content: 20 Posts per month (includes 4 professional Reels/Videos). Strategy: Hashtag research, engagement with followers, and monthly reports.</p>
                             <button class="btn-req" onclick="openBrief('Social Growth')">Requirement List</button>
                         </div>
                         <div class="tier-card">
                             <h3>DOMINATION PLAN</h3>
                             <span class="tier-price">1,200,000+/mo</span>
-                            <p>Content: Daily posting + Weekly video shoots + DM management.</p>
+                            <p>Platforms: All major platforms. Content: Daily posting + Weekly video shoots + DM management. Ads: Management of Facebook/Instagram/Google Ads (Ad spend paid by client).</p>
                             <button class="btn-req" onclick="openBrief('Social Domination')">Requirement List</button>
                         </div>
                     </div>
@@ -381,11 +383,12 @@
 
                 <div class="service-section">
                     <h2 class="section-title">5. Our Terms of Engagement</h2>
+                    <p class="section-desc">To ensure the best quality, we follow these professional standards:</p>
                     <ul style="font-size: 14px; line-height: 1.8;">
-                        <li><strong>Payment:</strong> A 50% deposit is required to begin. The balance is due before final delivery.</li>
-                        <li><strong>Revisions:</strong> Basic: 2 Rounds. Standard/Premium: Up to 4 Rounds.</li>
-                        <li><strong>Rush Jobs:</strong> A 25% rush fee will be applied for urgent delivery.</li>
-                        <li><strong>Communication:</strong> Clients must provide a clear "Brief" before we start.</li>
+                        <li><strong>1. Payment:</strong> A 50% deposit is required to begin any project. The remaining balance is due upon final approval before files are delivered.</li>
+                        <li><strong>2. Revisions:</strong> Basic: 2 Rounds of minor changes. Standard/Premium: Up to 4 Rounds of revisions.</li>
+                        <li><strong>3. Rush Jobs:</strong> If a "Standard" or "Premium" project is needed in "Basic" time, a 25% rush fee will be applied.</li>
+                        <li><strong>4. Communication:</strong> Clients must provide a clear "Brief" (instructions) before we start to ensure the 1-4 hour or 1-3 day timelines are met.</li>
                     </ul>
                 </div>
             `;

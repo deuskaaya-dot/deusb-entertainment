@@ -13,6 +13,7 @@
             --brand-yellow: #fdb813; 
             --pure-white: #ffffff;
             --whatsapp-green: #25d366;
+            --deusb-gold: #e67e22;
         }
 
         * { box-sizing: border-box; }
@@ -60,9 +61,10 @@
             align-items: center;
             justify-content: center;
             gap: 15px;
+            flex-wrap: wrap;
         }
 
-        .btn-store-link, .btn-back-link {
+        .btn-store-link, .btn-back-link, .btn-cat-link {
             display: inline-block;
             background: var(--brand-blue);
             color: var(--brand-yellow);
@@ -100,21 +102,16 @@
         .btn-play, .btn-nunua { display: block; background: var(--brand-red); color: white; padding: 12px; border-radius: 5px; font-weight: bold; font-size: 13px; margin: 0 15px 15px 15px; text-align: center; border: none; cursor: pointer; text-decoration: none; }
         .btn-nunua { background: var(--whatsapp-green); }
 
-        /* FOOTER RESTORATION */
+        /* FOOTER (EXACTLY AS YOURS) */
         footer { 
-            background: var(--brand-blue); 
-            padding: 50px 20px; 
-            text-align: center; 
-            color: var(--pure-white); 
-            border-top: 5px solid var(--brand-yellow); 
-            margin-top: 50px; 
+            background: var(--brand-blue); padding: 50px 20px; text-align: center; 
+            color: var(--pure-white); border-top: 5px solid var(--brand-yellow); margin-top: 50px;
         }
-
         .social-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin: 25px 0; }
         .social-btn { 
             display: flex; align-items: center; gap: 10px; padding: 12px 22px; 
             border-radius: 50px; text-decoration: none; color: white; font-weight: bold; 
-            font-size: 13px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); 
+            font-size: 13px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
         }
         .social-icon { width: 20px; height: 20px; object-fit: contain; }
         .email-link { color: var(--brand-yellow); text-decoration: none; font-weight: bold; font-size: 16px; }
@@ -135,6 +132,7 @@
             <div class="nav-actions">
                 <a href="javascript:void(0)" id="btnBack" class="btn-back-link" onclick="loadProjects()">← Go Back</a>
                 <a href="javascript:void(0)" id="btnStore" class="btn-store-link" onclick="loadStore()">Got to store and purchase</a>
+                <a href="javascript:void(0)" id="btnCatalogue" class="btn-cat-link" onclick="loadCatalogue()">Service Catalogue</a>
             </div>
         </div>
     </header>
@@ -170,14 +168,19 @@
         
         let allMiradi = [];
         let allStoreProducts = [];
-        let isStoreMode = false;
+        let catalogueData = [
+            { jina: "Graphics Basic", bei: "20k-30k", desc: "Logo or Flyer" },
+            { jina: "Video Editing Standard", bei: "80k-150k", desc: "Reels/Ads" },
+            { jina: "Social Media Lite", bei: "250k-400k", desc: "Monthly Management" }
+        ];
+        let mode = 'projects';
 
         async function loadProjects() {
-            isStoreMode = false;
+            mode = 'projects';
             document.getElementById('searchInput').value = "";
             document.getElementById('btnBack').style.display = 'none';
             document.getElementById('btnStore').style.display = 'inline-block';
-            
+            document.getElementById('btnCatalogue').style.display = 'inline-block';
             try {
                 const res = await fetch(projectSheetUrl);
                 const text = await res.text();
@@ -191,70 +194,73 @@
         }
 
         function loadStore() {
-            isStoreMode = true;
+            mode = 'store';
             document.getElementById('searchInput').value = "";
             document.getElementById('btnStore').style.display = 'none';
+            document.getElementById('btnCatalogue').style.display = 'inline-block';
             document.getElementById('btnBack').style.display = 'inline-block';
-            
             Papa.parse(storeSheetUrl, {
-                download: true,
-                header: true,
+                download: true, header: true,
                 complete: function(results) {
-                    allStoreProducts = results.data.filter(b => b.Jina && b.Bei);
+                    allStoreProducts = results.data.filter(b => b.Jina);
                     renderStore(allStoreProducts);
                 }
             });
         }
 
+        function loadCatalogue() {
+            mode = 'catalogue';
+            document.getElementById('searchInput').value = "";
+            document.getElementById('btnCatalogue').style.display = 'none';
+            document.getElementById('btnStore').style.display = 'inline-block';
+            document.getElementById('btnBack').style.display = 'inline-block';
+            renderCatalogue(catalogueData);
+        }
+
         function renderCards(list) {
-            document.getElementById('duka').innerHTML = list.map(m => {
-                const action = m.type === 'youtube' ? `onclick="playVideo('${m.link}')"` : `onclick="window.open('${m.link}', '_blank')"`;
-                return `
+            document.getElementById('duka').innerHTML = list.map(m => `
                 <div class="kadi">
-                    <img src="${m.picha}" class="product-img" ${action}>
-                    <div class="kadi-info" ${action}><h3>${m.jina}</h3></div>
+                    <img src="${m.picha}" class="product-img" onclick="${m.type === 'youtube' ? `playVideo('${m.link}')` : `window.open('${m.link}')`}">
+                    <div class="kadi-info"><h3>${m.jina}</h3></div>
                     <div class="post-description">${m.description}</div>
-                    <button class="btn-play" ${action}>${m.type === 'youtube' ? 'PLAY VIDEO' : 'VIEW POST'}</button>
-                </div>`;
-            }).join('');
+                    <button class="btn-play" onclick="${m.type === 'youtube' ? `playVideo('${m.link}')` : `window.open('${m.link}')`}">VIEW</button>
+                </div>`).join('');
         }
 
         function renderStore(list) {
-            let html = list.map(bidhaa => {
-                const picha = (bidhaa.PichaURL && bidhaa.PichaURL.includes('http')) ? bidhaa.PichaURL.trim() : '';
-                return `
-                    <div class="kadi">
-                        ${picha ? `<img src="${picha}" class="product-img">` : ''}
-                        <div class="kadi-info">
-                            <h3>${bidhaa.Jina}</h3>
-                            <span class="bei">TSH ${bidhaa.Bei}</span>
-                            <p class="maelezo">${bidhaa.Maelezo || ''}</p>
-                            <a class="btn-nunua" href="https://wa.me/255748666409?text=Habari DEUSB STORE, nahitaji: ${bidhaa.Jina} kwa TSH ${bidhaa.Bei}">
-                                Nunua kwa WhatsApp
-                            </a>
-                        </div>
-                    </div>`;
-            }).join('');
-            document.getElementById('duka').innerHTML = html || '<div style="text-align:center; padding:50px;">Hakuna kilichopatikana.</div>';
+            document.getElementById('duka').innerHTML = list.map(b => `
+                <div class="kadi">
+                    <img src="${b.PichaURL}" class="product-img">
+                    <div class="kadi-info">
+                        <h3>${b.Jina}</h3>
+                        <span class="bei">TSH ${b.Bei}</span>
+                        <p class="maelezo">${b.Maelezo || ''}</p>
+                        <a class="btn-nunua" href="https://wa.me/255748666409?text=Nahitaji: ${b.Jina}">NUNUA</a>
+                    </div>
+                </div>`).join('');
+        }
+
+        function renderCatalogue(list) {
+            document.getElementById('duka').innerHTML = list.map(s => `
+                <div class="kadi">
+                    <div class="kadi-info">
+                        <h3 style="margin-top:20px;">${s.jina}</h3>
+                        <span class="bei">${s.bei}</span>
+                        <p class="maelezo">${s.desc}</p>
+                        <a class="btn-play" href="https://wa.me/255748666409?text=Nahitaji huduma ya: ${s.jina}">ENQUIRE NOW</a>
+                    </div>
+                </div>`).join('');
         }
 
         function searchFromInput() { 
             const val = document.getElementById('searchInput').value.toLowerCase(); 
-            if(isStoreMode) {
-                renderStore(allStoreProducts.filter(p => p.Jina.toLowerCase().includes(val)));
-            } else {
-                renderCards(allMiradi.filter(m => m.jina.toLowerCase().includes(val))); 
-            }
+            if(mode === 'store') renderStore(allStoreProducts.filter(p => p.Jina.toLowerCase().includes(val)));
+            else if(mode === 'catalogue') renderCatalogue(catalogueData.filter(s => s.jina.toLowerCase().includes(val)));
+            else renderCards(allMiradi.filter(m => m.jina.toLowerCase().includes(val))); 
         }
 
-        function playVideo(id) { 
-            document.getElementById('youtubePlayer').src = `https://www.youtube.com/embed/${id}?autoplay=1`; 
-            document.getElementById('videoModal').style.display = 'flex'; 
-        }
-        function closeVideo() { 
-            document.getElementById('youtubePlayer').src = ""; 
-            document.getElementById('videoModal').style.display = 'none'; 
-        }
+        function playVideo(id) { document.getElementById('youtubePlayer').src = `https://www.youtube.com/embed/${id}?autoplay=1`; document.getElementById('videoModal').style.display = 'flex'; }
+        function closeVideo() { document.getElementById('youtubePlayer').src = ""; document.getElementById('videoModal').style.display = 'none'; }
 
         window.onload = loadProjects;
     </script>

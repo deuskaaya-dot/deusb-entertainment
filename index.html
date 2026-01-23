@@ -52,14 +52,7 @@
         }
 
         .container { max-width: 1200px; margin: 20px auto; padding: 0 15px; }
-        
-        /* ADAPTIVE GRID: Masonry-style feel */
-        #duka { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
-            gap: 25px; 
-            align-items: start; 
-        }
+        #duka { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 25px; align-items: start; }
 
         .kadi { 
             background: var(--pure-white); 
@@ -68,28 +61,58 @@
             border: 1px solid rgba(26, 42, 68, 0.1);
             display: flex;
             flex-direction: column;
-            cursor: pointer;
+            height: auto;
             transition: 0.3s;
         }
 
         .kadi:hover { transform: translateY(-5px); border-color: var(--brand-red); }
 
-        /* FIXED: Image now adopts its own height (portrait or landscape) */
         .product-img { 
             width: 100%; 
             height: auto; 
             display: block;
             object-fit: contain;
-            background: #eee;
+            cursor: pointer;
         }
 
         .kadi-info { padding: 15px; text-align: center; }
-        .kadi-info h3 { margin: 0; font-size: 14px; text-transform: uppercase; color: var(--brand-blue); }
+        .kadi-info h3 { margin: 0; font-size: 14px; text-transform: uppercase; color: var(--brand-blue); cursor: pointer; }
+
+        /* COMMENT SECTION STYLES */
+        .comment-section {
+            padding: 10px 15px 15px 15px;
+            border-top: 1px solid #eee;
+            background: #fdfdfd;
+        }
+
+        .comment-input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 12px;
+            resize: none;
+            outline: none;
+            font-family: inherit;
+        }
+
+        .btn-comment {
+            width: 100%;
+            background: var(--brand-blue);
+            color: white;
+            border: none;
+            padding: 6px;
+            margin-top: 5px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: bold;
+            cursor: pointer;
+        }
 
         .btn-play { 
             display: block; background: var(--brand-red); color: white; 
             padding: 12px; border-radius: 5px; font-weight: bold; font-size: 13px;
-            margin: 0 15px 15px 15px; text-align: center; border: none; cursor: pointer;
+            margin: 0 15px 10px 15px; text-align: center; border: none; cursor: pointer;
         }
 
         footer { 
@@ -168,16 +191,16 @@
                 link: "nuutlljPD2s"
             },
             {
-                jina: "DEUSB LATEST ON INSTAGRAM",
-                picha: "https://i.ibb.co/8nXBwsv0/1.png", 
-                type: "external",
-                link: "https://www.instagram.com/p/DTSedTMiAc0/"
-            },
-            {
                 jina: "ANIMATION OF A LOWPOLY HOUSE",
                 picha: "https://img.youtube.com/vi/HWblkG5km38/maxresdefault.jpg",
                 type: "youtube",
                 link: "HWblkG5km38"
+            },
+            {
+                jina: "DEUSB LATEST ON INSTAGRAM",
+                picha: "https://i.ibb.co/8nXBwsv0/1.png", 
+                type: "external",
+                link: "https://www.instagram.com/p/DTSedTMiAc0/"
             }
         ];
 
@@ -185,14 +208,19 @@
             const duka = document.getElementById('duka');
             const filtered = miradi.filter(m => m.jina.toLowerCase().includes(filterText.toLowerCase()));
 
-            duka.innerHTML = filtered.map(m => {
+            duka.innerHTML = filtered.map((m, index) => {
                 const action = m.type === 'youtube' ? `onclick="playVideo('${m.link}')"` : `onclick="window.open('${m.link}', '_blank')"`;
                 const buttonText = m.type === 'youtube' ? 'PLAY VIDEO' : 'VIEW POST';
                 return `
-                <div class="kadi" ${action}>
-                    <img src="${m.picha}" class="product-img">
-                    <div class="kadi-info"><h3>${m.jina}</h3></div>
-                    <button class="btn-play">${buttonText}</button>
+                <div class="kadi">
+                    <img src="${m.picha}" class="product-img" ${action}>
+                    <div class="kadi-info" ${action}><h3>${m.jina}</h3></div>
+                    <button class="btn-play" ${action}>${buttonText}</button>
+                    
+                    <div class="comment-section">
+                        <textarea class="comment-input" placeholder="Add a comment..." rows="2" id="input-${index}"></textarea>
+                        <button class="btn-comment" onclick="alert('Comment sent! Thank you.')">POST COMMENT</button>
+                    </div>
                 </div>
             `}).join('');
         }

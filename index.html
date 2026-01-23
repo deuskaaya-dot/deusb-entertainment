@@ -2,16 +2,22 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>DEUSB ENTERTAINMENT</title>
     <style>
         :root {
             /* Brand Palette from your Poster */
-            --brand-cream: #f7e1bc;  /* Poster Background */
-            --brand-red: #8b2635;    /* Motorcycle Burgundy */
-            --brand-blue: #1a2a44;   /* Icon/Text Navy Blue */
-            --brand-yellow: #fdb813; /* Golden Yellow from 'Boresha Biashara' */
+            --brand-cream: #f7e1bc;  
+            --brand-red: #8b2635;    
+            --brand-blue: #1a2a44;   
+            --brand-yellow: #fdb813; 
             --pure-white: #ffffff;
+        }
+
+        /* FIX: Prevents elements from exceeding phone width */
+        * { 
+            box-sizing: border-box; 
+            -webkit-tap-highlight-color: transparent;
         }
 
         body { 
@@ -19,24 +25,33 @@
             margin: 0; 
             background-color: var(--brand-cream); 
             color: var(--brand-blue); 
-            overflow-x: hidden;
+            overflow-x: hidden; /* Stops horizontal scrolling */
+            width: 100%;
         }
 
         header { 
-            padding: 40px 20px; 
+            padding: 30px 15px; 
             text-align: center; 
             background: var(--pure-white);
             border-bottom: 4px solid var(--brand-red);
+            width: 100%;
         }
 
-        .logo { width: 100px; margin-bottom: 10px; }
-        h1 { color: var(--brand-blue); letter-spacing: 2px; text-transform: uppercase; margin: 0; }
+        .logo { width: 90px; margin-bottom: 10px; }
+        h1 { 
+            color: var(--brand-blue); 
+            letter-spacing: 1px; 
+            text-transform: uppercase; 
+            margin: 0 0 15px 0; 
+            font-size: 1.4rem; 
+        }
 
+        /* MOBILE FIX: Responsive Search Bar */
         .search-container {
-            margin-top: 20px;
-            max-width: 400px;
-            margin-left: auto;
-            margin-right: auto;
+            width: 100%;
+            max-width: 450px;
+            margin: 0 auto;
+            padding: 0 5px;
         }
 
         #searchInput {
@@ -47,29 +62,33 @@
             background: var(--pure-white);
             color: var(--brand-blue);
             outline: none;
+            font-size: 16px; /* Prevents auto-zoom on iPhone */
         }
 
-        #searchInput:focus { border-color: var(--brand-red); }
+        .container { 
+            width: 100%;
+            max-width: 1200px; 
+            margin: 20px auto; 
+            padding: 0 15px; 
+        }
 
-        .container { max-width: 1200px; margin: 20px auto; padding: 20px; }
-        #duka { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 25px; }
+        #duka { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
+            gap: 20px; 
+        }
 
-        /* ADAPTIVE CARD STYLING */
         .kadi { 
             background: var(--pure-white); 
             border-radius: 12px; 
             overflow: hidden;
             border: 1px solid rgba(26, 42, 68, 0.1);
             transition: 0.3s;
-            cursor: pointer;
             display: flex;
             flex-direction: column;
             height: 100%;
         }
 
-        .kadi:hover { border-color: var(--brand-red); transform: translateY(-5px); }
-        
-        .img-container { width: 100%; background: #000; }
         .product-img { 
             width: 100%; 
             height: auto; 
@@ -79,50 +98,76 @@
         }
 
         .kadi-info { padding: 15px; text-align: center; flex-grow: 1; }
-        .kadi-info h3 { margin: 0 0 10px 0; font-size: 14px; text-transform: uppercase; color: var(--brand-blue); }
+        .kadi-info h3 { margin: 0; font-size: 14px; text-transform: uppercase; color: var(--brand-blue); }
 
         .btn-play { 
-            display: block; background: var(--brand-red); color: var(--pure-white); 
-            padding: 12px; border-radius: 5px; font-weight: bold; font-size: 13px;
-            margin: 0 15px 15px 15px; text-align: center; border: none; cursor: pointer;
+            display: block; 
+            background: var(--brand-red); 
+            color: var(--pure-white); 
+            padding: 14px; 
+            border-radius: 8px; 
+            font-weight: bold; 
+            font-size: 13px;
+            margin: 0 15px 15px 15px; 
+            text-align: center; 
+            border: none; 
+            cursor: pointer;
+            text-decoration: none;
         }
 
-        /* VIDEO MODAL (POP-UP) */
-        .video-modal {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(26, 42, 68, 0.95); display: none;
-            justify-content: center; align-items: center; z-index: 2000;
-        }
-        .modal-content { position: relative; width: 90%; max-width: 850px; aspect-ratio: 16/9; }
-        .modal-content iframe { width: 100%; height: 100%; border: none; border-radius: 10px; }
-        .close-modal { position: absolute; top: -40px; right: 0; color: #fff; font-size: 14px; cursor: pointer; background: var(--brand-red); padding: 6px 15px; border-radius: 5px; }
-
-        /* FOOTER & SOCIAL BUTTONS */
+        /* FOOTER & SOCIALS */
         footer { 
             background: var(--brand-blue); 
-            padding: 50px 20px; 
+            padding: 40px 15px; 
             text-align: center; 
             color: var(--pure-white); 
             border-top: 5px solid var(--brand-yellow); 
-            margin-top: 50px; 
+            margin-top: 50px;
+            width: 100%;
         }
-        .social-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin: 25px 0; }
+
+        .social-container { 
+            display: flex; 
+            flex-wrap: wrap; 
+            justify-content: center; 
+            gap: 10px; 
+            margin: 20px 0; 
+        }
         
         .social-btn { 
-            display: flex; align-items: center; gap: 10px; 
-            padding: 12px 22px; border-radius: 50px; 
-            text-decoration: none; color: white; font-weight: bold; font-size: 13px; transition: 0.3s; 
+            display: flex; 
+            align-items: center; 
+            gap: 8px; 
+            padding: 10px 15px; 
+            border-radius: 50px; 
+            text-decoration: none; 
+            color: white; 
+            font-weight: bold; 
+            font-size: 12px;
             background: rgba(255,255,255,0.1); 
-            border: 1px solid rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.1);
         }
 
-        .social-btn:hover { background: rgba(255,255,255,0.2); transform: scale(1.05); }
+        /* ICONS IN ORIGINAL COLORS */
+        .social-icon { width: 18px; height: 18px; object-fit: contain; }
+        .x-icon { filter: invert(1); } /* Makes X logo visible */
 
-        /* ORIGINAL COLORED ICONS */
-        .social-icon { width: 20px; height: 20px; object-fit: contain; }
-        .x-icon { filter: invert(1); } /* Makes black X logo white for visibility */
+        .email-link { color: var(--brand-yellow); text-decoration: none; font-weight: bold; word-break: break-all; }
 
-        .email-link { color: var(--brand-yellow); text-decoration: none; font-weight: bold; font-size: 16px; }
+        /* VIDEO MODAL */
+        .video-modal {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.95); display: none;
+            justify-content: center; align-items: center; z-index: 2000;
+        }
+        .modal-content { position: relative; width: 95%; max-width: 800px; aspect-ratio: 16/9; }
+        .modal-content iframe { width: 100%; height: 100%; border: none; }
+        .close-modal { position: absolute; top: -40px; right: 0; color: #fff; font-weight: bold; cursor: pointer; background: var(--brand-red); padding: 5px 15px; border-radius: 5px; }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 1.2rem; }
+            .social-btn { width: 45%; justify-content: center; } /* Better fit for small phones */
+        }
     </style>
 </head>
 <body>
@@ -147,7 +192,7 @@
     </div>
 
     <footer>
-        <div style="margin-bottom: 20px; font-weight: bold; letter-spacing: 1px;">FOLLOW OUR ACCOUNTS</div>
+        <div style="margin-bottom: 15px; font-weight: bold; letter-spacing: 1px; font-size: 0.8rem;">FOLLOW OUR ACCOUNTS</div>
         <div class="social-container">
             <a href="https://wa.me/255748666409" class="social-btn">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" class="social-icon"> WhatsApp
@@ -165,9 +210,9 @@
                 <img src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg" class="social-icon"> YouTube
             </a>
         </div>
-        <p>Contact us via email:</p>
+        <p style="margin-bottom: 5px;">Contact us:</p>
         <a href="mailto:deusbentertainment@gmail.com" class="email-link">deusbentertainment@gmail.com</a>
-        <p style="color: rgba(255,255,255,0.4); font-size: 11px; margin-top: 40px;">&copy; 2026 DEUSB ENTERTAINMENT. All Rights Reserved.</p>
+        <p style="color: rgba(255,255,255,0.4); font-size: 10px; margin-top: 30px;">&copy; 2026 DEUSB ENTERTAINMENT.</p>
     </footer>
 
     <script>

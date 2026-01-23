@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>DEUSB ENTERTAINMENT</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
             --brand-cream: #f7e1bc;  
@@ -32,8 +33,6 @@
             text-align: center; 
             background: var(--pure-white);
             border-bottom: 4px solid var(--brand-red);
-            position: relative;
-            z-index: 2000;
         }
 
         .logo { width: 100px; margin-bottom: 10px; }
@@ -64,8 +63,6 @@
             justify-content: center;
             gap: 10px;
             flex-wrap: wrap;
-            position: relative;
-            z-index: 2500;
         }
 
         .btn-nav {
@@ -96,13 +93,14 @@
             font-size: 18px;
         }
 
-        #mainGrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 25px; }
-        .kadi { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.1); transition: 0.3s; }
+        /* PROJECT & STORE GRID SYSTEM */
+        #mainGrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; }
+        .kadi { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.1); transition: 0.3s; display: flex; flex-direction: column; }
         .kadi:hover { transform: translateY(-5px); }
-        .product-img { width: 100%; height: 250px; object-fit: cover; }
-        .kadi-info { padding: 20px; text-align: left; }
-        .kadi-info h3 { margin: 0 0 10px 0; color: var(--brand-blue); }
-        .bei { color: var(--brand-red); font-weight: bold; font-size: 1.2rem; }
+        .product-img { width: 100%; height: 230px; object-fit: cover; }
+        .kadi-info { padding: 20px; text-align: left; flex-grow: 1; }
+        .kadi-info h3 { margin: 0 0 10px 0; color: var(--brand-blue); font-size: 18px; }
+        .bei { color: var(--brand-red); font-weight: bold; font-size: 1.2rem; display: block; margin-bottom: 10px; }
 
         /* SERVICE CATALOGUE STYLING */
         .service-section { margin-bottom: 50px; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 10px 20px rgba(0,0,0,0.08); text-align: left; }
@@ -116,28 +114,27 @@
         .tier-card p { font-size: 14px; color: #555; line-height: 1.6; flex-grow: 1; margin-bottom: 15px; }
         .btn-req { background: #000; color: white; border: none; padding: 14px; border-radius: 50px; font-weight: bold; cursor: pointer; width: 100%; margin-top: auto; text-transform: uppercase; font-size: 11px; letter-spacing: 1px; }
 
-        /* MODAL */
-        .modal { display: none; position: fixed; z-index: 5000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); overflow-y: auto; padding: 20px 0; }
-        .modal-content { background: white; margin: auto; padding: 35px; border-radius: 15px; width: 95%; max-width: 650px; position: relative; }
-        .close { position: absolute; right: 20px; top: 15px; font-size: 28px; cursor: pointer; }
-        .req-field { margin-bottom: 18px; text-align: left; }
-        .req-field label { display: block; font-weight: bold; margin-bottom: 8px; font-size: 14px; color: var(--brand-blue); }
-        .req-field input, .req-field textarea { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 8px; font-size: 14px; }
-        .btn-send { background: #d44638; color: white; border: none; padding: 18px; width: 100%; border-radius: 8px; font-weight: bold; cursor: pointer; margin-top: 20px; font-size: 16px; }
-
-        /* FOOTER EXACTLY AS PROVIDED */
+        /* FOOTER STYLES */
         footer { 
             background: #1a1a1a; 
             padding: 50px 20px; 
             text-align: center; 
             color: white;
             margin-top: 50px;
-            position: relative;
-            z-index: 1000;
         }
         .social-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin: 25px 0; }
         .social-btn { display: flex; align-items: center; gap: 8px; background: #2a2a2a; padding: 8px 14px; border-radius: 50px; text-decoration: none; color: white; font-weight: bold; font-size: 13px; border: 1px solid #444; }
         .social-icon { width: 18px; height: 18px; object-fit: contain; }
+
+        /* MODAL & FORM */
+        .modal { display: none; position: fixed; z-index: 3000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); overflow-y: auto; padding: 20px 0; }
+        .modal-content { background: white; margin: auto; padding: 35px; border-radius: 15px; width: 95%; max-width: 650px; position: relative; }
+        .close { position: absolute; right: 20px; top: 15px; font-size: 28px; cursor: pointer; }
+        .req-field { margin-bottom: 18px; text-align: left; border-bottom: 1px solid #f0f0f0; padding-bottom: 10px; }
+        .req-field label { display: block; font-weight: bold; margin-bottom: 8px; font-size: 14px; color: var(--brand-blue); }
+        .req-field input, .req-field textarea { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 8px; font-size: 14px; background: #fafafa; }
+        .upload-section { background: #fef9ef; padding: 15px; border-radius: 10px; border: 1px dashed var(--deusb-gold); margin-top: 20px; }
+        .btn-send { background: #d44638; color: white; border: none; padding: 18px; width: 100%; border-radius: 8px; font-weight: bold; cursor: pointer; margin-top: 20px; font-size: 16px; }
     </style>
 </head>
 <body>
@@ -146,11 +143,11 @@
         <img src="https://i.ibb.co/rRZvchrH/transparent-logo.png" alt="DEUSB Logo" class="logo">
         <h1>DEUSB ENTERTAINMENT</h1>
         <div class="search-container">
-            <input type="text" id="searchInput" placeholder="Search..." onkeyup="filterContent()">
+            <input type="text" id="searchInput" placeholder="Search projects or store..." onkeyup="filterContent()">
             <div class="nav-actions">
-                <div id="btnBack" class="btn-nav" onclick="changeView('miradi')">← Go Back</div>
-                <div id="btnStore" class="btn-nav" onclick="changeView('store')">Store & Shop</div>
-                <div id="btnCatalogue" class="btn-nav" onclick="changeView('catalogue')">Service Catalogue</div>
+                <a href="javascript:void(0)" id="btnBack" class="btn-nav" onclick="changeView('miradi')">← Go Back</a>
+                <a href="javascript:void(0)" id="btnStore" class="btn-nav" onclick="changeView('store')">Store & Shop</a>
+                <a href="javascript:void(0)" id="btnCatalogue" class="btn-nav" onclick="changeView('catalogue')">Service Catalogue</a>
             </div>
         </div>
     </header>
@@ -163,20 +160,32 @@
     <div id="briefModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal()">&times;</span>
-            <h3 id="briefTitle" style="color:var(--brand-red); text-transform: uppercase; border-bottom: 2px solid var(--brand-red); padding-bottom: 10px;">Requirement List</h3>
+            <h3 id="briefTitle" style="color:var(--brand-red); margin-top:0; text-transform: uppercase; border-bottom: 2px solid var(--brand-red); padding-bottom: 10px;">Requirement List</h3>
+            
             <div id="briefForm">
-                <div class="req-field"><label>Business/Brand Name</label><input type="text" id="bizName" placeholder="Name of brand"></div>
+                <div class="req-field"><label>Business/Brand Name</label><input type="text" id="bizName" placeholder="Name of your brand or event"></div>
                 <div id="dynamicFields"></div>
-                <button class="btn-send" onclick="sendGmail()">SUBMIT VIA GMAIL</button>
+                <div class="upload-section">
+                    <label style="font-weight: 800; color: var(--deusb-gold); display: block; margin-bottom: 10px;">MEDIA & ASSETS</label>
+                    <div class="req-field">
+                        <label>Upload Media (Images/Videos)</label>
+                        <input type="file" id="directUpload" multiple style="background: white; border: 1px solid #ddd;">
+                    </div>
+                    <div class="req-field"><label>Link to Raw Video/Footage (Google Drive/Wetransfer)</label>
+                    <input type="url" id="videoLink" placeholder="https://drive.google.com/..."></div>
+                    <div class="req-field"><label>Link to Sample Photo/Inspiration/Reference</label>
+                    <input type="url" id="samplePhotoLink" placeholder="Paste link or Instagram reference"></div>
+                </div>
+                <div class="req-field" style="margin-top: 20px;"><label>Any Extra Instructions?</label><textarea id="projDesc" rows="3" placeholder="Colors to avoid, specific fonts, etc."></textarea></div>
+                <button class="btn-send" onclick="sendGmail()">SUBMIT REQUIREMENTS VIA GMAIL</button>
             </div>
         </div>
     </div>
 
     <footer>
         <h3 style="margin-bottom: 10px;">Wasiliana Nasi</h3>
-        <p style="color: #ccc; margin-bottom: 20px;">Tufuate kwenye mitandao ya kijamii</p>
         <div class="social-container">
-            <a href="https://wa.me/255748666409" target="_blank" class="social-btn"><img src="https://i.ibb.co/tP3xXKN0/whatsapp.png" class="social-icon"> WhatsApp</a>
+            <a href="https://wa.me/255748666409" class="social-btn"><img src="https://i.ibb.co/tP3xXKN0/whatsapp.png" class="social-icon"> WhatsApp</a>
             <a href="https://www.instagram.com/deusb_entertainment?igsh=ajJ2aDY1MG1ycTY4" target="_blank" class="social-btn"><img src="https://i.ibb.co/PZF184kz/instagram.png" class="social-icon"> Instagram</a>
             <a href="https://tiktok.com/@deusbentertainment" target="_blank" class="social-btn"><img src="https://i.ibb.co/nMGgVbsT/tik-tok.png" class="social-icon"> TikTok</a>
             <a href="https://x.com/Deusb17" target="_blank" class="social-btn"><img src="https://i.ibb.co/FbWvjMxb/twitter.png" class="social-icon"> Twitter</a>
@@ -193,64 +202,98 @@
         };
 
         const packageQuestions = {
-            'Graphics Basic': ["Main headline?", "Brand colors?", "Date/Event?"],
-            'Graphics Standard': ["Brand mission?", "Slogan?", "Dimensions (Square/Story/A4)?", "3 Style keywords?"],
-            'Graphics Premium': ["Full Identity Details?", "Competitors?", "Items needed (Logo, Card, etc)?", "Typography style?"],
-            'Video Basic': ["Music mood?", "Must-keep parts?", "Platform (TikTok/Status)?"],
-            'Video Standard': ["Subtitles needed?", "Cinematic or Fast edit?", "Captions/Text?"],
-            'Video Premium': ["Script/Storyboard link?", "Voiceover tone?", "B-Roll needs?", "Marketing goal?"],
-            'Motion Basic': ["Logo PNG link?", "Movement (Smooth/Aggressive)?", "Intro or Outro?"],
-            'Motion Standard': ["3 Main benefits?", "Icon style (2D/Flat)?", "Target audience?"],
-            'Motion Premium': ["Storyboard link?", "Sound effects needed?", "Viral hook description?"],
-            'Social Lite': ["Usernames/Handles?", "Monthly posting goal?", "Browsing hours?"],
-            'Social Growth': ["Competitors?", "Reels vs Static count?", "Reporting frequency?"],
-            'Social Domination': ["Shoot days?", "Ads budget?", "Customer persona?"]
+            'Graphics Basic': ["What is the main headline for the flyer?", "What are your preferred brand colors?", "Is this for a specific date/event?"],
+            'Graphics Standard': ["Describe your brand's mission.", "Do you have a specific slogan?", "What dimensions do you need (Square/Story/A4)?", "List 3 words that describe your style."],
+            'Graphics Premium': ["Full Brand Identity details (Mission/Vision)?", "Who are your main competitors?", "What items do you need (Logo, Business Card, Letterhead)?", "Preferred Typography style?"],
+            'Video Basic': ["What is the mood of the background music?", "Are there specific parts of the footage we must keep?", "What platform is this for (TikTok/Status)?"],
+            'Video Standard': ["Do you need subtitles? If yes, what language?", "Would you prefer a slow cinematic or fast energetic edit?", "Any specific text/captions to overlay?"],
+            'Video Premium': ["Provide the Script or Storyboard flow.", "Describe the Tone for the Voiceover.", "List specific B-Roll/Extra footage required.", "What is the main marketing goal?"],
+            'Motion Basic': ["Upload Logo in PNG or Vector format.", "What kind of movement (Smooth/Aggressive)?", "Intro or Outro animation?"],
+            'Motion Standard': ["What are the 3 main benefits of your service/app?", "Describe the character or icon style (2D/Flat)?", "Who is the target audience?"],
+            'Motion Premium': ["Link to full corporate storyboard.", "Are there specific sound effects needed?", "Describe the 'Viral Hook' for the start."],
+            'Social Lite': ["Platform usernames/handles.", "What is your monthly posting goal?", "What time of day do your customers usually browse?"],
+            'Social Growth': ["List your main competitors in your niche.", "How many Reels vs Static posts do you want?", "How often do you want performance reports?"],
+            'Social Domination': ["Preferred days for weekly on-site video shoots.", "What is your monthly budget for paid ads?", "Describe your ideal customer persona."]
         };
 
         let currentView = 'miradi';
         let masterData = { projects: [], store: [] };
 
-        function changeView(view) {
+        async function changeView(view) {
             currentView = view;
             document.getElementById('btnBack').style.display = (view === 'miradi') ? 'none' : 'inline-block';
             document.getElementById('viewContainer').innerHTML = "";
+            
             if (view === 'catalogue') renderCatalogue();
             else if (view === 'store') loadStore();
             else loadProjects();
         }
 
         async function loadProjects() {
-            document.getElementById('loadingMsg').style.display = 'block';
+            const loader = document.getElementById('loadingMsg');
+            loader.style.display = 'block';
             try {
                 const res = await fetch(sheetUrls.projects);
                 const text = await res.text();
+                // Parsing manually for projects CSV
                 masterData.projects = text.split('\n').slice(1).map(l => {
                     const c = l.split(',');
                     return { name: c[0], desc: c[1], img: c[2], link: c[4]?.trim() };
-                });
+                }).filter(p => p.name);
                 renderList(masterData.projects, 'project');
-            } catch (e) {}
-            document.getElementById('loadingMsg').style.display = 'none';
+            } catch (e) {
+                console.error("Error loading projects:", e);
+            }
+            loader.style.display = 'none';
         }
 
         async function loadStore() {
-            document.getElementById('loadingMsg').style.display = 'block';
-            Papa.parse(sheetUrls.store, { download: true, header: true, complete: (res) => {
-                masterData.store = res.data.filter(i => i.Jina);
-                renderList(masterData.store, 'store');
-                document.getElementById('loadingMsg').style.display = 'none';
-            }});
+            const loader = document.getElementById('loadingMsg');
+            loader.style.display = 'block';
+            Papa.parse(sheetUrls.store, {
+                download: true,
+                header: true,
+                complete: (res) => {
+                    masterData.store = res.data.filter(i => i.Jina);
+                    renderList(masterData.store, 'store');
+                    loader.style.display = 'none';
+                },
+                error: (err) => {
+                    console.error("Error loading store:", err);
+                    loader.style.display = 'none';
+                }
+            });
         }
 
         function renderList(data, type) {
             let html = `<div id="mainGrid">`;
-            data.forEach(i => {
-                if (type === 'project') {
-                    html += `<div class="kadi" onclick="window.open('${i.link}')" style="cursor:pointer;"><img src="${i.img}" class="product-img"><div class="kadi-info"><h3>${i.name}</h3><p style="font-size:12px;">${i.desc}</p></div></div>`;
-                } else {
-                    html += `<div class="kadi"><img src="${i.PichaURL}" class="product-img"><div class="kadi-info"><h3>${i.Jina}</h3><span class="bei">TSH ${i.Bei}</span><p style="font-size:12px;">${i.Maelezo || ''}</p></div><a href="https://wa.me/255748666409?text=Nahitaji:${i.Jina}" class="btn-nav" style="background:var(--whatsapp-green); border:none; display:block; text-align:center; margin:10px;">PURCHASE VIA WHATSAPP</a></div>`;
-                }
-            });
+            if(data.length === 0) {
+                html += `<p style="grid-column: 1/-1; text-align:center;">No results found.</p>`;
+            } else {
+                data.forEach(i => {
+                    if (type === 'project') {
+                        html += `
+                        <div class="kadi" onclick="window.open('${i.link || '#'}', '_blank')">
+                            <img src="${i.img}" class="product-img" onerror="this.src='https://placehold.co/400x300?text=No+Image'">
+                            <div class="kadi-info">
+                                <h3>${i.name}</h3>
+                                <p style="font-size:12px; color:#666;">${i.desc || ''}</p>
+                            </div>
+                        </div>`;
+                    } else {
+                        html += `
+                        <div class="kadi">
+                            <img src="${i.PichaURL}" class="product-img" onerror="this.src='https://placehold.co/400x300?text=No+Image'">
+                            <div class="kadi-info">
+                                <h3>${i.Jina}</h3>
+                                <span class="bei">TSH ${i.Bei}</span>
+                                <p style="font-size:12px; color:#666;">${i.Maelezo || ''}</p>
+                            </div>
+                            <a href="https://wa.me/255748666409?text=Nahitaji:${encodeURIComponent(i.Jina)}" class="btn-nav" style="background:var(--whatsapp-green); border:none; display:block; text-align:center; margin:15px; border-radius:8px;">PURCHASE VIA WHATSAPP</a>
+                        </div>`;
+                    }
+                });
+            }
             document.getElementById('viewContainer').innerHTML = html + `</div>`;
         }
 
@@ -258,44 +301,136 @@
             document.getElementById('viewContainer').innerHTML = `
                 <div class="service-section">
                     <h2 class="section-title">1. Graphics & Branding (Logos & Flyers)</h2>
+                    <p class="section-desc">Visual communication designed to make your brand memorable.</p>
                     <div class="tier-grid">
-                        <div class="tier-card"><h3>BASIC</h3><span class="tier-price">20k-30k</span><span class="tier-time">1-4 Hours</span><p>Deliverables: 1 Simple Flyer OR Basic Logo (2 revisions). Best For: Urgent sales/events.</p><button class="btn-req" onclick="openBrief('Graphics Basic')">Requirement List</button></div>
-                        <div class="tier-card"><h3>STANDARD</h3><span class="tier-price">50k-80k</span><span class="tier-time">1-3 Days</span><p>Deliverables: 2 Flyers + Professional Logo + Source Files. Best For: Brand foundations.</p><button class="btn-req" onclick="openBrief('Graphics Standard')">Requirement List</button></div>
-                        <div class="tier-card"><h3>PREMIUM</h3><span class="tier-price">120k-250k</span><span class="tier-time">5-10 Days</span><p>Deliverables: Full Branding (Logo + Biz Card + Identity). Best For: Professional identities.</p><button class="btn-req" onclick="openBrief('Graphics Premium')">Requirement List</button></div>
+                        <div class="tier-card">
+                            <h3>BASIC</h3>
+                            <span class="tier-price">20k-30k</span>
+                            <span class="tier-time">1-4 Hours</span>
+                            <p>Deliverables: 1 Simple Flyer OR Basic Logo (2 revisions). Best For: Urgent sales/events.</p>
+                            <button class="btn-req" onclick="openBrief('Graphics Basic')">Requirement List</button>
+                        </div>
+                        <div class="tier-card">
+                            <h3>STANDARD</h3>
+                            <span class="tier-price">50k-80k</span>
+                            <span class="tier-time">1-3 Days</span>
+                            <p>Deliverables: 2 Flyers + Professional Logo + Source Files. Best For: Brand foundations.</p>
+                            <button class="btn-req" onclick="openBrief('Graphics Standard')">Requirement List</button>
+                        </div>
+                        <div class="tier-card">
+                            <h3>PREMIUM</h3>
+                            <span class="tier-price">120k-250k</span>
+                            <span class="tier-time">5-10 Days</span>
+                            <p>Deliverables: Full Branding (Logo + Biz Card + Identity). Best For: professional identities.</p>
+                            <button class="btn-req" onclick="openBrief('Graphics Premium')">Requirement List</button>
+                        </div>
                     </div>
+                    <p style="font-size: 12px; font-style: italic; margin-top: 15px;">Why the time difference? Basic is "design-on-demand." Standard/Premium involves market research and custom typography to ensure your logo is unique to your business.</p>
                 </div>
+
                 <div class="service-section">
                     <h2 class="section-title">2. Video Editing (Short-form/Social Media/Ads)</h2>
+                    <p class="section-desc">High-retention editing for TikTok, Instagram Reels, and TV Ads.</p>
                     <div class="tier-grid">
-                        <div class="tier-card"><h3>BASIC</h3><span class="tier-price">40k-60k</span><span class="tier-time">2-5 Hours</span><p>Focus: Simple cuts, background music, and basic color correction. Ideal for: Daily updates.</p><button class="btn-req" onclick="openBrief('Video Basic')">Requirement List</button></div>
-                        <div class="tier-card"><h3>STANDARD</h3><span class="tier-price">80k-150k</span><span class="tier-time">1-2 Days</span><p>Focus: Smooth transitions, professional color grading, and subtitles. Ideal for: Small business ads.</p><button class="btn-req" onclick="openBrief('Video Standard')">Requirement List</button></div>
-                        <div class="tier-card"><h3>PREMIUM</h3><span class="tier-price">200k-400k</span><span class="tier-time">3-7 Days</span><p>Focus: Full production including Scripting + B-roll + Voiceover. Ideal for: TV Commercials.</p><button class="btn-req" onclick="openBrief('Video Premium')">Requirement List</button></div>
+                        <div class="tier-card">
+                            <h3>BASIC</h3>
+                            <span class="tier-price">40,000-60,000</span>
+                            <span class="tier-time">2-5 Hours</span>
+                            <p>Focus: Simple cuts, background music, and basic color correction. Ideal for: Quick daily updates and personal vlogs.</p>
+                            <button class="btn-req" onclick="openBrief('Video Basic')">Requirement List</button>
+                        </div>
+                        <div class="tier-card">
+                            <h3>STANDARD</h3>
+                            <span class="tier-price">80,000-150,000</span>
+                            <span class="tier-time">1-2 Days</span>
+                            <p>Focus: Smooth transitions, professional color grading, and subtitles. Ideal for: Small business ads and professional social media content.</p>
+                            <button class="btn-req" onclick="openBrief('Video Standard')">Requirement List</button>
+                        </div>
+                        <div class="tier-card">
+                            <h3>PREMIUM</h3>
+                            <span class="tier-price">200,000 – 400,000</span>
+                            <span class="tier-time">3-7 Days</span>
+                            <p>Focus: Full production including Scripting + B-roll + Professional Voiceover. Ideal for: TV Commercials.</p>
+                            <button class="btn-req" onclick="openBrief('Video Premium')">Requirement List</button>
+                        </div>
                     </div>
                 </div>
+
                 <div class="service-section">
                     <h2 class="section-title">3. Motion Graphics (Animations/Explainers)</h2>
+                    <p class="section-desc">Using movement to explain complex ideas or add prestige.</p>
                     <div class="tier-grid">
-                        <div class="tier-card"><h3>BASIC</h3><span class="tier-price">50k-70k</span><p>5-10s Logo Animation. Usage: Intro/Outro for videos.</p><button class="btn-req" onclick="openBrief('Motion Basic')">Requirement List</button></div>
-                        <div class="tier-card"><h3>STANDARD</h3><span class="tier-price">150k-250k</span><p>30s 2D Explainer Video. Usage: Explaining apps/services.</p><button class="btn-req" onclick="openBrief('Motion Standard')">Requirement List</button></div>
-                        <div class="tier-card"><h3>PREMIUM</h3><span class="tier-price">350k-600k</span><p>1min Full Motion Ad. Usage: Corporate presentations.</p><button class="btn-req" onclick="openBrief('Motion Premium')">Requirement List</button></div>
+                        <div class="tier-card">
+                            <h3>BASIC</h3>
+                            <span class="tier-price">50,000 – 70,000</span>
+                            <span class="tier-time">5-8 Hours</span>
+                            <p>Deliverable: 5-10 second Logo Animation. Usage: Use this as an intro/outro for every video you ever make.</p>
+                            <button class="btn-req" onclick="openBrief('Motion Basic')">Requirement List</button>
+                        </div>
+                        <div class="tier-card">
+                            <h3>STANDARD</h3>
+                            <span class="tier-price">150,000 – 250,000</span>
+                            <span class="tier-time">3-5 Days</span>
+                            <p>Deliverable: 30-second 2D Explainer Video. Usage: Perfect for teaching customers how to use your app or service.</p>
+                            <button class="btn-req" onclick="openBrief('Motion Standard')">Requirement List</button>
+                        </div>
+                        <div class="tier-card">
+                            <h3>PREMIUM</h3>
+                            <span class="tier-price">350,000 – 600,000</span>
+                            <span class="tier-time">2-3 Weeks</span>
+                            <p>Deliverable: 1-minute Full Motion Graphic Ad. Usage: A high-end asset for corporate presentations.</p>
+                            <button class="btn-req" onclick="openBrief('Motion Premium')">Requirement List</button>
+                        </div>
                     </div>
                 </div>
+
                 <div class="service-section">
-                    <h2 class="section-title">4. Social Media Management (Monthly)</h2>
+                    <h2 class="section-title">4. Social Media Management (Monthly Retainers)</h2>
+                    <p class="section-desc">We don't just post; we grow your community.</p>
                     <div class="tier-grid">
-                        <div class="tier-card"><h3>LITE PLAN</h3><span class="tier-price">250k-400k/mo</span><p>12 Posts/mo. Goal: Page activity.</p><button class="btn-req" onclick="openBrief('Social Lite')">Requirement List</button></div>
-                        <div class="tier-card"><h3>GROWTH PLAN</h3><span class="tier-price">500k-850k/mo</span><p>20 Posts/mo (4 Reels). Strategy: Growth.</p><button class="btn-req" onclick="openBrief('Social Growth')">Requirement List</button></div>
-                        <div class="tier-card"><h3>DOMINATION PLAN</h3><span class="tier-price">1.2M+/mo</span><p>Daily posts + Weekly shoots + DM management.</p><button class="btn-req" onclick="openBrief('Social Domination')">Requirement List</button></div>
+                        <div class="tier-card">
+                            <h3>LITE PLAN</h3>
+                            <span class="tier-price">250k – 400k/mo</span>
+                            <p>Content: 12 Posts per month. Goal: Keeping your page active.</p>
+                            <button class="btn-req" onclick="openBrief('Social Lite')">Requirement List</button>
+                        </div>
+                        <div class="tier-card">
+                            <h3>GROWTH PLAN</h3>
+                            <span class="tier-price">500k – 850k/mo</span>
+                            <p>Content: 20 Posts per month (4 Reels). Strategy: Hashtag research & engagement.</p>
+                            <button class="btn-req" onclick="openBrief('Social Growth')">Requirement List</button>
+                        </div>
+                        <div class="tier-card">
+                            <h3>DOMINATION PLAN</h3>
+                            <span class="tier-price">1,200,000+/mo</span>
+                            <p>Content: Daily posting + Weekly video shoots + DM management.</p>
+                            <button class="btn-req" onclick="openBrief('Social Domination')">Requirement List</button>
+                        </div>
                     </div>
+                </div>
+
+                <div class="service-section">
+                    <h2 class="section-title">5. Our Terms of Engagement</h2>
+                    <ul style="font-size: 14px; line-height: 1.8;">
+                        <li><strong>Payment:</strong> A 50% deposit is required to begin. The balance is due before final delivery.</li>
+                        <li><strong>Revisions:</strong> Basic: 2 Rounds. Standard/Premium: Up to 4 Rounds.</li>
+                        <li><strong>Rush Jobs:</strong> A 25% rush fee will be applied for urgent delivery.</li>
+                        <li><strong>Communication:</strong> Clients must provide a clear "Brief" before we start.</li>
+                    </ul>
                 </div>
             `;
         }
 
+        let selCat = "";
         function openBrief(cat) {
-            document.getElementById('briefTitle').innerText = cat;
-            const qList = packageQuestions[cat] || ["Describe your needs:"];
+            selCat = cat;
+            document.getElementById('briefTitle').innerText = cat + " Requirement List";
+            const qList = packageQuestions[cat] || ["Describe your needs in detail."];
             document.getElementById('dynamicFields').innerHTML = qList.map(q => `
-                <div class="req-field"><label>${q}</label><input type="text" class="dynamic-input" data-question="${q}"></div>
+                <div class="req-field">
+                    <label>${q}</label>
+                    <input type="text" class="dynamic-input" data-question="${q}" placeholder="Type answer here...">
+                </div>
             `).join('');
             document.getElementById('briefModal').style.display = "block";
         }
@@ -303,17 +438,33 @@
         function closeModal() { document.getElementById('briefModal').style.display = "none"; }
 
         function sendGmail() {
-            let body = `PROJECT BRIEF: ${document.getElementById('briefTitle').innerText}\nBrand: ${document.getElementById('bizName').value}\n\n`;
+            let body = `DEUSB PROJECT BRIEF\n------------------\nCategory: ${selCat}\nBrand: ${document.getElementById('bizName').value}\n\n`;
             document.querySelectorAll('.dynamic-input').forEach(input => {
-                body += `${input.dataset.question}: ${input.value}\n`;
+                body += `Q: ${input.dataset.question}\nA: ${input.value}\n\n`;
             });
-            window.open(`https://mail.google.com/mail/?view=cm&fs=1&to=deusbentertainment@gmail.com&su=Brief: ${document.getElementById('briefTitle').innerText}&body=${encodeURIComponent(body)}`);
+            
+            const files = document.getElementById('directUpload').files;
+            let fileInfo = "FILES SELECTED: ";
+            if(files.length > 0) {
+                for(let i=0; i<files.length; i++) { fileInfo += files[i].name + (i === files.length - 1 ? "" : ", "); }
+            } else { fileInfo += "None (Client will send via Link or WhatsApp)"; }
+
+            body += `ASSETS\n------------------\n${fileInfo}\nVideo Link: ${document.getElementById('videoLink').value}\nSample Link: ${document.getElementById('samplePhotoLink').value}\n\n`;
+            body += `EXTRA INSTRUCTIONS: ${document.getElementById('projDesc').value}`;
+            
+            const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=deusbentertainment@gmail.com&su=Brief: ${encodeURIComponent(selCat)}&body=${encodeURIComponent(body)}`;
+            window.open(gmailUrl);
         }
 
         function filterContent() {
             const val = document.getElementById('searchInput').value.toLowerCase();
-            if (currentView === 'miradi') renderList(masterData.projects.filter(p => p.name.toLowerCase().includes(val)), 'project');
-            if (currentView === 'store') renderList(masterData.store.filter(s => s.Jina.toLowerCase().includes(val)), 'store');
+            if (currentView === 'miradi') {
+                const filtered = masterData.projects.filter(p => p.name.toLowerCase().includes(val) || p.desc.toLowerCase().includes(val));
+                renderList(filtered, 'project');
+            } else if (currentView === 'store') {
+                const filtered = masterData.store.filter(s => s.Jina.toLowerCase().includes(val) || s.Maelezo.toLowerCase().includes(val));
+                renderList(filtered, 'store');
+            }
         }
 
         window.onload = () => changeView('miradi');

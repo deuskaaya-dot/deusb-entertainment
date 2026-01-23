@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>DEUSB ENTERTAINMENT</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
     <style>
         :root {
             --brand-cream: #f7e1bc;  
@@ -11,6 +12,7 @@
             --brand-blue: #1a2a44;   
             --brand-yellow: #fdb813; 
             --pure-white: #ffffff;
+            --whatsapp-green: #25d366;
         }
 
         * { box-sizing: border-box; }
@@ -49,10 +51,39 @@
             background: var(--pure-white);
             font-size: 16px;
             outline: none;
+            margin-bottom: 15px;
+        }
+
+        /* NEW STORE BUTTON STYLE */
+        .btn-store-link {
+            display: inline-block;
+            background: var(--brand-blue);
+            color: var(--brand-yellow);
+            padding: 10px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+            border: 2px solid var(--brand-yellow);
+            transition: 0.3s;
+            text-transform: uppercase;
+        }
+
+        .btn-store-link:hover {
+            background: var(--brand-red);
+            color: white;
+            border-color: var(--brand-red);
         }
 
         .container { max-width: 1200px; margin: 20px auto; padding: 0 15px; }
-        #duka { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 25px; align-items: start; }
+        
+        /* Grid and Card styles for both Projects and Store items */
+        #duka { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
+            gap: 25px; 
+            align-items: start; 
+        }
 
         .kadi { 
             background: var(--pure-white); 
@@ -76,22 +107,41 @@
         }
 
         .kadi-info { padding: 15px 15px 5px 15px; text-align: center; }
-        .kadi-info h3 { margin: 0; font-size: 14px; text-transform: uppercase; color: var(--brand-blue); cursor: pointer; }
+        .kadi-info h3 { margin: 0; font-size: 18px; text-transform: uppercase; color: var(--brand-blue); }
 
-        .post-description {
+        .post-description, .maelezo {
             padding: 5px 15px 15px 15px;
             font-size: 13px;
             color: #444;
             line-height: 1.5;
             text-align: center;
-            font-style: italic;
         }
 
-        .btn-play { 
-            display: block; background: var(--brand-red); color: white; 
-            padding: 12px; border-radius: 5px; font-weight: bold; font-size: 13px;
-            margin: 0 15px 15px 15px; text-align: center; border: none; cursor: pointer;
+        .bei { 
+            color: #e67e22; 
+            font-weight: bold; 
+            font-size: 20px; 
+            display: block;
+            margin-bottom: 5px;
         }
+
+        .btn-play, .btn-nunua { 
+            display: block; 
+            background: var(--brand-red); 
+            color: white; 
+            padding: 12px; 
+            border-radius: 5px; 
+            font-weight: bold; 
+            font-size: 13px;
+            margin: 0 15px 15px 15px; 
+            text-align: center; 
+            border: none; 
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .btn-nunua { background: var(--whatsapp-green); }
+        .btn-nunua:hover { background: #128c7e; }
 
         footer { 
             background: var(--brand-blue); padding: 50px 20px; text-align: center; 
@@ -126,6 +176,7 @@
         <h1>DEUSB ENTERTAINMENT</h1>
         <div class="search-container">
             <input type="text" id="searchInput" placeholder="Search project..." onkeyup="searchFromInput()">
+            <a href="javascript:void(0)" class="btn-store-link" onclick="loadStore()">Go To Store</a>
         </div>
     </header>
 
@@ -155,42 +206,64 @@
     </footer>
 
     <script>
-        // Link yako ya Google Sheet CSV imewekwa hapa
-        const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS7Rt8XJHECqqEfVdN5I_TS2EHAPVAeaoenwF-SVQO35GX0lDg-opKoWhHhjfOJYmIMDe6tej1ZbdNC/pub?gid=0&single=true&output=csv';
+        // Links to your two different sheets
+        const projectSheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS7Rt8XJHECqqEfVdN5I_TS2EHAPVAeaoenwF-SVQO35GX0lDg-opKoWhHhjfOJYmIMDe6tej1ZbdNC/pub?gid=0&single=true&output=csv';
+        const storeSheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTjyYpymtplOkf4FK5Fwcfs9PnDMpldjLKiTftg4Sv518seWW188xS1v9aeJIQsbQbFS7HgiFb7SdV_/pub?gid=2113416306&single=true&output=csv';
+        
         let allMiradi = [];
 
+        // LOAD PROJECTS (Default View)
         async function loadProjects() {
             try {
-                const res = await fetch(sheetUrl);
+                const res = await fetch(projectSheetUrl);
                 const text = await res.text();
-                
-                // Tunatenganisha kila mstari (row)
                 const lines = text.split('\n').filter(line => line.trim() !== "");
-                
-                // Tunatengeneza miradi tukianzia mstari wa pili (slice(1)) kuruka vichwa vya habari
                 allMiradi = lines.slice(1).map(line => {
                     const c = line.split(',');
-                    return { 
-                        jina: c[0], 
-                        description: c[1], 
-                        picha: c[2], 
-                        type: c[3], 
-                        link: c[4]?.trim() 
-                    };
+                    return { jina: c[0], description: c[1], picha: c[2], type: c[3], link: c[4]?.trim() };
                 });
                 renderCards(allMiradi);
             } catch (e) { 
-                document.getElementById('duka').innerHTML = "Failed to load projects. Please check connection."; 
+                document.getElementById('duka').innerHTML = "Failed to load projects."; 
             }
+        }
+
+        // LOAD STORE (When button is clicked)
+        function loadStore() {
+            document.getElementById('duka').innerHTML = '<div style="text-align:center; padding:50px;">Loading Store Items...</div>';
+            Papa.parse(storeSheetUrl, {
+                download: true,
+                header: true,
+                complete: function(results) {
+                    const data = results.data;
+                    const dukaDiv = document.getElementById('duka');
+                    let html = '';
+                    
+                    data.forEach(bidhaa => {
+                        if(bidhaa.Jina && bidhaa.Bei) {
+                            const pichaSahihi = (bidhaa.PichaURL && bidhaa.PichaURL.includes('http')) ? bidhaa.PichaURL.trim() : '';
+                            html += `
+                                <div class="kadi">
+                                    ${pichaSahihi ? `<img src="${pichaSahihi}" class="product-img">` : ''}
+                                    <div class="kadi-info">
+                                        <h3>${bidhaa.Jina}</h3>
+                                        <span class="bei">TSH ${bidhaa.Bei}</span>
+                                        <p class="maelezo">${bidhaa.Maelezo || ''}</p>
+                                        <a class="btn-nunua" href="https://wa.me/255748666409?text=Habari DEUSB STORE, nahitaji: ${bidhaa.Jina} kwa TSH ${bidhaa.Bei}">
+                                            Nunua kwa WhatsApp
+                                        </a>
+                                    </div>
+                                </div>
+                            `;
+                        }
+                    });
+                    dukaDiv.innerHTML = html || '<div style="text-align:center; padding:50px;">Hakuna bidhaa stoo kwa sasa.</div>';
+                }
+            });
         }
 
         function renderCards(list) {
             const duka = document.getElementById('duka');
-            if (list.length === 0) {
-                duka.innerHTML = "<p>No projects found.</p>";
-                return;
-            }
-
             duka.innerHTML = list.map(m => {
                 const action = m.type === 'youtube' ? `onclick="playVideo('${m.link}')"` : `onclick="window.open('${m.link}', '_blank')"`;
                 const buttonText = m.type === 'youtube' ? 'PLAY VIDEO' : 'VIEW POST';

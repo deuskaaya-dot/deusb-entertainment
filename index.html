@@ -20,7 +20,6 @@
             scroll-behavior: smooth;
         }
 
-        /* Header & Search */
         header { 
             padding: 40px 20px; 
             text-align: center; 
@@ -47,9 +46,6 @@
             outline: none;
         }
 
-        #searchInput:focus { border-color: var(--primary-red); }
-
-        /* Grid System */
         .container { max-width: 1200px; margin: 20px auto; padding: 20px; }
 
         #duka { 
@@ -58,22 +54,34 @@
             gap: 25px;
         }
 
-        /* Project Cards */
+        /* --- MABADILIKO YA BOX LI-ADAPT HAPA --- */
         .kadi { 
             background: var(--card-bg); 
             border-radius: 12px; 
             overflow: hidden;
             border: 1px solid #222;
             transition: 0.3s;
-            opacity: 0;
-            transform: translateY(20px);
+            display: flex;
+            flex-direction: column;
+            height: auto; /* Inaruhusu box kukua kulingana na content */
         }
 
-        .kadi.show { opacity: 1; transform: translateY(0); }
-        .kadi:hover { border-color: var(--primary-red); transform: translateY(-5px); }
+        .img-container {
+            width: 100%;
+            background: #000; /* Background nyeusi kama picha ni ndogo */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
-        .product-img { width: 100%; height: 200px; object-fit: cover; }
-        
+        .product-img { 
+            width: 100%; 
+            height: auto; /* Hii inafanya picha i-adapt size yake halisi */
+            display: block;
+            object-fit: contain; /* Inahakikisha picha yote inaonekana */
+        }
+        /* --------------------------------------- */
+
         .kadi-info { padding: 15px; text-align: center; }
         .kadi-info h3 { margin: 0 0 15px 0; font-size: 16px; text-transform: uppercase; letter-spacing: 1px; }
 
@@ -82,13 +90,13 @@
             background: var(--primary-red); 
             color: white; 
             text-decoration: none; 
-            padding: 10px; 
+            padding: 12px; 
             border-radius: 5px; 
             font-weight: bold;
             font-size: 13px;
+            margin: 0 15px 15px 15px;
         }
 
-        /* Footer & Social Buttons */
         footer { 
             background: #000; 
             padding: 50px 20px; 
@@ -97,98 +105,42 @@
             margin-top: 50px;
         }
 
-        .footer-heading { color: #fff; margin-bottom: 15px; font-size: 18px; font-weight: 600; }
-        .footer-subheading { color: var(--text-gray); margin-bottom: 20px; font-size: 14px; }
-
-        .social-container { 
-            display: flex; 
-            flex-wrap: wrap; 
-            justify-content: center; 
-            gap: 12px; 
-            margin: 25px 0; 
-        }
-
-        .social-btn { 
-            display: flex; 
-            align-items: center; 
-            gap: 8px; 
-            background: #1a1a1a; 
-            padding: 10px 18px; 
-            border-radius: 50px; 
-            text-decoration: none; 
-            color: white; 
-            font-weight: bold; 
-            font-size: 13px; 
-            border: 1px solid #333;
-            transition: 0.3s;
-        }
-
-        .social-btn:hover { background: #333; border-color: var(--primary-red); }
+        .social-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin: 25px 0; }
+        .social-btn { display: flex; align-items: center; gap: 8px; background: #1a1a1a; padding: 10px 18px; border-radius: 50px; text-decoration: none; color: white; font-weight: bold; font-size: 13px; border: 1px solid #333; }
         .social-icon { width: 18px; height: 18px; object-fit: contain; }
 
-        .email-link {
-            display: inline-block;
-            margin-top: 15px;
-            color: var(--primary-red);
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 15px;
-            transition: 0.3s;
-        }
-
-        .email-link:hover { opacity: 0.8; }
+        .email-link { color: var(--primary-red); text-decoration: none; font-weight: bold; }
     </style>
 </head>
 <body>
 
     <header>
         <img src="https://i.ibb.co/rRZvchrH/transparent-logo.png" alt="DEUSB Logo" class="logo">
-        <h1 style="margin:0; letter-spacing: 2px;">DEUSB ENTERTAINMENT</h1>
-        
+        <h1>DEUSB ENTERTAINMENT</h1>
         <div class="search-container">
             <input type="text" id="searchInput" placeholder="Tafuta mradi..." onkeyup="searchProjects()">
         </div>
     </header>
 
     <div class="container">
-        <div id="duka">
-            </div>
+        <div id="duka"></div>
     </div>
 
     <footer>
-        <div class="footer-heading">Follow our accounts</div>
-        <div class="footer-subheading">Stay updated with our latest works</div>
-
+        <div style="margin-bottom: 20px; font-weight: bold;">Follow our accounts</div>
         <div class="social-container">
-            <a href="https://wa.me/255748666409" class="social-btn">
-                <img src="https://i.ibb.co/tP3xXKN0/whatsapp.png" class="social-icon"> WhatsApp
-            </a>
-            <a href="https://www.instagram.com/deusb_entertainment" target="_blank" class="social-btn">
-                <img src="https://i.ibb.co/PZF184kz/instagram.png" class="social-icon"> Instagram
-            </a>
-            <a href="https://tiktok.com/@deusbentertainment" target="_blank" class="social-btn">
-                <img src="https://i.ibb.co/nMGgVbsT/tik-tok.png" class="social-icon"> TikTok
-            </a>
-            <a href="https://x.com/Deusb17" target="_blank" class="social-btn">
-                <img src="https://i.ibb.co/FbWvjMxb/twitter.png" class="social-icon"> X (Twitter)
-            </a>
-            <a href="https://youtube.com/@deusbentertainment" target="_blank" class="social-btn">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/e/ef/Youtube_logo.png" class="social-icon"> YouTube
-            </a>
+            <a href="https://wa.me/255748666409" class="social-btn"><img src="https://i.ibb.co/tP3xXKN0/whatsapp.png" class="social-icon"> WhatsApp</a>
+            <a href="https://www.instagram.com/deusb_entertainment" target="_blank" class="social-btn"><img src="https://i.ibb.co/PZF184kz/instagram.png" class="social-icon"> Instagram</a>
+            <a href="https://tiktok.com/@deusbentertainment" target="_blank" class="social-btn"><img src="https://i.ibb.co/nMGgVbsT/tik-tok.png" class="social-icon"> TikTok</a>
+            <a href="https://x.com/Deusb17" target="_blank" class="social-btn"><img src="https://i.ibb.co/FbWvjMxb/twitter.png" class="social-icon"> X</a>
+            <a href="https://youtube.com/@deusbentertainment" target="_blank" class="social-btn"><img src="https://upload.wikimedia.org/wikipedia/commons/e/ef/Youtube_logo.png" class="social-icon"> YouTube</a>
         </div>
-
-        <div style="margin-top: 30px;">
-            <p style="color: #666; font-size: 13px; margin-bottom: 5px;">Have a project in mind?</p>
-            <a href="mailto:deusbentertainment@gmail.com?subject=Inquiry%20from%20Website&body=Hello%20DEUSB%20Team," class="email-link">
-                Email: deusbentertainment@gmail.com
-            </a>
-        </div>
-
-        <p style="color: #444; font-size: 11px; margin-top: 40px;">&copy; 2026 DEUSB ENTERTAINMENT. All Rights Reserved.</p>
+        <p>Have a project in mind?</p>
+        <a href="mailto:deusbentertainment@gmail.com?subject=Inquiry" class="email-link">Email: deusbentertainment@gmail.com</a>
+        <p style="color: #444; font-size: 11px; margin-top: 40px;">&copy; 2026 DEUSB ENTERTAINMENT.</p>
     </footer>
 
     <script>
-        // --- ONGEZA VIDEO ZAKO HAPA ---
         const miradi = [
             {
                 jina: "FIRST YEAR CAREER MISSION",
@@ -199,28 +151,23 @@
 
         function jengaDuka(filterText = "") {
             const duka = document.getElementById('duka');
-            const filtered = miradi.filter(m => 
-                m.jina.toLowerCase().includes(filterText.toLowerCase())
-            );
+            const filtered = miradi.filter(m => m.jina.toLowerCase().includes(filterText.toLowerCase()));
 
-            duka.innerHTML = filtered.map((m, index) => `
-                <div class="kadi" style="transition-delay: ${index * 0.1}s">
-                    <img src="${m.picha}" class="product-img">
+            duka.innerHTML = filtered.map(m => `
+                <div class="kadi">
+                    <div class="img-container">
+                        <img src="${m.picha}" class="product-img">
+                    </div>
                     <div class="kadi-info">
                         <h3>${m.jina}</h3>
-                        <a href="${m.video}" target="_blank" class="btn-video">TAZAMA VIDEO</a>
                     </div>
+                    <a href="${m.video}" target="_blank" class="btn-video">TAZAMA VIDEO</a>
                 </div>
             `).join('');
-
-            setTimeout(() => {
-                document.querySelectorAll('.kadi').forEach(el => el.classList.add('show'));
-            }, 100);
         }
 
         function searchProjects() {
-            const txt = document.getElementById('searchInput').value;
-            jengaDuka(txt);
+            jengaDuka(document.getElementById('searchInput').value);
         }
 
         window.onload = () => jengaDuka();

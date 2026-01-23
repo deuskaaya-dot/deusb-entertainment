@@ -93,12 +93,15 @@
             font-size: 18px;
         }
 
-        /* PROJECT & STORE GRID SYSTEM */
-        #mainGrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; }
-        .kadi { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.1); transition: 0.3s; display: flex; flex-direction: column; }
+        /* MODIFIED GRID & IMAGE ADAPTATION */
+        #mainGrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; align-items: start; }
+        .kadi { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.1); transition: 0.3s; display: flex; flex-direction: column; height: auto; }
         .kadi:hover { transform: translateY(-5px); }
-        .product-img { width: 100%; height: 230px; object-fit: cover; }
-        .kadi-info { padding: 20px; text-align: left; flex-grow: 1; }
+        
+        /* This ensures the image height adjusts to content (portrait/landscape) */
+        .product-img { width: 100%; height: auto; max-height: 500px; object-fit: contain; background: #f0f0f0; }
+        
+        .kadi-info { padding: 20px; text-align: left; }
         .kadi-info h3 { margin: 0 0 10px 0; color: var(--brand-blue); font-size: 18px; }
         .bei { color: var(--brand-red); font-weight: bold; font-size: 1.2rem; display: block; margin-bottom: 10px; }
 
@@ -122,6 +125,9 @@
             color: white;
             margin-top: 50px;
         }
+        .footer-email { color: var(--deusb-gold); text-decoration: none; font-weight: bold; font-size: 16px; transition: 0.3s; }
+        .footer-email:hover { color: white; }
+        
         .social-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin: 25px 0; }
         .social-btn { display: flex; align-items: center; gap: 8px; background: #2a2a2a; padding: 8px 14px; border-radius: 50px; text-decoration: none; color: white; font-weight: bold; font-size: 13px; border: 1px solid #444; }
         .social-icon { width: 18px; height: 18px; object-fit: contain; }
@@ -184,6 +190,8 @@
 
     <footer>
         <h3 style="margin-bottom: 10px;">Wasiliana Nasi</h3>
+        <p style="color: #ccc; margin-bottom: 20px;">Tufuate kwenye mitandao ya kijamii</p>
+        
         <div class="social-container">
             <a href="https://wa.me/255748666409" class="social-btn"><img src="https://i.ibb.co/tP3xXKN0/whatsapp.png" class="social-icon"> WhatsApp</a>
             <a href="https://www.instagram.com/deusb_entertainment?igsh=ajJ2aDY1MG1ycTY4" target="_blank" class="social-btn"><img src="https://i.ibb.co/PZF184kz/instagram.png" class="social-icon"> Instagram</a>
@@ -191,7 +199,8 @@
             <a href="https://x.com/Deusb17" target="_blank" class="social-btn"><img src="https://i.ibb.co/FbWvjMxb/twitter.png" class="social-icon"> Twitter</a>
             <a href="https://youtube.com/@deusbentertainment?si=N23cHeGqwjABfTgc" target="_blank" class="social-btn"><img src="https://upload.wikimedia.org/wikipedia/commons/e/ef/Youtube_logo.png" class="social-icon"> YouTube</a>
         </div>
-        <p style="color: #ffffff; font-size: 14px; margin-top: 20px;">Email: deusbentertainment@gmail.com</p>
+
+        <p style="margin-top: 20px;">Email: <a href="mailto:deusbentertainment@gmail.com" class="footer-email">deusbentertainment@gmail.com</a></p>
         <p style="font-size: 12px; color: #555; margin-top: 30px;">&copy; 2026 DEUSB STORE. Haki zote zimehifadhiwa.</p>
     </footer>
 
@@ -223,77 +232,43 @@
             currentView = view;
             document.getElementById('btnBack').style.display = (view === 'miradi') ? 'none' : 'inline-block';
             document.getElementById('viewContainer').innerHTML = "";
-            
             if (view === 'catalogue') renderCatalogue();
             else if (view === 'store') loadStore();
             else loadProjects();
         }
 
         async function loadProjects() {
-            const loader = document.getElementById('loadingMsg');
-            loader.style.display = 'block';
+            document.getElementById('loadingMsg').style.display = 'block';
             try {
                 const res = await fetch(sheetUrls.projects);
                 const text = await res.text();
-                // Parsing manually for projects CSV
                 masterData.projects = text.split('\n').slice(1).map(l => {
                     const c = l.split(',');
                     return { name: c[0], desc: c[1], img: c[2], link: c[4]?.trim() };
                 }).filter(p => p.name);
                 renderList(masterData.projects, 'project');
-            } catch (e) {
-                console.error("Error loading projects:", e);
-            }
-            loader.style.display = 'none';
+            } catch (e) {}
+            document.getElementById('loadingMsg').style.display = 'none';
         }
 
         async function loadStore() {
-            const loader = document.getElementById('loadingMsg');
-            loader.style.display = 'block';
-            Papa.parse(sheetUrls.store, {
-                download: true,
-                header: true,
-                complete: (res) => {
-                    masterData.store = res.data.filter(i => i.Jina);
-                    renderList(masterData.store, 'store');
-                    loader.style.display = 'none';
-                },
-                error: (err) => {
-                    console.error("Error loading store:", err);
-                    loader.style.display = 'none';
-                }
-            });
+            document.getElementById('loadingMsg').style.display = 'block';
+            Papa.parse(sheetUrls.store, { download: true, header: true, complete: (res) => {
+                masterData.store = res.data.filter(i => i.Jina);
+                renderList(masterData.store, 'store');
+                document.getElementById('loadingMsg').style.display = 'none';
+            }});
         }
 
         function renderList(data, type) {
             let html = `<div id="mainGrid">`;
-            if(data.length === 0) {
-                html += `<p style="grid-column: 1/-1; text-align:center;">No results found.</p>`;
-            } else {
-                data.forEach(i => {
-                    if (type === 'project') {
-                        html += `
-                        <div class="kadi" onclick="window.open('${i.link || '#'}', '_blank')">
-                            <img src="${i.img}" class="product-img" onerror="this.src='https://placehold.co/400x300?text=No+Image'">
-                            <div class="kadi-info">
-                                <h3>${i.name}</h3>
-                                <p style="font-size:12px; color:#666;">${i.desc || ''}</p>
-                            </div>
-                        </div>`;
-                    } else {
-                        html += `
-                        <div class="kadi">
-                            <img src="${i.PichaURL}" class="product-img" onerror="this.src='https://placehold.co/400x300?text=No+Image'">
-                            <div class="kadi-info">
-                                <h3>${i.Jina}</h3>
-                                <span class="bei">TSH ${i.Bei}</span>
-                                <p style="font-size:12px; color:#666;">${i.Maelezo || ''}</p>
-                            </div>
-                            <a href="https://wa.me/255748666409?text=Nahitaji:${encodeURIComponent(i.Jina)}" class="btn-nav" style="background:var(--whatsapp-green); border:none; display:block; text-align:center; margin:15px; border-radius:8px;">PURCHASE VIA WHATSAPP</a>
-                        </div>`;
-                    }
-                });
-            }
+            data.forEach(i => {
+                if (type === 'project') {
+                    html += `<div class="kadi" onclick="window.open('${i.link || '#'}')"><img src="${i.img}" class="product-img"><div class="kadi-info"><h3>${i.name}</h3><p style="font-size:12px;">${i.desc || ''}</p></div></div>`;
+                } else {
+                    html += `<div class="kadi"><img src="${i.PichaURL}" class="product-img"><div class="kadi-info"><h3>${i.Jina}</h3><span class="bei">TSH ${i.Bei}</span><p style="font-size:12px;">${i.Maelezo || ''}</p></div><a href="https://wa.me/255748666409?text=Nahitaji:${i.Jina}" class="btn-nav" style="background:var(--whatsapp-green); border:none; display:block; text-align:center; margin:15px; border-radius:8px;">PURCHASE VIA WHATSAPP</a></div>`;
+                }
+            });
             document.getElementById('viewContainer').innerHTML = html + `</div>`;
         }
 
@@ -427,10 +402,7 @@
             document.getElementById('briefTitle').innerText = cat + " Requirement List";
             const qList = packageQuestions[cat] || ["Describe your needs in detail."];
             document.getElementById('dynamicFields').innerHTML = qList.map(q => `
-                <div class="req-field">
-                    <label>${q}</label>
-                    <input type="text" class="dynamic-input" data-question="${q}" placeholder="Type answer here...">
-                </div>
+                <div class="req-field"><label>${q}</label><input type="text" class="dynamic-input" data-question="${q}" placeholder="Type answer here..."></div>
             `).join('');
             document.getElementById('briefModal').style.display = "block";
         }
@@ -442,29 +414,20 @@
             document.querySelectorAll('.dynamic-input').forEach(input => {
                 body += `Q: ${input.dataset.question}\nA: ${input.value}\n\n`;
             });
-            
             const files = document.getElementById('directUpload').files;
             let fileInfo = "FILES SELECTED: ";
             if(files.length > 0) {
                 for(let i=0; i<files.length; i++) { fileInfo += files[i].name + (i === files.length - 1 ? "" : ", "); }
-            } else { fileInfo += "None (Client will send via Link or WhatsApp)"; }
-
-            body += `ASSETS\n------------------\n${fileInfo}\nVideo Link: ${document.getElementById('videoLink').value}\nSample Link: ${document.getElementById('samplePhotoLink').value}\n\n`;
+            } else { fileInfo += "None"; }
+            body += `ASSETS\n------------------\n${fileInfo}\nVideo/Footage Link: ${document.getElementById('videoLink').value}\nSample Link: ${document.getElementById('samplePhotoLink').value}\n\n`;
             body += `EXTRA INSTRUCTIONS: ${document.getElementById('projDesc').value}`;
-            
-            const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=deusbentertainment@gmail.com&su=Brief: ${encodeURIComponent(selCat)}&body=${encodeURIComponent(body)}`;
-            window.open(gmailUrl);
+            window.open(`https://mail.google.com/mail/?view=cm&fs=1&to=deusbentertainment@gmail.com&su=Brief: ${selCat}&body=${encodeURIComponent(body)}`);
         }
 
         function filterContent() {
             const val = document.getElementById('searchInput').value.toLowerCase();
-            if (currentView === 'miradi') {
-                const filtered = masterData.projects.filter(p => p.name.toLowerCase().includes(val) || p.desc.toLowerCase().includes(val));
-                renderList(filtered, 'project');
-            } else if (currentView === 'store') {
-                const filtered = masterData.store.filter(s => s.Jina.toLowerCase().includes(val) || s.Maelezo.toLowerCase().includes(val));
-                renderList(filtered, 'store');
-            }
+            if (currentView === 'miradi') renderList(masterData.projects.filter(p => p.name.toLowerCase().includes(val)), 'project');
+            if (currentView === 'store') renderList(masterData.store.filter(s => s.Jina.toLowerCase().includes(val)), 'store');
         }
 
         window.onload = () => changeView('miradi');

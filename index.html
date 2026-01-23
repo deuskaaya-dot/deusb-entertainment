@@ -94,7 +94,7 @@
 
         #mainGrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 25px; }
 
-        /* CATALOGUE DESIGN */
+        /* CATALOGUE DESIGN - EXACT PDF WORDING */
         .service-section { margin-bottom: 50px; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 10px 20px rgba(0,0,0,0.08); text-align: left; }
         .section-title { border-left: 5px solid var(--deusb-gold); padding-left: 15px; margin-bottom: 10px; color: var(--brand-blue); font-size: 22px; text-transform: uppercase; font-weight: 800; }
         .section-desc { color: #666; font-size: 14px; margin-bottom: 25px; font-style: italic; }
@@ -107,13 +107,6 @@
         .btn-req { background: #000; color: white; border: none; padding: 14px; border-radius: 50px; font-weight: bold; cursor: pointer; width: 100%; margin-top: auto; text-transform: uppercase; font-size: 11px; letter-spacing: 1px; }
 
         .note-box { background: #fff8e1; border: 1px solid #ffe082; padding: 15px; border-radius: 8px; margin-top: 20px; font-size: 13px; color: #5d4037; }
-
-        /* CARDS */
-        .kadi { background: var(--pure-white); border-radius: 12px; overflow: hidden; border: 1px solid rgba(26, 42, 68, 0.1); display: flex; flex-direction: column; }
-        .product-img { width: 100%; height: auto; display: block; object-fit: contain; cursor: pointer; }
-        .kadi-info { padding: 15px; text-align: center; }
-        .bei { color: var(--deusb-gold); font-weight: bold; font-size: 20px; display: block; margin-bottom: 10px; }
-        .btn-action { display: block; background: var(--brand-red); color: white; padding: 12px; border-radius: 5px; font-weight: bold; font-size: 13px; margin: 0 15px 15px 15px; text-align: center; text-decoration: none; }
 
         /* MODAL */
         .modal { display: none; position: fixed; z-index: 3000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); overflow-y: auto; padding: 20px 0; }
@@ -143,7 +136,7 @@
     </header>
 
     <div class="container">
-        <div id="loadingMsg">FETCHING DATA FROM DEUSB...</div>
+        <div id="loadingMsg">FETCHING DATA...</div>
         <div id="viewContainer"></div>
     </div>
 
@@ -152,11 +145,11 @@
             <span class="close" onclick="closeModal()">&times;</span>
             <h3 id="briefTitle" style="color:var(--deusb-gold); margin-top:0;">Requirement List</h3>
             <div id="briefForm">
-                <div class="req-field"><label>Business/Event Name</label><input type="text" id="bizName" placeholder="Enter name..."></div>
+                <div class="req-field"><label>Business/Event Name</label><input type="text" id="bizName"></div>
                 <div id="dynamicFields"></div>
-                <div class="req-field"><label>Link to Raw Video/Footage (Google Drive/Cloud)</label><input type="url" id="videoLink" placeholder="Paste link here..."></div>
-                <div class="req-field"><label>Link to Sample Photo/Inspiration</label><input type="url" id="samplePhotoLink" placeholder="Paste link here..."></div>
-                <div class="req-field"><label>Specific Instructions (The Brief)</label><textarea id="projDesc" rows="4" placeholder="Describe your vision..."></textarea></div>
+                <div class="req-field"><label>Link to Raw Video/Footage (Drive/Cloud)</label><input type="url" id="videoLink"></div>
+                <div class="req-field"><label>Link to Sample Photo/Inspiration</label><input type="url" id="samplePhotoLink"></div>
+                <div class="req-field"><label>Specific Instructions (The Brief)</label><textarea id="projDesc" rows="4"></textarea></div>
                 <button class="btn-send" onclick="sendGmail()">Submit via Gmail</button>
             </div>
         </div>
@@ -164,7 +157,6 @@
 
     <footer>
         <p>&copy; 2026 DEUSB ENTERTAINMENT. The Standard of Story.</p>
-        <p>+255 748 666 409 | @deusb_entertainment</p>
     </footer>
 
     <script>
@@ -174,18 +166,18 @@
         };
 
         const config = {
-            'Graphics Basic': ["Required Colors", "Main Headline"],
-            'Graphics Standard': ["Style Vibe", "Source File Formats"],
-            'Graphics Premium': ["Brand Identity Details", "Business Card Info"],
-            'Video Basic': ["Background Music Vibe"],
-            'Video Standard': ["Subtitles Language", "Transition Style"],
-            'Video Premium': ["Voiceover Script", "B-roll Requirements"],
-            'Motion Basic': ["Logo File Format"],
-            'Motion Standard': ["Explainer Focus (App/Service)"],
-            'Motion Premium': ["Corporate Storyboard Link"],
-            'Social Lite': ["Platform Handles"],
-            'Social Growth': ["Engagement Target"],
-            'Social Domination': ["Shoot Frequency"]
+            'Graphics Basic': ["Headline Text", "Color Theme"],
+            'Graphics Standard': ["Brand Mission", "Style Vibe"],
+            'Graphics Premium': ["Full Identity Details"],
+            'Video Basic': ["Music Choice"],
+            'Video Standard': ["Subtitles Needed?"],
+            'Video Premium': ["Voiceover Script"],
+            'Motion Basic': ["Logo File PNG/Vector"],
+            'Motion Standard': ["App/Service Benefits"],
+            'Motion Premium': ["Full Storyboard Link"],
+            'Social Lite': ["Account Handles"],
+            'Social Growth': ["Target Audience"],
+            'Social Domination': ["Ad Spend Budget"]
         };
 
         let currentView = 'miradi';
@@ -210,7 +202,7 @@
                     return { name: c[0], desc: c[1], img: c[2], link: c[4]?.trim() };
                 });
                 renderList(masterData.projects, 'project');
-            } catch (e) { console.error(e); }
+            } catch (e) {}
             document.getElementById('loadingMsg').style.display = 'none';
         }
 
@@ -227,9 +219,9 @@
             let html = `<div id="mainGrid">`;
             data.forEach(i => {
                 if (type === 'project') {
-                    html += `<div class="kadi"><img src="${i.img}" class="product-img" onclick="window.open('${i.link}')"><div class="kadi-info"><h3>${i.name}</h3><p style="font-size:12px;">${i.desc}</p></div></div>`;
+                    html += `<div class="kadi" onclick="window.open('${i.link}')"><img src="${i.img}" class="product-img"><div class="kadi-info"><h3>${i.name}</h3><p>${i.desc}</p></div></div>`;
                 } else {
-                    html += `<div class="kadi"><img src="${i.PichaURL}" class="product-img"><div class="kadi-info"><h3>${i.Jina}</h3><span class="bei">TSH ${i.Bei}</span></div><a href="https://wa.me/255748666409?text=Nahitaji:${i.Jina}" class="btn-action" style="background:var(--whatsapp-green)">PURCHASE VIA WHATSAPP</a></div>`;
+                    html += `<div class="kadi"><img src="${i.PichaURL}" class="product-img"><div class="kadi-info"><h3>${i.Jina}</h3><span class="bei">TSH ${i.Bei}</span></div><a href="https://wa.me/255748666409?text=Nahitaji:${i.Jina}" class="btn-nav" style="background:var(--whatsapp-green); border:none; display:block; text-align:center; margin:10px;">PURCHASE</a></div>`;
                 }
             });
             document.getElementById('viewContainer').innerHTML = html + `</div>`;
@@ -241,9 +233,9 @@
                     <h2 class="section-title">1. Graphics & Branding (Logos & Flyers)</h2>
                     <p class="section-desc">Visual communication designed to make your brand memorable.</p>
                     <div class="tier-grid">
-                        <div class="tier-card"><h3>BASIC</h3><span class="tier-price">20k-30k TSH</span><span class="tier-time">Timeline: 1-4 Hours</span><p>Deliverables: 1 Simple Flyer OR Basic Logo (2 revisions). Best For: Urgent sales/events.</p><button class="btn-req" onclick="openBrief('Graphics Basic')">Requirement List</button></div>
-                        <div class="tier-card"><h3>STANDARD</h3><span class="tier-price">50k-80k TSH</span><span class="tier-time">Timeline: 1-3 Days</span><p>Deliverables: 2 Flyers + Professional Logo + Source Files. Best For: Brand foundations.</p><button class="btn-req" onclick="openBrief('Graphics Standard')">Requirement List</button></div>
-                        <div class="tier-card"><h3>PREMIUM</h3><span class="tier-price">120k+ TSH</span><span class="tier-time">Timeline: 5-10 Days</span><p>Deliverables: Full Branding (Logo + Biz Card + Identity). Best For: Professional identities.</p><button class="btn-req" onclick="openBrief('Graphics Premium')">Requirement List</button></div>
+                        <div class="tier-card"><h3>BASIC</h3><span class="tier-price">20,000-30,000 TSH</span><span class="tier-time">Timeline: 1-4 Hours</span><p>Deliverables: 1 Simple Flyer OR Basic Logo (2 revisions). Best For: Urgent sales/events.</p><button class="btn-req" onclick="openBrief('Graphics Basic')">Requirement List</button></div>
+                        <div class="tier-card"><h3>STANDARD</h3><span class="tier-price">50,000-80,000 TSH</span><span class="tier-time">Timeline: 1-3 Days</span><p>Deliverables: 2 Flyers + Professional Logo + Source Files. Best For: Brand foundations.</p><button class="btn-req" onclick="openBrief('Graphics Standard')">Requirement List</button></div>
+                        <div class="tier-card"><h3>PREMIUM</h3><span class="tier-price">120,000-250,000 TSH</span><span class="tier-time">Timeline: 5-10 Days</span><p>Deliverables: Full Branding (Logo + Biz Card + identity). Best For: professional identity.</p><button class="btn-req" onclick="openBrief('Graphics Premium')">Requirement List</button></div>
                     </div>
                     <div class="note-box"><strong>Why the time difference?</strong> Basic is "design-on-demand." Standard/Premium involves market research and custom typography to ensure your logo isn't just "pretty," but unique to your business.</div>
                 </div>
@@ -254,7 +246,7 @@
                     <div class="tier-grid">
                         <div class="tier-card"><h3>BASIC</h3><span class="tier-price">40,000-60,000</span><span class="tier-time">Timeline: 2-5 Hours</span><p>Focus: Simple cuts, background music, and basic color correction. Ideal for: Quick daily updates and personal vlogs.</p><button class="btn-req" onclick="openBrief('Video Basic')">Requirement List</button></div>
                         <div class="tier-card"><h3>STANDARD</h3><span class="tier-price">80,000-150,000</span><span class="tier-time">Timeline: 1-2 Days</span><p>Focus: Smooth transitions, professional color grading, and subtitles. Ideal for: Small business ads.</p><button class="btn-req" onclick="openBrief('Video Standard')">Requirement List</button></div>
-                        <div class="tier-card"><h3>PREMIUM</h3><span class="tier-price">200,000 – 400,000</span><span class="tier-time">Timeline: 3-7 Days</span><p>Focus: Full production including Scripting + B-roll + Professional Voiceover. Ideal for: High-budget campaigns.</p><button class="btn-req" onclick="openBrief('Video Premium')">Requirement List</button></div>
+                        <div class="tier-card"><h3>PREMIUM</h3><span class="tier-price">200,000-400,000</span><span class="tier-time">Timeline: 3-7 Days</span><p>Focus: Full production including Scripting + B-roll + Professional Voiceover. Ideal for: High-budget marketing campaigns.</p><button class="btn-req" onclick="openBrief('Video Premium')">Requirement List</button></div>
                     </div>
                 </div>
 
@@ -262,9 +254,9 @@
                     <h2 class="section-title">3. Motion Graphics (Animations/Explainers)</h2>
                     <p class="section-desc">Using movement to explain complex ideas or add prestige.</p>
                     <div class="tier-grid">
-                        <div class="tier-card"><h3>BASIC</h3><span class="tier-price">50,000 – 70,000</span><span class="tier-time">Timeline: 5-8 Hours</span><p>Deliverable: 5-10 second Logo Animation. Usage: Intro/outro for every video.</p><button class="btn-req" onclick="openBrief('Motion Basic')">Requirement List</button></div>
-                        <div class="tier-card"><h3>STANDARD</h3><span class="tier-price">150,000 – 250,000</span><span class="tier-time">Timeline: 3-5 Days</span><p>Deliverable: 30-second 2D Explainer Video. Usage: Teaching customers how to use your app.</p><button class="btn-req" onclick="openBrief('Motion Standard')">Requirement List</button></div>
-                        <div class="tier-card"><h3>PREMIUM</h3><span class="tier-price">350,000 – 600,000</span><span class="tier-time">Timeline: 2-3 Weeks</span><p>Deliverable: 1-minute Full Motion Graphic Ad. Usage: High-end asset for corporate presentations.</p><button class="btn-req" onclick="openBrief('Motion Premium')">Requirement List</button></div>
+                        <div class="tier-card"><h3>BASIC</h3><span class="tier-price">50,000-70,000</span><span class="tier-time">Timeline: 5-8 Hours</span><p>Deliverable: 5-10 second Logo Animation. Usage: Use this as an intro/outro for every video.</p><button class="btn-req" onclick="openBrief('Motion Basic')">Requirement List</button></div>
+                        <div class="tier-card"><h3>STANDARD</h3><span class="tier-price">150,000-250,000</span><span class="tier-time">Timeline: 3-5 Days</span><p>Deliverable: 30-second 2D Explainer Video. Usage: Teaching customers how to use your app.</p><button class="btn-req" onclick="openBrief('Motion Standard')">Requirement List</button></div>
+                        <div class="tier-card"><h3>PREMIUM</h3><span class="tier-price">350,000-600,000</span><span class="tier-time">Timeline: 2-3 Weeks</span><p>Deliverable: 1-minute Full Motion Graphic Ad. Usage: High-end asset for corporate presentations.</p><button class="btn-req" onclick="openBrief('Motion Premium')">Requirement List</button></div>
                     </div>
                 </div>
 
@@ -272,28 +264,28 @@
                     <h2 class="section-title">4. Social Media Management (Monthly Retainers)</h2>
                     <p class="section-desc">We don't just post; we grow your community.</p>
                     <div class="tier-grid">
-                        <div class="tier-card"><h3>LITE PLAN</h3><span class="tier-price">250,000 – 400,000/mo</span><p>Platform: 1-2 (FB/IG). Content: 12 Posts per month + Caption writing.</p><button class="btn-req" onclick="openBrief('Social Lite')">Requirement List</button></div>
-                        <div class="tier-card"><h3>GROWTH PLAN</h3><span class="tier-price">500,000 – 850,000/mo</span><p>Platform: 3 (FB, IG, TikTok). Content: 20 Posts per month (4 Reels).</p><button class="btn-req" onclick="openBrief('Social Growth')">Requirement List</button></div>
-                        <div class="tier-card"><h3>DOMINATION PLAN</h3><span class="tier-price">1,200,000+/mo</span><p>Platform: All. Content: Daily posting + Weekly shoots + Ads.</p><button class="btn-req" onclick="openBrief('Social Domination')">Requirement List</button></div>
+                        <div class="tier-card"><h3>LITE PLAN</h3><span class="tier-price">250,000-400,000 TSH/mo</span><p>Platform: 1-2 (FB/IG). Content: 12 Posts per month + Caption writing. Goal: Keeping your page active.</p><button class="btn-req" onclick="openBrief('Social Lite')">Requirement List</button></div>
+                        <div class="tier-card"><h3>GROWTH PLAN</h3><span class="tier-price">500,000-850,000 TSH/mo</span><p>Platform: 3 (FB, IG, TikTok). Content: 20 Posts per month (4 professional Reels). Strategy: Hashtag research, engagement.</p><button class="btn-req" onclick="openBrief('Social Growth')">Requirement List</button></div>
+                        <div class="tier-card"><h3>DOMINATION PLAN</h3><span class="tier-price">1,200,000+ TSH/mo</span><p>Platform: All major platforms. Content: Daily posting + Weekly video shoots + DM management.</p><button class="btn-req" onclick="openBrief('Social Domination')">Requirement List</button></div>
                     </div>
                 </div>
 
                 <div class="service-section">
                     <h2 class="section-title">5. Our Terms of Engagement</h2>
-                    <ul style="font-size:14px; line-height:1.8;">
-                        <li><strong>Payment:</strong> 50% deposit required. Balance due upon final approval. [cite: 67, 68]</li>
-                        <li><strong>Revisions:</strong> Basic (2 rounds). Standard/Premium (Up to 4 rounds). [cite: 69, 70]</li>
-                        <li><strong>Rush Jobs:</strong> 25% surcharge applies if needed faster. [cite: 71]</li>
-                        <li><strong>Brief:</strong> Clear instructions must be provided to meet timelines. [cite: 72]</li>
-                    </ul>
+                    <ol style="font-size:14px; line-height:1.8;">
+                        <li><strong>Payment:</strong> A 50% deposit is required to begin any project. The remaining balance is due upon final approval before files are delivered.</li>
+                        <li><strong>Revisions:</strong> Basic: 2 Rounds of minor changes. Standard/Premium: Up to 4 Rounds of revisions.</li>
+                        <li><strong>Rush Jobs:</strong> If a "Standard" or "Premium" project is needed in "Basic" time, a 25% rush fee will be applied.</li>
+                        <li><strong>Communication:</strong> Clients must provide a clear "Brief" (instructions) before we start to ensure the 1-4 hour or 1-3 day timelines are met.</li>
+                    </ol>
                 </div>`;
         }
 
         let selCat = "";
         function openBrief(cat) {
             selCat = cat;
-            document.getElementById('briefTitle').innerText = cat + " Requirement List";
-            document.getElementById('dynamicFields').innerHTML = (config[cat] || []).map(f => `<div class="req-field"><label>${f}</label><input type="text" data-label="${f}" placeholder="Required..."></div>`).join('');
+            document.getElementById('briefTitle').innerText = cat + " Brief";
+            document.getElementById('dynamicFields').innerHTML = (config[cat] || []).map(f => `<div class="req-field"><label>${f}</label><input type="text" data-label="${f}"></div>`).join('');
             document.getElementById('briefModal').style.display = "block";
         }
 
@@ -302,8 +294,7 @@
         function sendGmail() {
             let body = `DEUSB PROJECT BRIEF\nCategory: ${selCat}\nBrand: ${document.getElementById('bizName').value}\n\n`;
             document.querySelectorAll('#dynamicFields input').forEach(i => body += `${i.dataset.label}: ${i.value}\n`);
-            body += `Raw Footage Link: ${document.getElementById('videoLink').value}\n`;
-            body += `Sample/Reference Link: ${document.getElementById('samplePhotoLink').value}\n\nInstructions:\n${document.getElementById('projDesc').value}`;
+            body += `Footage Link: ${document.getElementById('videoLink').value}\nSample Link: ${document.getElementById('samplePhotoLink').value}\nBrief: ${document.getElementById('projDesc').value}`;
             window.open(`https://mail.google.com/mail/?view=cm&fs=1&to=deusbentertainment@gmail.com&su=Brief: ${selCat}&body=${encodeURIComponent(body)}`);
         }
 

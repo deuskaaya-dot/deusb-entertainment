@@ -100,10 +100,24 @@
         .btn-play, .btn-nunua { display: block; background: var(--brand-red); color: white; padding: 12px; border-radius: 5px; font-weight: bold; font-size: 13px; margin: 0 15px 15px 15px; text-align: center; border: none; cursor: pointer; text-decoration: none; }
         .btn-nunua { background: var(--whatsapp-green); }
 
-        footer { background: var(--brand-blue); padding: 50px 20px; text-align: center; color: var(--pure-white); border-top: 5px solid var(--brand-yellow); margin-top: 50px; }
-        .social-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin: 25px 0; }
-        .social-btn { display: flex; align-items: center; gap: 10px; padding: 12px 22px; border-radius: 50px; text-decoration: none; color: white; font-weight: bold; font-size: 13px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); }
-        .social-icon { width: 20px; height: 20px; object-fit: contain; }
+        /* RESTORED ORIGINAL FOOTER STYLING */
+        footer { 
+            background: #1a1a1a; 
+            padding: 50px 20px; 
+            text-align: center; 
+            color: white;
+            margin-top: 50px;
+            border-top: 5px solid var(--brand-yellow);
+        }
+
+        .footer-link {
+            color: var(--whatsapp-green); 
+            text-decoration: none; 
+            font-weight: bold;
+            display: block;
+            margin: 15px 0;
+            font-size: 18px;
+        }
 
         .video-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); display: none; justify-content: center; align-items: center; z-index: 2000; }
         .modal-content { position: relative; width: 90%; max-width: 850px; aspect-ratio: 16/9; }
@@ -137,12 +151,11 @@
     </div>
 
     <footer>
-        <div class="social-container">
-            <a href="https://wa.me/255748666409" class="social-btn"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" class="social-icon"> WhatsApp</a>
-            <a href="https://www.instagram.com/deusb_entertainment" target="_blank" class="social-btn"><img src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Instagram_logo_2016.svg" class="social-icon"> Instagram</a>
-            <a href="https://youtube.com/@deusbentertainment" target="_blank" class="social-btn"><img src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg" class="social-icon"> YouTube</a>
-        </div>
-        <p style="color: rgba(255,255,255,0.4); font-size: 11px; margin-top: 40px;">&copy; 2026 DEUSB ENTERTAINMENT. All Rights Reserved.</p>
+        <h3 style="margin-bottom: 20px;">Wasiliana Nasi</h3>
+        <p style="color: #ccc;">Tunapatikana kila wakati kukuhudumia kwa bidhaa bora.</p>
+        <a href="https://wa.me/255748666409" class="footer-link">WhatsApp: +255 748 666 409</a>
+        <a href="mailto:deusbentertainment@gmail.com" class="footer-link" style="color:#ffffff;">Email: deusbentertainment@gmail.com</a>
+        <p style="font-size: 12px; color: #666; margin-top: 30px;">&copy; 2026 DEUSB STORE. Haki zote zimehifadhiwa.</p>
     </footer>
 
     <script>
@@ -228,8 +241,14 @@
             }
         }
 
-        function playVideo(id) { document.getElementById('youtubePlayer').src = `https://www.youtube.com/embed/${id}?autoplay=1`; document.getElementById('videoModal').style.display = 'flex'; }
-        function closeVideo() { document.getElementById('youtubePlayer').src = ""; document.getElementById('videoModal').style.display = 'none'; }
+        function playVideo(id) { 
+            document.getElementById('youtubePlayer').src = `https://www.youtube.com/embed/${id}?autoplay=1`; 
+            document.getElementById('videoModal').style.display = 'flex'; 
+        }
+        function closeVideo() { 
+            document.getElementById('youtubePlayer').src = ""; 
+            document.getElementById('videoModal').style.display = 'none'; 
+        }
 
         window.onload = loadProjects;
     </script>

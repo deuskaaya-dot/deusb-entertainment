@@ -6,38 +6,32 @@
     <title>DEUSB ENTERTAINMENT</title>
     <style>
         :root {
-            /* Rangi kutoka kwenye Poster yako */
-            --brand-red: #8b2635; /* Rangi ya Pikipiki */
-            --brand-cream: #f7e1bc; /* Background ya Poster */
-            --brand-blue: #1a2a44; /* Rangi ya Icons kwenye poster */
-            --brand-yellow: #fdb813; /* Rangi ya 'Boresha Biashara' */
-            --text-dark: #222;
+            /* Exact Palette from your Poster */
+            --brand-cream: #f7e1bc;  /* Poster Background */
+            --brand-red: #8b2635;    /* Motorcycle Burgundy */
+            --brand-blue: #1a2a44;   /* Icon/Text Navy Blue */
+            --brand-yellow: #fdb813; /* Golden Yellow from 'Boresha Biashara' */
+            --pure-white: #ffffff;
         }
 
         body { 
             font-family: 'Segoe UI', Roboto, sans-serif; 
             margin: 0; 
             background-color: var(--brand-cream); 
-            color: var(--text-dark); 
+            color: var(--brand-blue); 
             overflow-x: hidden;
         }
 
         header { 
             padding: 40px 20px; 
             text-align: center; 
-            background: white;
+            background: var(--pure-white);
             border-bottom: 4px solid var(--brand-red);
         }
 
-        .logo { width: 120px; margin-bottom: 10px; }
+        .logo { width: 100px; margin-bottom: 10px; }
 
-        h1 { 
-            color: var(--brand-blue); 
-            margin: 0; 
-            letter-spacing: 2px;
-            font-size: 28px;
-            text-transform: uppercase;
-        }
+        h1 { color: var(--brand-blue); letter-spacing: 2px; text-transform: uppercase; }
 
         .search-container {
             margin-top: 20px;
@@ -51,10 +45,12 @@
             padding: 12px 20px;
             border-radius: 25px;
             border: 2px solid var(--brand-blue);
-            background: white;
-            color: var(--text-dark);
+            background: var(--pure-white);
+            color: var(--brand-blue);
             outline: none;
         }
+
+        #searchInput:focus { border-color: var(--brand-red); }
 
         .container { max-width: 1200px; margin: 20px auto; padding: 20px; }
 
@@ -64,61 +60,48 @@
             gap: 25px;
         }
 
-        /* CARD STYLING - MATCHING BRAND COLORS */
         .kadi { 
-            background: white; 
-            border-radius: 15px; 
+            background: var(--pure-white); 
+            border-radius: 12px; 
             overflow: hidden;
-            border: 1px solid #ddd;
+            border: 1px solid rgba(26, 42, 68, 0.1);
             transition: 0.3s;
             cursor: pointer;
             display: flex;
             flex-direction: column;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            height: 100%;
         }
 
-        .kadi:hover { 
-            border-color: var(--brand-red); 
-            transform: translateY(-8px);
-            box-shadow: 0 10px 25px rgba(139, 38, 53, 0.2);
-        }
+        .kadi:hover { border-color: var(--brand-red); transform: translateY(-5px); }
 
-        .img-container { width: 100%; background: var(--brand-blue); }
+        .img-container { width: 100%; background: #000; }
         
         .product-img { 
             width: 100%; 
             height: auto; 
             display: block; 
-            aspect-ratio: 16 / 9;
             object-fit: cover;
+            aspect-ratio: 16 / 9;
         }
 
-        .kadi-info { padding: 20px; text-align: center; flex-grow: 1; }
-        .kadi-info h3 { 
-            margin: 0; 
-            font-size: 16px; 
-            color: var(--brand-blue);
-            text-transform: uppercase;
-        }
+        .kadi-info { padding: 15px; text-align: center; flex-grow: 1; }
+        .kadi-info h3 { margin: 0 0 10px 0; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; color: var(--brand-blue); }
 
         .btn-play { 
             display: block; 
             background: var(--brand-red); 
-            color: white; 
-            padding: 14px; 
-            border-radius: 0 0 15px 15px; /* Inakaa chini kabisa ya kadi */
+            color: var(--pure-white); 
+            padding: 12px; 
+            border-radius: 5px; 
             font-weight: bold;
             font-size: 13px;
+            margin: 0 15px 15px 15px;
             text-align: center;
             border: none;
             cursor: pointer;
             text-decoration: none;
-            transition: 0.3s;
         }
 
-        .btn-play:hover { background: var(--brand-blue); }
-
-        /* MODAL (POP-UP) */
         .video-modal {
             position: fixed;
             top: 0; left: 0;
@@ -137,38 +120,43 @@
             aspect-ratio: 16/9;
         }
 
+        .modal-content iframe {
+            width: 100%; height: 100%;
+            border: none; border-radius: 10px;
+        }
+
         .close-modal {
             position: absolute;
             top: -40px; right: 0;
-            color: white; font-size: 16px; cursor: pointer;
+            color: var(--pure-white); font-size: 14px; cursor: pointer;
             background: var(--brand-red);
-            padding: 8px 20px;
+            padding: 6px 15px;
             border-radius: 5px;
             font-weight: bold;
         }
 
-        /* FOOTER BRANDING */
         footer { 
             background: var(--brand-blue); 
             padding: 50px 20px; 
             text-align: center; 
-            color: white;
+            border-top: 5px solid var(--brand-yellow);
             margin-top: 50px;
+            color: var(--pure-white);
         }
 
-        .social-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin: 25px 0; }
+        .social-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin: 25px 0; }
         .social-btn { 
             display: flex; align-items: center; gap: 8px; 
             background: rgba(255,255,255,0.1); 
-            padding: 12px 20px; 
+            padding: 10px 18px; 
             border-radius: 50px; 
-            text-decoration: none; color: white; 
+            text-decoration: none; color: var(--pure-white); 
             font-weight: bold; font-size: 12px; 
             border: 1px solid rgba(255,255,255,0.2); 
             transition: 0.3s; 
         }
         .social-btn:hover { background: var(--brand-red); border-color: var(--brand-red); }
-        .social-icon { width: 20px; height: 20px; filter: brightness(0) invert(1); }
+        .social-icon { width: 18px; height: 18px; filter: brightness(0) invert(1); }
 
         .email-link { color: var(--brand-yellow); text-decoration: none; font-weight: bold; }
     </style>
@@ -179,7 +167,7 @@
         <img src="https://i.ibb.co/rRZvchrH/transparent-logo.png" alt="DEUSB Logo" class="logo">
         <h1>DEUSB ENTERTAINMENT</h1>
         <div class="search-container">
-            <input type="text" id="searchInput" placeholder="Search our works..." onkeyup="searchProjects()">
+            <input type="text" id="searchInput" placeholder="Search project..." onkeyup="searchProjects()">
         </div>
     </header>
 
@@ -195,9 +183,7 @@
     </div>
 
     <footer>
-        <h2 style="font-size: 18px; margin-bottom: 10px;">THE STANDARD OF STORY</h2>
-        <div style="margin-bottom: 20px; opacity: 0.8;">Follow our accounts</div>
-        
+        <div style="margin-bottom: 20px; font-weight: bold; letter-spacing: 1px;">FOLLOW OUR ACCOUNTS</div>
         <div class="social-container">
             <a href="https://wa.me/255748666409" class="social-btn"><img src="https://i.ibb.co/tP3xXKN0/whatsapp.png" class="social-icon"> WhatsApp</a>
             <a href="https://www.instagram.com/deusb_entertainment" target="_blank" class="social-btn"><img src="https://i.ibb.co/PZF184kz/instagram.png" class="social-icon"> Instagram</a>
@@ -205,5 +191,71 @@
             <a href="https://x.com/Deusb17" target="_blank" class="social-btn"><img src="https://i.ibb.co/FbWvjMxb/twitter.png" class="social-icon"> X</a>
             <a href="https://youtube.com/@deusbentertainment" target="_blank" class="social-btn"><img src="https://upload.wikimedia.org/wikipedia/commons/e/ef/Youtube_logo.png" class="social-icon"> YouTube</a>
         </div>
+        <p>Contact us via email:</p>
+        <a href="mailto:deusbentertainment@gmail.com" class="email-link">deusbentertainment@gmail.com</a>
+        <p style="color: rgba(255,255,255,0.4); font-size: 11px; margin-top: 40px;">&copy; 2026 DEUSB ENTERTAINMENT. All Rights Reserved.</p>
+    </footer>
 
-        <p>Boresha Biashara Leo:</
+    <script>
+        const miradi = [
+            {
+                jina: "FIRST YEAR CAREER MISSION",
+                picha: "https://img.youtube.com/vi/nuutlljPD2s/maxresdefault.jpg",
+                type: "youtube",
+                link: "nuutlljPD2s"
+            },
+            {
+                jina: "ANIMATION OF A LOWPOLY HOUSE",
+                picha: "https://img.youtube.com/vi/HWblkG5km38/maxresdefault.jpg",
+                type: "youtube",
+                link: "HWblkG5km38"
+            },
+            {
+                jina: "DEUSB LATEST ON INSTAGRAM",
+                picha: "https://via.placeholder.com/400x225/1a2a44/f7e1bc?text=DEUSB+POST",
+                type: "external",
+                link: "https://www.instagram.com/p/DTSedTMiAc0/"
+            }
+        ];
+
+        function jengaDuka(filterText = "") {
+            const duka = document.getElementById('duka');
+            const filtered = miradi.filter(m => m.jina.toLowerCase().includes(filterText.toLowerCase()));
+
+            duka.innerHTML = filtered.map(m => {
+                const action = m.type === 'youtube' ? `onclick="playVideo('${m.link}')"` : `onclick="window.open('${m.link}', '_blank')"`;
+                const buttonText = m.type === 'youtube' ? 'PLAY VIDEO' : 'VIEW ON INSTAGRAM';
+                return `
+                <div class="kadi" ${action}>
+                    <div class="img-container">
+                        <img src="${m.picha}" class="product-img">
+                    </div>
+                    <div class="kadi-info">
+                        <h3>${m.jina}</h3>
+                    </div>
+                    <button class="btn-play">${buttonText}</button>
+                </div>
+            `}).join('');
+        }
+
+        function playVideo(id) {
+            const player = document.getElementById('youtubePlayer');
+            player.src = `https://www.youtube.com/embed/${id}?autoplay=1`;
+            document.getElementById('videoModal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeVideo() {
+            document.getElementById('youtubePlayer').src = "";
+            document.getElementById('videoModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        function searchProjects() {
+            jengaDuka(document.getElementById('searchInput').value);
+        }
+
+        window.onload = () => jengaDuka();
+    </script>
+</body>
+</html>

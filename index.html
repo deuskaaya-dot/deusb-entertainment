@@ -78,7 +78,6 @@
         .kadi-info { padding: 15px 15px 5px 15px; text-align: center; }
         .kadi-info h3 { margin: 0; font-size: 14px; text-transform: uppercase; color: var(--brand-blue); cursor: pointer; }
 
-        /* NEW DESCRIPTION STYLE */
         .post-description {
             padding: 5px 15px 15px 15px;
             font-size: 13px;
@@ -126,12 +125,12 @@
         <img src="https://i.ibb.co/rRZvchrH/transparent-logo.png" alt="DEUSB Logo" class="logo">
         <h1>DEUSB ENTERTAINMENT</h1>
         <div class="search-container">
-            <input type="text" id="searchInput" placeholder="Search project..." onkeyup="searchProjects()">
+            <input type="text" id="searchInput" placeholder="Search project..." onkeyup="searchFromInput()">
         </div>
     </header>
 
     <div class="container">
-        <div id="duka"></div>
+        <div id="duka">Loading projects...</div>
     </div>
 
     <div class="video-modal" id="videoModal">
@@ -156,42 +155,43 @@
     </footer>
 
     <script>
-        const miradi = [
-            {
-                jina: "DEUSB LATEST ON TIKTOK",
-                description: "Check out our latest creative poster designs and visual identity works for our clients.",
-                picha: "https://i.ibb.co/VWyxjjXD/IMG-20250819-WA0013.jpg", 
-                type: "external",
-                link: "https://www.tiktok.com/@deusbentertainment/photo/7591227356354727179"
-            },
-            {
-                jina: "FIRST YEAR CAREER MISSION",
-                description: "A look back at the milestones and creative projects that defined our first year.",
-                picha: "https://img.youtube.com/vi/nuutlljPD2s/maxresdefault.jpg",
-                type: "youtube",
-                link: "nuutlljPD2s"
-            },
-            {
-                jina: "ANIMATION OF A LOWPOLY HOUSE",
-                description: "Exploring clean geometry and vibrant lighting in 3D lowpoly environment design.",
-                picha: "https://img.youtube.com/vi/HWblkG5km38/maxresdefault.jpg",
-                type: "youtube",
-                link: "HWblkG5km38"
-            },
-            {
-                jina: "DEUSB LATEST ON INSTAGRAM",
-                description: "Follow us for behind-the-scenes content and real-time design updates.",
-                picha: "https://i.ibb.co/8nXBwsv0/1.png", 
-                type: "external",
-                link: "https://www.instagram.com/p/DTSedTMiAc0/"
+        // Link yako ya Google Sheet CSV imewekwa hapa
+        const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS7Rt8XJHECqqEfVdN5I_TS2EHAPVAeaoenwF-SVQO35GX0lDg-opKoWhHhjfOJYmIMDe6tej1ZbdNC/pub?gid=0&single=true&output=csv';
+        let allMiradi = [];
+
+        async function loadProjects() {
+            try {
+                const res = await fetch(sheetUrl);
+                const text = await res.text();
+                
+                // Tunatenganisha kila mstari (row)
+                const lines = text.split('\n').filter(line => line.trim() !== "");
+                
+                // Tunatengeneza miradi tukianzia mstari wa pili (slice(1)) kuruka vichwa vya habari
+                allMiradi = lines.slice(1).map(line => {
+                    const c = line.split(',');
+                    return { 
+                        jina: c[0], 
+                        description: c[1], 
+                        picha: c[2], 
+                        type: c[3], 
+                        link: c[4]?.trim() 
+                    };
+                });
+                renderCards(allMiradi);
+            } catch (e) { 
+                document.getElementById('duka').innerHTML = "Failed to load projects. Please check connection."; 
             }
-        ];
+        }
 
-        function jengaDuka(filterText = "") {
+        function renderCards(list) {
             const duka = document.getElementById('duka');
-            const filtered = miradi.filter(m => m.jina.toLowerCase().includes(filterText.toLowerCase()));
+            if (list.length === 0) {
+                duka.innerHTML = "<p>No projects found.</p>";
+                return;
+            }
 
-            duka.innerHTML = filtered.map((m) => {
+            duka.innerHTML = list.map(m => {
                 const action = m.type === 'youtube' ? `onclick="playVideo('${m.link}')"` : `onclick="window.open('${m.link}', '_blank')"`;
                 const buttonText = m.type === 'youtube' ? 'PLAY VIDEO' : 'VIEW POST';
                 return `
@@ -200,24 +200,28 @@
                     <div class="kadi-info" ${action}><h3>${m.jina}</h3></div>
                     <div class="post-description">${m.description}</div>
                     <button class="btn-play" ${action}>${buttonText}</button>
-                </div>
-            `}).join('');
+                </div>`;
+            }).join('');
         }
 
-        function playVideo(id) {
-            document.getElementById('youtubePlayer').src = `https://www.youtube.com/embed/${id}?autoplay=1`;
-            document.getElementById('videoModal').style.display = 'flex';
-            document.body.style.overflow = 'hidden';
+        function playVideo(id) { 
+            document.getElementById('youtubePlayer').src = `https://www.youtube.com/embed/${id}?autoplay=1`; 
+            document.getElementById('videoModal').style.display = 'flex'; 
+            document.body.style.overflow = 'hidden'; 
         }
 
-        function closeVideo() {
-            document.getElementById('youtubePlayer').src = "";
-            document.getElementById('videoModal').style.display = 'none';
-            document.body.style.overflow = 'auto';
+        function closeVideo() { 
+            document.getElementById('youtubePlayer').src = ""; 
+            document.getElementById('videoModal').style.display = 'none'; 
+            document.body.style.overflow = 'auto'; 
         }
 
-        function searchProjects() { jengaDuka(document.getElementById('searchInput').value); }
-        window.onload = () => jengaDuka();
+        function searchFromInput() { 
+            const val = document.getElementById('searchInput').value.toLowerCase(); 
+            renderCards(allMiradi.filter(m => m.jina.toLowerCase().includes(val))); 
+        }
+
+        window.onload = loadProjects;
     </script>
 </body>
 </html>

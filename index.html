@@ -114,6 +114,18 @@
         .tier-card p { font-size: 14px; color: #555; line-height: 1.6; flex-grow: 1; margin-bottom: 15px; }
         .btn-req { background: #000; color: white; border: none; padding: 14px; border-radius: 50px; font-weight: bold; cursor: pointer; width: 100%; margin-top: auto; text-transform: uppercase; font-size: 11px; letter-spacing: 1px; }
 
+        /* FOOTER STYLES FROM STORE */
+        footer { 
+            background: #1a1a1a; 
+            padding: 50px 20px; 
+            text-align: center; 
+            color: white;
+            margin-top: 50px;
+        }
+        .social-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin: 25px 0; }
+        .social-btn { display: flex; align-items: center; gap: 8px; background: #2a2a2a; padding: 8px 14px; border-radius: 50px; text-decoration: none; color: white; font-weight: bold; font-size: 13px; border: 1px solid #444; }
+        .social-icon { width: 18px; height: 18px; object-fit: contain; }
+
         /* MODAL & FORM */
         .modal { display: none; position: fixed; z-index: 3000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); overflow-y: auto; padding: 20px 0; }
         .modal-content { background: white; margin: auto; padding: 35px; border-radius: 15px; width: 95%; max-width: 650px; position: relative; }
@@ -123,19 +135,6 @@
         .req-field input, .req-field textarea { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 8px; font-size: 14px; background: #fafafa; }
         .upload-section { background: #fef9ef; padding: 15px; border-radius: 10px; border: 1px dashed var(--deusb-gold); margin-top: 20px; }
         .btn-send { background: #d44638; color: white; border: none; padding: 18px; width: 100%; border-radius: 8px; font-weight: bold; cursor: pointer; margin-top: 20px; font-size: 16px; }
-
-        /* FOOTER SETTINGS */
-        footer { background: var(--brand-blue); padding: 50px 20px; text-align: center; color: var(--pure-white); border-top: 5px solid var(--brand-yellow); margin-top: 50px; }
-        .social-icons { display: flex; justify-content: center; gap: 20px; margin: 20px 0; flex-wrap: wrap; }
-        .social-icons a { font-size: 28px; transition: 0.3s; text-decoration: none; }
-        .social-icons a:hover { transform: scale(1.2); }
-        .fa-instagram { color: #E1306C; }
-        .fa-whatsapp { color: #25D366; }
-        .fa-youtube { color: #FF0000; }
-        .fa-tiktok { color: #ffffff; }
-        .fa-x-twitter { color: #ffffff; }
-        .fa-envelope { color: #EA4335; }
-        .fa-phone { color: var(--brand-yellow); }
     </style>
 </head>
 <body>
@@ -184,17 +183,19 @@
     </div>
 
     <footer>
-        <p style="font-weight: bold; letter-spacing: 1px; margin-bottom: 15px;">THE STANDARD OF STORY</p>
-        <div class="social-icons">
-            <a href="https://www.instagram.com/deusb_entertainment" target="_blank"><i class="fab fa-instagram"></i></a>
-            <a href="https://wa.me/255748666409" target="_blank"><i class="fab fa-whatsapp"></i></a>
-            <a href="https://tiktok.com/@deusb_entertainment" target="_blank"><i class="fab fa-tiktok"></i></a>
-            <a href="https://youtube.com/@deusb_entertainment" target="_blank"><i class="fab fa-youtube"></i></a>
-            <a href="https://x.com/deusb_ent" target="_blank"><i class="fab fa-x-twitter"></i></a>
-            <a href="mailto:deusbentertainment@gmail.com"><i class="fas fa-envelope"></i></a>
-            <a href="tel:+255748666409"><i class="fas fa-phone"></i></a>
+        <h3 style="margin-bottom: 10px;">Wasiliana Nasi</h3>
+        <p style="color: #ccc; margin-bottom: 20px;">Tufuate kwenye mitandao ya kijamii</p>
+        
+        <div class="social-container">
+            <a href="https://wa.me/255748666409" class="social-btn"><img src="https://i.ibb.co/tP3xXKN0/whatsapp.png" class="social-icon"> WhatsApp</a>
+            <a href="https://www.instagram.com/deusb_entertainment?igsh=ajJ2aDY1MG1ycTY4" target="_blank" class="social-btn"><img src="https://i.ibb.co/PZF184kz/instagram.png" class="social-icon"> Instagram</a>
+            <a href="https://tiktok.com/@deusbentertainment" target="_blank" class="social-btn"><img src="https://i.ibb.co/nMGgVbsT/tik-tok.png" class="social-icon"> TikTok</a>
+            <a href="https://x.com/Deusb17" target="_blank" class="social-btn"><img src="https://i.ibb.co/FbWvjMxb/twitter.png" class="social-icon"> Twitter</a>
+            <a href="https://youtube.com/@deusbentertainment?si=N23cHeGqwjABfTgc" target="_blank" class="social-btn"><img src="https://upload.wikimedia.org/wikipedia/commons/e/ef/Youtube_logo.png" class="social-icon"> YouTube</a>
         </div>
-        <p style="font-size: 13px; opacity: 0.8; margin-top: 20px;">&copy; 2026 DEUSB ENTERTAINMENT. All Rights Reserved.</p>
+
+        <p style="color: #ffffff; font-size: 14px; margin-top: 20px;">Email: deusbentertainment@gmail.com</p>
+        <p style="font-size: 12px; color: #555; margin-top: 30px;">&copy; 2026 DEUSB STORE. Haki zote zimehifadhiwa.</p>
     </footer>
 
     <script>
@@ -259,7 +260,7 @@
                 if (type === 'project') {
                     html += `<div class="kadi" onclick="window.open('${i.link}')" style="cursor:pointer;"><img src="${i.img}" class="product-img"><div class="kadi-info"><h3>${i.name}</h3><p style="font-size:12px;">${i.desc}</p></div></div>`;
                 } else {
-                    html += `<div class="kadi"><img src="${i.PichaURL}" class="product-img"><div class="kadi-info"><h3>${i.Jina}</h3><span class="bei">TSH ${i.Bei}</span></div><a href="https://wa.me/255748666409?text=Nahitaji:${i.Jina}" class="btn-nav" style="background:var(--whatsapp-green); border:none; display:block; text-align:center; margin:10px;">PURCHASE VIA WHATSAPP</a></div>`;
+                    html += `<div class="kadi"><img src="${i.PichaURL}" class="product-img"><div class="kadi-info"><h3>${i.Jina}</h3><span class="bei">TSH ${i.Bei}</span><p style="font-size:12px;">${i.Maelezo || ''}</p></div><a href="https://wa.me/255748666409?text=Nahitaji:${i.Jina}" class="btn-nav" style="background:var(--whatsapp-green); border:none; display:block; text-align:center; margin:10px;">PURCHASE VIA WHATSAPP</a></div>`;
                 }
             });
             document.getElementById('viewContainer').innerHTML = html + `</div>`;
@@ -372,58 +373,3 @@
                             <h3>DOMINATION PLAN</h3>
                             <span class="tier-price">1,200,000+/mo</span>
                             <p>Content: Daily posting + Weekly video shoots + DM management.</p>
-                            <button class="btn-req" onclick="openBrief('Social Domination')">Requirement List</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="service-section">
-                    <h2 class="section-title">5. Our Terms of Engagement</h2>
-                    <ul style="font-size: 14px; line-height: 1.8;">
-                        <li><strong>Payment:</strong> A 50% deposit is required to begin. The balance is due before final delivery.</li>
-                        <li><strong>Revisions:</strong> Basic: 2 Rounds. Standard/Premium: Up to 4 Rounds.</li>
-                        <li><strong>Rush Jobs:</strong> A 25% rush fee will be applied for urgent delivery.</li>
-                        <li><strong>Communication:</strong> Clients must provide a clear "Brief" before we start.</li>
-                    </ul>
-                </div>
-            `;
-        }
-
-        let selCat = "";
-        function openBrief(cat) {
-            selCat = cat;
-            document.getElementById('briefTitle').innerText = cat + " Requirement List";
-            const qList = packageQuestions[cat] || ["Describe your needs in detail."];
-            document.getElementById('dynamicFields').innerHTML = qList.map(q => `
-                <div class="req-field"><label>${q}</label><input type="text" class="dynamic-input" data-question="${q}" placeholder="Type answer here..."></div>
-            `).join('');
-            document.getElementById('briefModal').style.display = "block";
-        }
-
-        function closeModal() { document.getElementById('briefModal').style.display = "none"; }
-
-        function sendGmail() {
-            let body = `DEUSB PROJECT BRIEF\n------------------\nCategory: ${selCat}\nBrand: ${document.getElementById('bizName').value}\n\n`;
-            document.querySelectorAll('.dynamic-input').forEach(input => {
-                body += `Q: ${input.dataset.question}\nA: ${input.value}\n\n`;
-            });
-            const files = document.getElementById('directUpload').files;
-            let fileInfo = "FILES SELECTED: ";
-            if(files.length > 0) {
-                for(let i=0; i<files.length; i++) { fileInfo += files[i].name + (i === files.length - 1 ? "" : ", "); }
-            } else { fileInfo += "None"; }
-            body += `ASSETS\n------------------\n${fileInfo}\nVideo/Footage Link: ${document.getElementById('videoLink').value}\nSample Link: ${document.getElementById('samplePhotoLink').value}\n\n`;
-            body += `EXTRA INSTRUCTIONS: ${document.getElementById('projDesc').value}`;
-            window.open(`https://mail.google.com/mail/?view=cm&fs=1&to=deusbentertainment@gmail.com&su=Brief: ${selCat}&body=${encodeURIComponent(body)}`);
-        }
-
-        function filterContent() {
-            const val = document.getElementById('searchInput').value.toLowerCase();
-            if (currentView === 'miradi') renderList(masterData.projects.filter(p => p.name.toLowerCase().includes(val)), 'project');
-            if (currentView === 'store') renderList(masterData.store.filter(s => s.Jina.toLowerCase().includes(val)), 'store');
-        }
-
-        window.onload = () => changeView('miradi');
-    </script>
-</body>
-</html>

@@ -41,6 +41,7 @@
             max-width: 400px;
             margin: 20px auto 0 auto;
             padding: 0 15px;
+            position: relative;
         }
 
         #searchInput {
@@ -54,116 +55,63 @@
             margin-bottom: 15px;
         }
 
-        /* NEW STORE BUTTON STYLE */
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        /* BACK ARROW STYLE */
+        .back-arrow {
+            display: none; /* Hidden by default */
+            font-size: 30px;
+            text-decoration: none;
+            color: var(--brand-red);
+            font-weight: bold;
+            cursor: pointer;
+            line-height: 1;
+            transition: 0.2s;
+        }
+        .back-arrow:hover { transform: scale(1.2); }
+
         .btn-store-link {
             display: inline-block;
             background: var(--brand-blue);
             color: var(--brand-yellow);
-            padding: 10px 25px;
+            padding: 10px 20px;
             border-radius: 50px;
             text-decoration: none;
             font-weight: bold;
-            font-size: 14px;
+            font-size: 13px;
             border: 2px solid var(--brand-yellow);
             transition: 0.3s;
             text-transform: uppercase;
         }
 
-        .btn-store-link:hover {
-            background: var(--brand-red);
-            color: white;
-            border-color: var(--brand-red);
-        }
-
         .container { max-width: 1200px; margin: 20px auto; padding: 0 15px; }
-        
-        /* Grid and Card styles for both Projects and Store items */
-        #duka { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
-            gap: 25px; 
-            align-items: start; 
-        }
+        #duka { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 25px; align-items: start; }
 
-        .kadi { 
-            background: var(--pure-white); 
-            border-radius: 12px; 
-            overflow: hidden;
-            border: 1px solid rgba(26, 42, 68, 0.1);
-            display: flex;
-            flex-direction: column;
-            height: auto;
-            transition: 0.3s;
-        }
-
+        .kadi { background: var(--pure-white); border-radius: 12px; overflow: hidden; border: 1px solid rgba(26, 42, 68, 0.1); display: flex; flex-direction: column; transition: 0.3s; }
         .kadi:hover { transform: translateY(-5px); border-color: var(--brand-red); }
-
-        .product-img { 
-            width: 100%; 
-            height: auto; 
-            display: block;
-            object-fit: contain;
-            cursor: pointer;
-        }
+        .product-img { width: 100%; height: auto; display: block; object-fit: contain; cursor: pointer; }
 
         .kadi-info { padding: 15px 15px 5px 15px; text-align: center; }
         .kadi-info h3 { margin: 0; font-size: 18px; text-transform: uppercase; color: var(--brand-blue); }
 
-        .post-description, .maelezo {
-            padding: 5px 15px 15px 15px;
-            font-size: 13px;
-            color: #444;
-            line-height: 1.5;
-            text-align: center;
-        }
+        .post-description, .maelezo { padding: 5px 15px 15px 15px; font-size: 13px; color: #444; line-height: 1.5; text-align: center; }
+        .bei { color: #e67e22; font-weight: bold; font-size: 20px; display: block; margin-bottom: 5px; }
 
-        .bei { 
-            color: #e67e22; 
-            font-weight: bold; 
-            font-size: 20px; 
-            display: block;
-            margin-bottom: 5px;
-        }
-
-        .btn-play, .btn-nunua { 
-            display: block; 
-            background: var(--brand-red); 
-            color: white; 
-            padding: 12px; 
-            border-radius: 5px; 
-            font-weight: bold; 
-            font-size: 13px;
-            margin: 0 15px 15px 15px; 
-            text-align: center; 
-            border: none; 
-            cursor: pointer;
-            text-decoration: none;
-        }
-
+        .btn-play, .btn-nunua { display: block; background: var(--brand-red); color: white; padding: 12px; border-radius: 5px; font-weight: bold; font-size: 13px; margin: 0 15px 15px 15px; text-align: center; border: none; cursor: pointer; text-decoration: none; }
         .btn-nunua { background: var(--whatsapp-green); }
-        .btn-nunua:hover { background: #128c7e; }
 
-        footer { 
-            background: var(--brand-blue); padding: 50px 20px; text-align: center; 
-            color: var(--pure-white); border-top: 5px solid var(--brand-yellow); margin-top: 50px;
-        }
-
+        footer { background: var(--brand-blue); padding: 50px 20px; text-align: center; color: var(--pure-white); border-top: 5px solid var(--brand-yellow); margin-top: 50px; }
         .social-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin: 25px 0; }
-        .social-btn { 
-            display: flex; align-items: center; gap: 10px; padding: 12px 22px; 
-            border-radius: 50px; text-decoration: none; color: white; font-weight: bold; 
-            font-size: 13px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
-        }
-
+        .social-btn { display: flex; align-items: center; gap: 10px; padding: 12px 22px; border-radius: 50px; text-decoration: none; color: white; font-weight: bold; font-size: 13px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); }
         .social-icon { width: 20px; height: 20px; object-fit: contain; }
-        .x-icon { filter: invert(1); }
-
         .email-link { color: var(--brand-yellow); text-decoration: none; font-weight: bold; font-size: 16px; }
 
-        .video-modal {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.95); display: none; justify-content: center; align-items: center; z-index: 2000;
-        }
+        .video-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); display: none; justify-content: center; align-items: center; z-index: 2000; }
         .modal-content { position: relative; width: 90%; max-width: 850px; aspect-ratio: 16/9; }
         .modal-content iframe { width: 100%; height: 100%; border: none; border-radius: 10px; }
         .close-modal { position: absolute; top: -40px; right: 0; color: white; cursor: pointer; background: var(--brand-red); padding: 6px 15px; border-radius: 50px; font-size: 14px; }
@@ -175,13 +123,16 @@
         <img src="https://i.ibb.co/rRZvchrH/transparent-logo.png" alt="DEUSB Logo" class="logo">
         <h1>DEUSB ENTERTAINMENT</h1>
         <div class="search-container">
-            <input type="text" id="searchInput" placeholder="Search project..." onkeyup="searchFromInput()">
-            <a href="javascript:void(0)" class="btn-store-link" onclick="loadStore()">Go To Store</a>
+            <input type="text" id="searchInput" placeholder="Search..." onkeyup="searchFromInput()">
+            <div class="nav-actions">
+                <a href="javascript:void(0)" id="backArrow" class="back-arrow" onclick="loadProjects()" title="Back to Projects">←</a>
+                <a href="javascript:void(0)" id="btnStore" class="btn-store-link" onclick="loadStore()">Got to store and purchase</a>
+            </div>
         </div>
     </header>
 
     <div class="container">
-        <div id="duka">Loading projects...</div>
+        <div id="duka">Loading...</div>
     </div>
 
     <div class="video-modal" id="videoModal">
@@ -197,7 +148,7 @@
             <a href="https://wa.me/255748666409" class="social-btn"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" class="social-icon"> WhatsApp</a>
             <a href="https://www.instagram.com/deusb_entertainment" target="_blank" class="social-btn"><img src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Instagram_logo_2016.svg" class="social-icon"> Instagram</a>
             <a href="https://tiktok.com/@deusbentertainment" target="_blank" class="social-btn"><img src="https://www.svgrepo.com/show/333611/tiktok.svg" class="social-icon"> TikTok</a>
-            <a href="https://x.com/Deusb17" target="_blank" class="social-btn"><img src="https://upload.wikimedia.org/wikipedia/commons/c/ce/X_logo_2023.svg" class="social-icon x-icon"> X</a>
+            <a href="https://x.com/Deusb17" target="_blank" class="social-btn"><img src="https://upload.wikimedia.org/wikipedia/commons/c/ce/X_logo_2023.svg" class="social-icon"> X</a>
             <a href="https://youtube.com/@deusbentertainment" target="_blank" class="social-btn"><img src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg" class="social-icon"> YouTube</a>
         </div>
         <p>Contact us via email:</p>
@@ -206,14 +157,18 @@
     </footer>
 
     <script>
-        // Links to your two different sheets
         const projectSheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS7Rt8XJHECqqEfVdN5I_TS2EHAPVAeaoenwF-SVQO35GX0lDg-opKoWhHhjfOJYmIMDe6tej1ZbdNC/pub?gid=0&single=true&output=csv';
         const storeSheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTjyYpymtplOkf4FK5Fwcfs9PnDMpldjLKiTftg4Sv518seWW188xS1v9aeJIQsbQbFS7HgiFb7SdV_/pub?gid=2113416306&single=true&output=csv';
         
         let allMiradi = [];
+        let isStoreMode = false;
 
-        // LOAD PROJECTS (Default View)
         async function loadProjects() {
+            isStoreMode = false;
+            document.getElementById('backArrow').style.display = 'none';
+            document.getElementById('btnStore').style.display = 'inline-block';
+            document.getElementById('duka').innerHTML = '<div style="text-align:center; padding:50px;">Loading Projects...</div>';
+            
             try {
                 const res = await fetch(projectSheetUrl);
                 const text = await res.text();
@@ -223,28 +178,27 @@
                     return { jina: c[0], description: c[1], picha: c[2], type: c[3], link: c[4]?.trim() };
                 });
                 renderCards(allMiradi);
-            } catch (e) { 
-                document.getElementById('duka').innerHTML = "Failed to load projects."; 
-            }
+            } catch (e) { document.getElementById('duka').innerHTML = "Error loading data."; }
         }
 
-        // LOAD STORE (When button is clicked)
         function loadStore() {
-            document.getElementById('duka').innerHTML = '<div style="text-align:center; padding:50px;">Loading Store Items...</div>';
+            isStoreMode = true;
+            document.getElementById('btnStore').style.display = 'none';
+            document.getElementById('backArrow').style.display = 'inline-block';
+            document.getElementById('duka').innerHTML = '<div style="text-align:center; padding:50px;">Opening Store...</div>';
+            
             Papa.parse(storeSheetUrl, {
                 download: true,
                 header: true,
                 complete: function(results) {
                     const data = results.data;
-                    const dukaDiv = document.getElementById('duka');
                     let html = '';
-                    
                     data.forEach(bidhaa => {
                         if(bidhaa.Jina && bidhaa.Bei) {
-                            const pichaSahihi = (bidhaa.PichaURL && bidhaa.PichaURL.includes('http')) ? bidhaa.PichaURL.trim() : '';
+                            const picha = (bidhaa.PichaURL && bidhaa.PichaURL.includes('http')) ? bidhaa.PichaURL.trim() : '';
                             html += `
                                 <div class="kadi">
-                                    ${pichaSahihi ? `<img src="${pichaSahihi}" class="product-img">` : ''}
+                                    ${picha ? `<img src="${picha}" class="product-img">` : ''}
                                     <div class="kadi-info">
                                         <h3>${bidhaa.Jina}</h3>
                                         <span class="bei">TSH ${bidhaa.Bei}</span>
@@ -253,43 +207,31 @@
                                             Nunua kwa WhatsApp
                                         </a>
                                     </div>
-                                </div>
-                            `;
+                                </div>`;
                         }
                     });
-                    dukaDiv.innerHTML = html || '<div style="text-align:center; padding:50px;">Hakuna bidhaa stoo kwa sasa.</div>';
+                    document.getElementById('duka').innerHTML = html || '<div style="text-align:center; padding:50px;">Store is empty.</div>';
                 }
             });
         }
 
         function renderCards(list) {
-            const duka = document.getElementById('duka');
-            duka.innerHTML = list.map(m => {
+            document.getElementById('duka').innerHTML = list.map(m => {
                 const action = m.type === 'youtube' ? `onclick="playVideo('${m.link}')"` : `onclick="window.open('${m.link}', '_blank')"`;
-                const buttonText = m.type === 'youtube' ? 'PLAY VIDEO' : 'VIEW POST';
                 return `
                 <div class="kadi">
                     <img src="${m.picha}" class="product-img" ${action}>
                     <div class="kadi-info" ${action}><h3>${m.jina}</h3></div>
                     <div class="post-description">${m.description}</div>
-                    <button class="btn-play" ${action}>${buttonText}</button>
+                    <button class="btn-play" ${action}>${m.type === 'youtube' ? 'PLAY VIDEO' : 'VIEW POST'}</button>
                 </div>`;
             }).join('');
         }
 
-        function playVideo(id) { 
-            document.getElementById('youtubePlayer').src = `https://www.youtube.com/embed/${id}?autoplay=1`; 
-            document.getElementById('videoModal').style.display = 'flex'; 
-            document.body.style.overflow = 'hidden'; 
-        }
-
-        function closeVideo() { 
-            document.getElementById('youtubePlayer').src = ""; 
-            document.getElementById('videoModal').style.display = 'none'; 
-            document.body.style.overflow = 'auto'; 
-        }
-
+        function playVideo(id) { document.getElementById('youtubePlayer').src = `https://www.youtube.com/embed/${id}?autoplay=1`; document.getElementById('videoModal').style.display = 'flex'; document.body.style.overflow = 'hidden'; }
+        function closeVideo() { document.getElementById('youtubePlayer').src = ""; document.getElementById('videoModal').style.display = 'none'; document.body.style.overflow = 'auto'; }
         function searchFromInput() { 
+            if(isStoreMode) return; 
             const val = document.getElementById('searchInput').value.toLowerCase(); 
             renderCards(allMiradi.filter(m => m.jina.toLowerCase().includes(val))); 
         }

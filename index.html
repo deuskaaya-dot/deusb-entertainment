@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DEUSB VISUALS</title>
+    <title>DEUSB ENTERTAINMENT</title>
     <style>
         :root {
             --primary-red: #ff0000;
@@ -70,7 +70,6 @@
         }
 
         .kadi.show { opacity: 1; transform: translateY(0); }
-
         .kadi:hover { border-color: var(--primary-red); transform: translateY(-5px); }
 
         .product-img { width: 100%; height: 200px; object-fit: cover; }
@@ -89,7 +88,7 @@
             font-size: 13px;
         }
 
-        /* Footer & Social Buttons (YAKO YA ZAMANI) */
+        /* Footer & Social Buttons */
         footer { 
             background: #000; 
             padding: 50px 20px; 
@@ -97,6 +96,9 @@
             border-top: 1px solid #222;
             margin-top: 50px;
         }
+
+        .footer-heading { color: #fff; margin-bottom: 15px; font-size: 18px; font-weight: 600; }
+        .footer-subheading { color: var(--text-gray); margin-bottom: 20px; font-size: 14px; }
 
         .social-container { 
             display: flex; 
@@ -122,15 +124,28 @@
         }
 
         .social-btn:hover { background: #333; border-color: var(--primary-red); }
+        .social-icon { width: 18px; height: 18px; object-fit: contain; }
 
-        .social-icon { width: 18px; height: 18px; }
+        /* Email Button Styling */
+        .email-link {
+            display: inline-block;
+            margin-top: 15px;
+            color: var(--primary-red);
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 15px;
+            transition: 0.3s;
+            border-bottom: 1px solid transparent;
+        }
+
+        .email-link:hover { border-bottom: 1px solid var(--primary-red); opacity: 0.8; }
     </style>
 </head>
 <body>
 
     <header>
         <img src="https://i.ibb.co/rRZvchrH/transparent-logo.png" alt="DEUSB Logo" class="logo">
-        <h1 style="margin:0; letter-spacing: 2px;">DEUSB VISUALS</h1>
+        <h1 style="margin:0; letter-spacing: 2px;">DEUSB ENTERTAINMENT</h1>
         
         <div class="search-container">
             <input type="text" id="searchInput" placeholder="Tafuta mradi..." onkeyup="searchProjects()">
@@ -143,7 +158,9 @@
     </div>
 
     <footer>
-        <h3 style="margin-bottom: 10px;">Wasiliana Nasi</h3>
+        <div class="footer-heading">Follow our accounts</div>
+        <div class="footer-subheading">Stay updated with our latest works</div>
+
         <div class="social-container">
             <a href="https://wa.me/255748666409" class="social-btn">
                 <img src="https://i.ibb.co/tP3xXKN0/whatsapp.png" class="social-icon"> WhatsApp
@@ -154,25 +171,36 @@
             <a href="https://tiktok.com/@deusbentertainment" target="_blank" class="social-btn">
                 <img src="https://i.ibb.co/nMGgVbsT/tik-tok.png" class="social-icon"> TikTok
             </a>
+            <a href="https://x.com/Deusb17" target="_blank" class="social-btn">
+                <img src="https://i.ibb.co/FbWvjMxb/twitter.png" class="social-icon"> X (Twitter)
+            </a>
             <a href="https://youtube.com/@deusbentertainment" target="_blank" class="social-btn">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/e/ef/Youtube_logo.png" class="social-icon"> YouTube
             </a>
         </div>
-        <p style="color: #555; font-size: 12px;">&copy; 2026 DEUSB STORE. Haki zote zimehifadhiwa.</p>
+
+        <div style="margin-top: 30px;">
+            <p style="color: #666; font-size: 13px; margin-bottom: 5px;">Have a project in mind?</p>
+            <a href="mailto:deusbentertainment@gmail.com?subject=Inquiry%20from%20Website&body=Hello%20DEUSB%20Team," class="email-link">
+                Email: deusbentertainment@gmail.com
+            </a>
+        </div>
+
+        <p style="color: #444; font-size: 11px; margin-top: 40px;">&copy; 2026 DEUSB ENTERTAINMENT. All Rights Reserved.</p>
     </footer>
 
     <script>
         // --- ONGEZA VIDEO ZAKO HAPA ---
         const miradi = [
             {
-                jina: "Wedding Highlights",
-                picha: "https://via.placeholder.com/400x250/333/fff?text=Wedding",
+                jina: "Sample Project 1",
+                picha: "https://via.placeholder.com/400x250/333/fff?text=DEUSB+1",
                 video: "https://www.instagram.com/reel/EXAMPLE1"
             },
             {
-                jina: "Music Video",
-                picha: "https://via.placeholder.com/400x250/222/fff?text=Music", 
-                video: "https://www.tiktok.com/@example/video/1"
+                jina: "Sample Project 2",
+                picha: "https://via.placeholder.com/400x250/222/fff?text=DEUSB+2", 
+                video: "https://www.tiktok.com/@example"
             }
         ];
 

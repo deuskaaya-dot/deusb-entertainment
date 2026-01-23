@@ -3,179 +3,231 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DEUSB EVENTS STORE</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+    <title>DEUSB VISUALS | Portfolio</title>
     <style>
         :root {
-            --whatsapp-green: #25d366;
-            --accent-color: #e67e22;
-            --card-shadow: 0 10px 20px rgba(0,0,0,0.08);
+            --primary-red: #ff0000;
+            --dark-bg: #0a0a0a;
+            --card-bg: #161616;
+            --text-gray: #b3b3b3;
         }
 
         body { 
-            font-family: 'Inter', -apple-system, sans-serif; 
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
             margin: 0; 
-            background-color: #f4f6f8; 
-            color: #1c1e21; 
+            background-color: var(--dark-bg); 
+            color: #fff; 
+            scroll-behavior: smooth;
         }
 
+        /* Header & Search */
         header { 
-            background: #ffffff; 
-            padding: 25px; 
+            padding: 40px 20px; 
             text-align: center; 
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
+            background: linear-gradient(to bottom, #000, var(--dark-bg));
+            border-bottom: 1px solid #222;
         }
 
-        .logo { width: 80px; height: auto; margin-bottom: 10px; }
-        .logo-light { display: inline-block; }
-        .logo-dark { display: none; }
+        .logo { width: 120px; transition: 0.5s; }
+        .logo:hover { transform: rotateY(180deg); }
 
-        @media (min-width: 768px) {
-            .logo { width: 180px; }
-            header h1 { font-size: 32px; }
+        .search-container {
+            margin-top: 25px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
-        @media (prefers-color-scheme: dark) {
-            .logo-light { display: none; }
-            .logo-dark { display: inline-block; }
+        #searchInput {
+            width: 100%;
+            padding: 12px 20px;
+            border-radius: 25px;
+            border: 1px solid #333;
+            background: #1a1a1a;
+            color: white;
+            font-size: 16px;
+            outline: none;
+            transition: 0.3s;
         }
 
-        header h1 { margin: 0; font-size: 24px; color: #000; text-transform: uppercase; }
+        #searchInput:focus { border-color: var(--primary-red); box-shadow: 0 0 10px rgba(255,0,0,0.2); }
 
-        .container { max-width: 1200px; margin: 30px auto; padding: 0 15px; }
+        /* Grid System */
+        .container { max-width: 1200px; margin: 20px auto; padding: 20px; }
 
         #duka { 
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
         }
 
+        /* Project Cards */
         .kadi { 
-            background: white; 
-            border-radius: 12px; 
-            box-shadow: var(--card-shadow);
+            background: var(--card-bg); 
+            border-radius: 15px; 
             overflow: hidden;
-            transition: 0.3s;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            padding-bottom: 20px;
+            border: 1px solid #222;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            opacity: 0; /* Kwa ajili ya animation ya kuingia */
+            transform: translateY(20px);
         }
 
-        .kadi:hover { transform: translateY(-5px); }
-        .kadi img.product-img { width: 100%; height: 200px; object-fit: cover; display: block; margin-bottom: 15px; background: #eee; }
-        
-        .kadi-info { padding: 0 20px; flex-grow: 1; }
-        
-        .tarehe-tag {
-            background: #f0f0f0;
-            color: #555;
-            font-size: 11px;
-            padding: 4px 10px;
-            border-radius: 20px;
-            display: inline-block;
-            margin-bottom: 10px;
-            font-weight: bold;
+        .kadi.show { opacity: 1; transform: translateY(0); }
+
+        .kadi:hover { 
+            border-color: var(--primary-red); 
+            transform: scale(1.03);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.5);
         }
 
-        .kadi-info h3 { margin: 0 0 8px 0; font-size: 18px; color: #333; }
+        .img-container { position: relative; overflow: hidden; height: 220px; }
         
-        .maelezo { color: #666; font-size: 13px; line-height: 1.4; margin-bottom: 15px; }
-
-        .action-btns {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            padding: 0 20px;
+        .product-img { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover;
+            transition: 0.5s;
         }
 
-        .btn-nunua, .btn-video { 
+        .kadi:hover .product-img { transform: scale(1.1); }
+        
+        .kadi-info { padding: 20px; text-align: left; }
+        
+        .kadi-info h3 { 
+            margin: 0 0 15px 0; 
+            font-size: 20px; 
+            letter-spacing: 1px;
+            color: #efefef;
+        }
+
+        .btn-video { 
             display: inline-flex; 
             align-items: center;
             justify-content: center;
-            gap: 8px;
-            padding: 10px 16px; 
+            background: var(--primary-red); 
+            color: white; 
             text-decoration: none; 
-            font-weight: bold; 
-            font-size: 13px;
-            border-radius: 50px;
+            width: 100%;
+            padding: 12px; 
+            border-radius: 8px; 
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 14px;
             transition: 0.3s;
         }
 
-        .btn-nunua { background: var(--whatsapp-green); color: white; }
-        .btn-nunua:hover { background: #128c7e; transform: scale(1.05); }
+        .btn-video:hover { background: #cc0000; letter-spacing: 2px; }
 
-        .btn-video { background: #000; color: white; }
-        .btn-video:hover { opacity: 0.8; }
-
-        .btn-icon-small { width: 18px !important; height: 18px !important; object-fit: contain; }
-
-        footer { 
-            background: #1a1a1a; 
-            padding: 50px 20px; 
-            text-align: center; 
+        /* Footer & Back to Top */
+        footer { text-align: center; padding: 60px 20px; color: var(--text-gray); border-top: 1px solid #222; }
+        
+        #backToTop {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--primary-red);
             color: white;
-            margin-top: 50px;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: bold;
+            z-index: 1000;
         }
 
-        .social-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin: 25px 0; }
-        .social-btn { display: flex; align-items: center; gap: 8px; background: #2a2a2a; padding: 8px 14px; border-radius: 50px; text-decoration: none; color: white; font-weight: bold; font-size: 13px; border: 1px solid #444; }
-        .social-icon { width: 18px; height: 18px; object-fit: contain; }
-        .loading { text-align: center; padding: 100px; font-size: 20px; color: #888; }
+        @media (max-width: 600px) {
+            #duka { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
 
     <header>
-        <img src="https://i.ibb.co/rRZvchrH/transparent-logo.png" alt="DEUSB Logo" class="logo logo-light">
-        <img src="https://i.ibb.co/v4rqWHrN/transparent-logo-for-black-theme-people.png" alt="DEUSB Logo" class="logo logo-dark">
-        <h1>DEUSB ENTERTAINMENT EVENTS</h1>
+        <img src="https://i.ibb.co/rRZvchrH/transparent-logo.png" alt="DEUSB Logo" class="logo">
+        <h1 style="margin:10px 0 0 0; letter-spacing: 3px;">DEUSB VISUALS</h1>
+        
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Tafuta mradi hapa (mfano: Wedding)..." onkeyup="searchProjects()">
+        </div>
     </header>
 
     <div class="container">
         <div id="duka">
-            <div class="loading">Inapakia matukio...</div>
-        </div>
+            </div>
     </div>
 
-    <footer>
-        <h3 style="margin-bottom: 10px;">Wasiliana Nasi</h3>
-        <p style="color: #ccc; margin-bottom: 20px;">Tufuate kwenye mitandao ya kijamii</p>
-        
-        <div class="social-container">
-            <a href="https://wa.me/255748666409" class="social-btn"><img src="https://i.ibb.co/tP3xXKN0/whatsapp.png" class="social-icon"> WhatsApp</a>
-            <a href="https://www.instagram.com/deusb_entertainment" target="_blank" class="social-btn"><img src="https://i.ibb.co/PZF184kz/instagram.png" class="social-icon"> Instagram</a>
-            <a href="https://tiktok.com/@deusbentertainment" target="_blank" class="social-btn"><img src="https://i.ibb.co/nMGgVbsT/tik-tok.png" class="social-icon"> TikTok</a>
-            <a href="https://x.com/Deusb17" target="_blank" class="social-btn"><img src="https://i.ibb.co/FbWvjMxb/twitter.png" class="social-icon"> Twitter</a>
-            <a href="https://youtube.com/@deusbentertainment" target="_blank" class="social-btn"><img src="https://upload.wikimedia.org/wikipedia/commons/e/ef/Youtube_logo.png" class="social-icon"> YouTube</a>
-        </div>
+    <a href="#" id="backToTop">↑</a>
 
-        <p style="color: #ffffff; font-size: 14px; margin-top: 20px;">Email: deusbentertainment@gmail.com</p>
-        <p style="font-size: 12px; color: #555; margin-top: 30px;">&copy; 2026 DEUSB STORE. Haki zote zimehifadhiwa.</p>
+    <footer>
+        <p>DEUSB ENTERTAINMENT &copy; 2026</p>
+        <p style="font-size: 11px;">Designed for the best visual experience.</p>
     </footer>
 
     <script>
-        // Link yako mpya ya Google Sheet
-        const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRu93VHqm-2hTtaaNWbRMuhgqIki7Fv_EMu9EaZqZb41EXkGAFOWuEldPh0CvkSHv7EYZ94tF2XQMvL/pub?gid=699655056&single=true&output=csv';
+        // --- DATA YA MIRADI YAKO ---
+        const miradi = [
+            {
+                jina: "Wedding Highlights - Arusha",
+                picha: "https://via.placeholder.com/400x250/333/fff?text=Wedding+Photo",
+                video: "https://www.instagram.com/reel/EXAMPLE1"
+            },
+            {
+                jina: "Music Video: Bongo Flava",
+                picha: "https://via.placeholder.com/400x250/222/fff?text=Music+Video", 
+                video: "https://www.tiktok.com/@example/video/1"
+            },
+            {
+                jina: "Corporate Event - Dar es Salaam",
+                picha: "https://via.placeholder.com/400x250/444/fff?text=Corporate+Event",
+                video: "https://youtube.com/shorts/example"
+            }
+        ];
 
-        function loadEvents() {
-            Papa.parse(sheetUrl, {
-                download: true,
-                header: true,
-                complete: function(results) {
-                    const data = results.data;
-                    const dukaDiv = document.getElementById('duka');
-                    let html = '';
-                    
-                    data.forEach(mradi => {
-                        if(mradi.Jina) {
-                            const jina = mradi.Jina;
-                            const tarehe = mradi.Tarehe || 'Leo';
-                            const picha = mradi.PichaURL ? mradi.PichaURL.trim() : 'https://via.placeholder.com/400x250?text=Deusb+Visuals';
-                            const video = mradi.VideoURL ? mradi.VideoURL.trim() : '';
-                            const maelezo = mradi.Maelezo || 'Bonyeza kitufe cha WhatsApp kupata huduma hii.';
-                            
-                            // Kutengeneza ujumbe wa WhatsApp wenye maelezo kam
+        function jengaDuka(filterText = "") {
+            const duka = document.getElementById('duka');
+            const filtered = miradi.filter(m => 
+                m.jina.toLowerCase().includes(filterText.toLowerCase())
+            );
+
+            duka.innerHTML = filtered.map((m, index) => `
+                <div class="kadi" style="transition-delay: ${index * 0.1}s">
+                    <div class="img-container">
+                        <img src="${m.picha}" class="product-img" loading="lazy">
+                    </div>
+                    <div class="kadi-info">
+                        <h3>${m.jina}</h3>
+                        <a href="${m.video}" target="_blank" class="btn-video">WATCH VIDEO</a>
+                    </div>
+                </div>
+            `).join('');
+
+            // Trigger animation
+            setTimeout(() => {
+                document.querySelectorAll('.kadi').forEach(el => el.classList.add('show'));
+            }, 100);
+        }
+
+        // Search Function
+        function searchProjects() {
+            const txt = document.getElementById('searchInput').value;
+            jengaDuka(txt);
+        }
+
+        // Back to top logic
+        window.onscroll = function() {
+            const btn = document.getElementById("backToTop");
+            if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+                btn.style.display = "flex";
+            } else {
+                btn.style.display = "none";
+            }
+        };
+
+        window.onload = () => jengaDuka();
+    </script>
+</body>
+</html>

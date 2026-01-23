@@ -6,6 +6,8 @@
     <title>DEUSB ENTERTAINMENT</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&family=Playfair+Display:ital,wght@1,700&display=swap" rel="stylesheet">
+    
     <style>
         :root {
             --brand-cream: #f7e1bc;  
@@ -36,8 +38,33 @@
         }
 
         .logo { width: 100px; margin-bottom: 10px; }
-        h1 { color: var(--brand-blue); text-transform: uppercase; margin: 0; font-size: 1.5rem; letter-spacing: 2px; }
-        .tagline { font-style: italic; color: var(--brand-red); font-size: 14px; margin-bottom: 15px; display: block; }
+
+        /* Beautiful Font & Animated Color Change */
+        .brand-name { 
+            font-family: 'Montserrat', sans-serif;
+            text-transform: uppercase; 
+            margin: 0; 
+            font-size: 1.8rem; 
+            letter-spacing: 4px;
+            font-weight: 900;
+            animation: colorShift 8s infinite alternate;
+        }
+
+        @keyframes colorShift {
+            0% { color: var(--brand-blue); }
+            33% { color: var(--brand-red); }
+            66% { color: var(--deusb-gold); }
+            100% { color: #2c3e50; }
+        }
+
+        .tagline { 
+            font-family: 'Playfair Display', serif;
+            font-style: italic; 
+            color: #555; 
+            font-size: 16px; 
+            margin-bottom: 15px; 
+            display: block; 
+        }
 
         .search-container {
             width: 100%;
@@ -143,8 +170,8 @@
 
     <header>
         <img src="https://i.ibb.co/rRZvchrH/transparent-logo.png" alt="DEUSB Logo" class="logo">
-        <h1>DEUSB ENTERTAINMENT</h1>
-        <span class="tagline">"The Standard of Story"</span>
+        <h1 class="brand-name">DEUSB ENTERTAINMENT</h1>
+        [cite_start]<span class="tagline">"The Standard of Story"</span> [cite: 3, 10, 25, 42, 62, 74, 81]
         <div class="search-container">
             <input type="text" id="searchInput" placeholder="Search projects or store..." onkeyup="filterContent()">
             <div class="nav-actions">
@@ -163,7 +190,7 @@
     <div id="briefModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal()">&times;</span>
-            <h3 id="briefTitle" style="color:var(--brand-red); margin-top:0; text-transform: uppercase; border-bottom: 2px solid var(--brand-red); padding-bottom: 10px;">Requirement List</h3>
+            [cite_start]<h3 id="briefTitle" style="color:var(--brand-red); margin-top:0; text-transform: uppercase; border-bottom: 2px solid var(--brand-red); padding-bottom: 10px;">Requirement List</h3> [cite: 78]
             
             <div id="briefForm">
                 <div class="req-field"><label>Business/Brand Name</label><input type="text" id="bizName" placeholder="Name of your brand or event"></div>
@@ -186,12 +213,12 @@
     </div>
 
     <footer>
-        <h3 style="margin-bottom: 10px; color: var(--deusb-gold);">Follow Us on Social Media</h3>
+        <h3 class="brand-name" style="font-size: 1.4rem; letter-spacing: 2px; margin-bottom: 10px;">Follow Us on Social Media</h3>
         <p style="color: #ccc; margin-bottom: 25px;">Stay connected and see our latest projects</p>
         
         <div class="social-container">
-            <a href="https://wa.me/255748666409" class="social-btn"><img src="https://i.ibb.co/tP3xXKN0/whatsapp.png" class="social-icon"> WhatsApp</a>
-            <a href="https://www.instagram.com/deusb_entertainment?igsh=ajJ2aDY1MG1ycTY4" target="_blank" class="social-btn"><img src="https://i.ibb.co/PZF184kz/instagram.png" class="social-icon"> Instagram</a>
+            [cite_start]<a href="https://wa.me/255748666409" class="social-btn"><img src="https://i.ibb.co/tP3xXKN0/whatsapp.png" class="social-icon"> WhatsApp</a> [cite: 10, 25, 42, 62, 74, 81]
+            [cite_start]<a href="https://www.instagram.com/deusb_entertainment?igsh=ajJ2aDY1MG1ycTY4" target="_blank" class="social-btn"><img src="https://i.ibb.co/PZF184kz/instagram.png" class="social-icon"> Instagram</a> [cite: 10, 25, 42, 62, 74, 81]
             <a href="https://tiktok.com/@deusbentertainment" target="_blank" class="social-btn"><img src="https://i.ibb.co/nMGgVbsT/tik-tok.png" class="social-icon"> TikTok</a>
             <a href="https://x.com/Deusb17" target="_blank" class="social-btn"><img src="https://i.ibb.co/FbWvjMxb/twitter.png" class="social-icon"> Twitter</a>
             <a href="https://youtube.com/@deusbentertainment?si=N23cHeGqwjABfTgc" target="_blank" class="social-btn"><img src="https://upload.wikimedia.org/wikipedia/commons/e/ef/Youtube_logo.png" class="social-icon"> YouTube</a>
@@ -272,123 +299,123 @@
         function renderCatalogue() {
             document.getElementById('viewContainer').innerHTML = `
                 <div class="service-section">
-                    <h2 class="section-title">1. Graphics & Branding (Logos & Flyers)</h2>
-                    <p class="section-desc">Visual communication designed to make your brand memorable.</p>
+                    <h2 class="section-title">1. [cite_start]Graphics & Branding (Logos & Flyers) [cite: 6]</h2>
+                    [cite_start]<p class="section-desc">Visual communication designed to make your brand memorable. [cite: 7]</p>
                     <div class="tier-grid">
                         <div class="tier-card">
                             <h3>BASIC</h3>
-                            <span class="tier-price">20,000 - 30,000</span>
-                            <span class="tier-time">1-4 Hours</span>
-                            <p>Deliverables: 1 Simple Flyer OR Basic Logo (2 revisions). Best For: Urgent sales/events.</p>
-                            <button class="btn-req" onclick="openBrief('Graphics Basic')">Requirement List</button>
+                            [cite_start]<span class="tier-price">20,000 - 30,000 [cite: 8]</span>
+                            [cite_start]<span class="tier-time">1-4 Hours [cite: 8]</span>
+                            <p>Deliverables: 1 Simple Flyer OR Basic Logo (2 revisions). [cite_start]Best For: Urgent sales/events. [cite: 8]</p>
+                            [cite_start]<button class="btn-req" onclick="openBrief('Graphics Basic')">Requirement List [cite: 78]</button>
                         </div>
                         <div class="tier-card">
                             <h3>STANDARD</h3>
-                            <span class="tier-price">50,000 - 80,000</span>
-                            <span class="tier-time">1-3 Days</span>
-                            <p>Deliverables: 2 Flyers + Professional Logo + Source Files. Best For: Brand foundations.</p>
-                            <button class="btn-req" onclick="openBrief('Graphics Standard')">Requirement List</button>
+                            [cite_start]<span class="tier-price">50,000 - 80,000 [cite: 8]</span>
+                            [cite_start]<span class="tier-time">1-3 Days [cite: 8]</span>
+                            <p>Deliverables: 2 Flyers + Professional Logo + Source Files. [cite_start]Best For: Brand foundations. [cite: 8]</p>
+                            [cite_start]<button class="btn-req" onclick="openBrief('Graphics Standard')">Requirement List [cite: 78]</button>
                         </div>
                         <div class="tier-card">
                             <h3>PREMIUM</h3>
-                            <span class="tier-price">120,000 - 250,000</span>
-                            <span class="tier-time">5-10 Days</span>
-                            <p>Deliverables: Full Branding (Logo + Biz Card + Identity). Best For: professional identities.</p>
-                            <button class="btn-req" onclick="openBrief('Graphics Premium')">Requirement List</button>
+                            [cite_start]<span class="tier-price">120,000 - 250,000 [cite: 8]</span>
+                            [cite_start]<span class="tier-time">5-10 Days [cite: 8]</span>
+                            <p>Deliverables: Full Branding (Logo + Biz Card + Identity). [cite_start]Best For: professional identities. [cite: 8]</p>
+                            [cite_start]<button class="btn-req" onclick="openBrief('Graphics Premium')">Requirement List [cite: 78]</button>
                         </div>
                     </div>
-                    <p style="font-size: 12px; font-style: italic; margin-top: 15px;">Why the time difference? Basic is "design-on-demand." Standard/Premium involves market research and custom typography to ensure your logo isn't just "pretty," but unique to your business.</p>
+                    <p style="font-size: 12px; font-style: italic; margin-top: 15px;">Why the time difference? Basic is "design-on-demand." [cite_start]Standard/Premium involves market research and custom typography to ensure your logo isn't just "pretty," but unique to your business. [cite: 9]</p>
                 </div>
 
                 <div class="service-section">
-                    <h2 class="section-title">2. Video Editing (Short-form/Social Media/Ads)</h2>
-                    <p class="section-desc">High-retention editing for TikTok, Instagram Reels, and TV Ads.</p>
+                    <h2 class="section-title">2. [cite_start]Video Editing (Short-form/Social Media/Ads) [cite: 13]</h2>
+                    [cite_start]<p class="section-desc">High-retention editing for TikTok, Instagram Reels, and TV Ads. [cite: 14]</p>
                     <div class="tier-grid">
                         <div class="tier-card">
                             <h3>BASIC</h3>
-                            <span class="tier-price">40,000 - 60,000</span>
-                            <span class="tier-time">2-5 Hours</span>
-                            <p>Focus: Simple cuts, background music, and basic color correction. Ideal for: Quick daily updates and personal vlogs.</p>
-                            <button class="btn-req" onclick="openBrief('Video Basic')">Requirement List</button>
+                            [cite_start]<span class="tier-price">40,000 - 60,000 [cite: 15]</span>
+                            [cite_start]<span class="tier-time">2-5 Hours [cite: 15]</span>
+                            <p>Focus: Simple cuts, background music, and basic color correction. [cite_start]Ideal for: Quick daily updates and personal vlogs. [cite: 17, 18]</p>
+                            [cite_start]<button class="btn-req" onclick="openBrief('Video Basic')">Requirement List [cite: 78]</button>
                         </div>
                         <div class="tier-card">
                             <h3>STANDARD</h3>
-                            <span class="tier-price">80,000 - 150,000</span>
-                            <span class="tier-time">1-2 Days</span>
-                            <p>Focus: Smooth transitions, professional color grading, and subtitles (essential for silent scrolling). Ideal for: Small business ads and professional social media content.</p>
-                            <button class="btn-req" onclick="openBrief('Video Standard')">Requirement List</button>
+                            [cite_start]<span class="tier-price">80,000 - 150,000 [cite: 19]</span>
+                            [cite_start]<span class="tier-time">1-2 Days [cite: 19]</span>
+                            <p>Focus: Smooth transitions, professional color grading, and subtitles (essential for silent scrolling). [cite_start]Ideal for: Small business ads and professional social media content. [cite: 20, 21]</p>
+                            [cite_start]<button class="btn-req" onclick="openBrief('Video Standard')">Requirement List [cite: 78]</button>
                         </div>
                         <div class="tier-card">
                             <h3>PREMIUM</h3>
-                            <span class="tier-price">200,000 – 400,000</span>
-                            <span class="tier-time">3-7 Days</span>
-                            <p>Focus: Full production including Scripting + B-roll (extra footage) + Professional Voiceover. Ideal for: High-budget marketing campaigns and TV Commercials.</p>
-                            <button class="btn-req" onclick="openBrief('Video Premium')">Requirement List</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="service-section">
-                    <h2 class="section-title">3. Motion Graphics (Animations/Explainers)</h2>
-                    <p class="section-desc">Using movement to explain complex ideas or add prestige.</p>
-                    <div class="tier-grid">
-                        <div class="tier-card">
-                            <h3>BASIC</h3>
-                            <span class="tier-price">50,000 – 70,000</span>
-                            <span class="tier-time">5-8 Hours</span>
-                            <p>Deliverable: 5-10 second Logo Animation. Usage: Use this as an intro/outro for every video you ever make.</p>
-                            <button class="btn-req" onclick="openBrief('Motion Basic')">Requirement List</button>
-                        </div>
-                        <div class="tier-card">
-                            <h3>STANDARD</h3>
-                            <span class="tier-price">150,000 – 250,000</span>
-                            <span class="tier-time">3-5 Days</span>
-                            <p>Deliverable: 30-second 2D Explainer Video (using characters/icons). Usage: Perfect for teaching customers how to use your app or service.</p>
-                            <button class="btn-req" onclick="openBrief('Motion Standard')">Requirement List</button>
-                        </div>
-                        <div class="tier-card">
-                            <h3>PREMIUM</h3>
-                            <span class="tier-price">350,000 – 600,000</span>
-                            <span class="tier-time">2-3 Weeks</span>
-                            <p>Deliverable: 1-minute Full Motion Graphic Ad (Custom Storytelling). Usage: A high-end asset for corporate presentations or viral marketing.</p>
-                            <button class="btn-req" onclick="openBrief('Motion Premium')">Requirement List</button>
+                            [cite_start]<span class="tier-price">200,000 – 400,000 [cite: 21]</span>
+                            [cite_start]<span class="tier-time">3-7 Days [cite: 21]</span>
+                            <p>Focus: Full production including Scripting + B-roll (extra footage) + Professional Voiceover. [cite_start]Ideal for: High-budget marketing campaigns and TV Commercials. [cite: 22, 23]</p>
+                            [cite_start]<button class="btn-req" onclick="openBrief('Video Premium')">Requirement List [cite: 78]</button>
                         </div>
                     </div>
                 </div>
 
                 <div class="service-section">
-                    <h2 class="section-title">4. Social Media Management (Monthly Retainers)</h2>
-                    <p class="section-desc">We don't just post; we grow your community.</p>
+                    <h2 class="section-title">3. [cite_start]Motion Graphics (Animations/Explainers) [cite: 28]</h2>
+                    [cite_start]<p class="section-desc">Using movement to explain complex ideas or add prestige. [cite: 29]</p>
+                    <div class="tier-grid">
+                        <div class="tier-card">
+                            <h3>BASIC</h3>
+                            [cite_start]<span class="tier-price">50,000 – 70,000 [cite: 30]</span>
+                            [cite_start]<span class="tier-time">5-8 Hours [cite: 30]</span>
+                            <p>Deliverable: 5-10 second Logo Animation. [cite_start]Usage: Use this as an intro/outro for every video you ever make. [cite: 32, 33]</p>
+                            [cite_start]<button class="btn-req" onclick="openBrief('Motion Basic')">Requirement List [cite: 78]</button>
+                        </div>
+                        <div class="tier-card">
+                            <h3>STANDARD</h3>
+                            [cite_start]<span class="tier-price">150,000 – 250,000 [cite: 34]</span>
+                            [cite_start]<span class="tier-time">3-5 Days [cite: 34]</span>
+                            <p>Deliverable: 30-second 2D Explainer Video (using characters/icons). [cite_start]Usage: Perfect for teaching customers how to use your app or service. [cite: 35, 36]</p>
+                            [cite_start]<button class="btn-req" onclick="openBrief('Motion Standard')">Requirement List [cite: 78]</button>
+                        </div>
+                        <div class="tier-card">
+                            <h3>PREMIUM</h3>
+                            [cite_start]<span class="tier-price">350,000 – 600,000 [cite: 37]</span>
+                            [cite_start]<span class="tier-time">2-3 Weeks [cite: 37]</span>
+                            <p>Deliverable: 1-minute Full Motion Graphic Ad (Custom Storytelling). [cite_start]Usage: A high-end asset for corporate presentations or viral marketing. [cite: 38, 39, 40]</p>
+                            [cite_start]<button class="btn-req" onclick="openBrief('Motion Premium')">Requirement List [cite: 78]</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="service-section">
+                    <h2 class="section-title">4. [cite_start]Social Media Management (Monthly Retainers) [cite: 45]</h2>
+                    [cite_start]<p class="section-desc">We don't just post; we grow your community. [cite: 46]</p>
                     <div class="tier-grid">
                         <div class="tier-card">
                             <h3>LITE PLAN</h3>
-                            <span class="tier-price">250,000 – 400,000/mo</span>
-                            <p>Platforms: 1-2 (FB/IG). Content: 12 Posts per month + Caption writing. Goal: Keeping your page active so customers know you are open.</p>
-                            <button class="btn-req" onclick="openBrief('Social Lite')">Requirement List</button>
+                            [cite_start]<span class="tier-price">250,000 – 400,000 TSH/mo [cite: 48]</span>
+                            <p>Platforms: 1-2 (FB/IG). Content: 12 Posts per month + Caption writing. [cite_start]Goal: Keeping your page active so customers know you are open. [cite: 49, 51, 52]</p>
+                            [cite_start]<button class="btn-req" onclick="openBrief('Social Lite')">Requirement List [cite: 78]</button>
                         </div>
                         <div class="tier-card">
                             <h3>GROWTH PLAN</h3>
-                            <span class="tier-price">500,000 – 850,000/mo</span>
-                            <p>Platforms: 3 (FB, IG, TikTok). Content: 20 Posts per month (includes 4 professional Reels/Videos). Strategy: Hashtag research, engagement with followers, and monthly reports.</p>
-                            <button class="btn-req" onclick="openBrief('Social Growth')">Requirement List</button>
+                            [cite_start]<span class="tier-price">500,000 – 850,000 TSH/mo [cite: 53]</span>
+                            <p>Platforms: 3 (FB, IG, TikTok). Content: 20 Posts per month (includes 4 professional Reels/Videos). [cite_start]Strategy: Hashtag research, engagement with followers, and monthly reports. [cite: 54, 55, 56]</p>
+                            [cite_start]<button class="btn-req" onclick="openBrief('Social Growth')">Requirement List [cite: 78]</button>
                         </div>
                         <div class="tier-card">
                             <h3>DOMINATION PLAN</h3>
-                            <span class="tier-price">1,200,000+/mo</span>
-                            <p>Platforms: All major platforms. Content: Daily posting + Weekly video shoots + DM management. Ads: Management of Facebook/Instagram/Google Ads (Ad spend paid by client).</p>
-                            <button class="btn-req" onclick="openBrief('Social Domination')">Requirement List</button>
+                            [cite_start]<span class="tier-price">1,200,000+ TSH/mo [cite: 57]</span>
+                            <p>Platforms: All major platforms. Content: Daily posting + Weekly video shoots + DM management. [cite_start]Ads: Management of Facebook/Instagram/Google Ads (Ad spend paid by client). [cite: 58, 59, 60]</p>
+                            [cite_start]<button class="btn-req" onclick="openBrief('Social Domination')">Requirement List [cite: 78]</button>
                         </div>
                     </div>
                 </div>
 
                 <div class="service-section">
-                    <h2 class="section-title">5. Our Terms of Engagement</h2>
-                    <p class="section-desc">To ensure the best quality, we follow these professional standards:</p>
+                    <h2 class="section-title">5. [cite_start]Our Terms of Engagement [cite: 65]</h2>
+                    [cite_start]<p class="section-desc">To ensure the best quality, we follow these professional standards: [cite: 66]</p>
                     <ul style="font-size: 14px; line-height: 1.8;">
-                        <li><strong>1. Payment:</strong> A 50% deposit is required to begin any project. The remaining balance is due upon final approval before files are delivered.</li>
-                        <li><strong>2. Revisions:</strong> Basic: 2 Rounds of minor changes. Standard/Premium: Up to 4 Rounds of revisions.</li>
-                        <li><strong>3. Rush Jobs:</strong> If a "Standard" or "Premium" project is needed in "Basic" time, a 25% rush fee will be applied.</li>
-                        <li><strong>4. Communication:</strong> Clients must provide a clear "Brief" (instructions) before we start to ensure the 1-4 hour or 1-3 day timelines are met.</li>
+                        <li><strong>1. Payment:</strong> A 50% deposit is required to begin any project. [cite_start]The remaining balance is due upon final approval before files are delivered. [cite: 67, 68]</li>
+                        <li><strong>2. Revisions:</strong> Basic: 2 Rounds of minor changes. [cite_start]Standard/Premium: Up to 4 Rounds of revisions. [cite: 69, 70]</li>
+                        <li><strong>3. [cite_start]Rush Jobs:</strong> If a "Standard" or "Premium" project is needed in "Basic" time, a 25% rush fee will be applied. [cite: 71]</li>
+                        <li><strong>4. [cite_start]Communication:</strong> Clients must provide a clear "Brief" (instructions) before we start to ensure the 1-4 hour or 1-3 day timelines are met. [cite: 72]</li>
                     </ul>
                 </div>
             `;

@@ -93,19 +93,16 @@
             font-size: 18px;
         }
 
-        /* UPDATED GRID FOR ADAPTIVE BOXES */
         #mainGrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; align-items: start; }
         .kadi { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.1); transition: 0.3s; display: flex; flex-direction: column; }
         .kadi:hover { transform: translateY(-5px); }
         
-        /* ADAPTIVE IMAGE SIZE */
         .product-img { width: 100%; height: auto; display: block; object-fit: contain; background: #f0f0f0; }
         
         .kadi-info { padding: 20px; text-align: left; }
         .kadi-info h3 { margin: 0 0 10px 0; color: var(--brand-blue); font-size: 18px; }
         .bei { color: var(--brand-red); font-weight: bold; font-size: 1.2rem; display: block; margin-bottom: 10px; }
 
-        /* SERVICE CATALOGUE STYLING */
         .service-section { margin-bottom: 50px; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 10px 20px rgba(0,0,0,0.08); text-align: left; }
         .section-title { border-left: 5px solid var(--deusb-gold); padding-left: 15px; margin-bottom: 10px; color: var(--brand-blue); font-size: 22px; text-transform: uppercase; font-weight: 800; }
         .section-desc { color: #666; font-size: 14px; margin-bottom: 25px; font-style: italic; }
@@ -117,7 +114,6 @@
         .tier-card p { font-size: 14px; color: #555; line-height: 1.6; flex-grow: 1; margin-bottom: 15px; }
         .btn-req { background: #000; color: white; border: none; padding: 14px; border-radius: 50px; font-weight: bold; cursor: pointer; width: 100%; margin-top: auto; text-transform: uppercase; font-size: 11px; letter-spacing: 1px; }
 
-        /* FOOTER STYLES */
         footer { 
             background: #1a1a1a; 
             padding: 50px 20px; 
@@ -132,7 +128,6 @@
         .social-btn { display: flex; align-items: center; gap: 8px; background: #2a2a2a; padding: 8px 14px; border-radius: 50px; text-decoration: none; color: white; font-weight: bold; font-size: 13px; border: 1px solid #444; }
         .social-icon { width: 18px; height: 18px; object-fit: contain; }
 
-        /* MODAL & FORM */
         .modal { display: none; position: fixed; z-index: 3000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); overflow-y: auto; padding: 20px 0; }
         .modal-content { background: white; margin: auto; padding: 35px; border-radius: 15px; width: 95%; max-width: 650px; position: relative; }
         .close { position: absolute; right: 20px; top: 15px; font-size: 28px; cursor: pointer; }
@@ -189,8 +184,8 @@
     </div>
 
     <footer>
-        <h3 style="margin-bottom: 10px;">Wasiliana Nasi</h3>
-        <p style="color: #ccc; margin-bottom: 20px;">Tufuate kwenye mitandao ya kijamii</p>
+        <h3 style="margin-bottom: 10px; color: var(--deusb-gold);">Follow Us on Social Media</h3>
+        <p style="color: #ccc; margin-bottom: 25px;">Stay connected and see our latest projects</p>
         
         <div class="social-container">
             <a href="https://wa.me/255748666409" class="social-btn"><img src="https://i.ibb.co/tP3xXKN0/whatsapp.png" class="social-icon"> WhatsApp</a>
@@ -200,8 +195,8 @@
             <a href="https://youtube.com/@deusbentertainment?si=N23cHeGqwjABfTgc" target="_blank" class="social-btn"><img src="https://upload.wikimedia.org/wikipedia/commons/e/ef/Youtube_logo.png" class="social-icon"> YouTube</a>
         </div>
 
-        <p style="margin-top: 20px;">Email: <a href="mailto:deusbentertainment@gmail.com" class="footer-email">deusbentertainment@gmail.com</a></p>
-        <p style="font-size: 12px; color: #555; margin-top: 30px;">&copy; 2026 DEUSB STORE. Haki zote zimehifadhiwa.</p>
+        <p style="margin-top: 30px; font-size: 14px;">For inquiries: <a href="mailto:deusbentertainment@gmail.com" class="footer-email">deusbentertainment@gmail.com</a></p>
+        <p style="font-size: 12px; color: #555; margin-top: 20px;">&copy; 2026 DEUSB ENTERTAINMENT. All rights reserved.</p>
     </footer>
 
     <script>
@@ -280,21 +275,21 @@
                     <div class="tier-grid">
                         <div class="tier-card">
                             <h3>BASIC</h3>
-                            <span class="tier-price">20k-30k</span>
+                            <span class="tier-price">20,000 - 30,000</span>
                             <span class="tier-time">1-4 Hours</span>
                             <p>Deliverables: 1 Simple Flyer OR Basic Logo (2 revisions). Best For: Urgent sales/events.</p>
                             <button class="btn-req" onclick="openBrief('Graphics Basic')">Requirement List</button>
                         </div>
                         <div class="tier-card">
                             <h3>STANDARD</h3>
-                            <span class="tier-price">50k-80k</span>
+                            <span class="tier-price">50,000 - 80,000</span>
                             <span class="tier-time">1-3 Days</span>
                             <p>Deliverables: 2 Flyers + Professional Logo + Source Files. Best For: Brand foundations.</p>
                             <button class="btn-req" onclick="openBrief('Graphics Standard')">Requirement List</button>
                         </div>
                         <div class="tier-card">
                             <h3>PREMIUM</h3>
-                            <span class="tier-price">120k-250k</span>
+                            <span class="tier-price">120,000 - 250,000</span>
                             <span class="tier-time">5-10 Days</span>
                             <p>Deliverables: Full Branding (Logo + Biz Card + Identity). Best For: professional identities.</p>
                             <button class="btn-req" onclick="openBrief('Graphics Premium')">Requirement List</button>
@@ -365,13 +360,13 @@
                     <div class="tier-grid">
                         <div class="tier-card">
                             <h3>LITE PLAN</h3>
-                            <span class="tier-price">250k – 400k/mo</span>
+                            <span class="tier-price">250,000 – 400,000/mo</span>
                             <p>Content: 12 Posts per month. Goal: Keeping your page active.</p>
                             <button class="btn-req" onclick="openBrief('Social Lite')">Requirement List</button>
                         </div>
                         <div class="tier-card">
                             <h3>GROWTH PLAN</h3>
-                            <span class="tier-price">500k – 850k/mo</span>
+                            <span class="tier-price">500,000 – 850,000/mo</span>
                             <p>Content: 20 Posts per month (4 Reels). Strategy: Hashtag research & engagement.</p>
                             <button class="btn-req" onclick="openBrief('Social Growth')">Requirement List</button>
                         </div>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DEUSB VISUALS | Portfolio</title>
+    <title>DEUSB VISUALS</title>
     <style>
         :root {
             --primary-red: #ff0000;
@@ -13,7 +13,7 @@
         }
 
         body { 
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
+            font-family: 'Segoe UI', Roboto, sans-serif; 
             margin: 0; 
             background-color: var(--dark-bg); 
             color: #fff; 
@@ -24,16 +24,15 @@
         header { 
             padding: 40px 20px; 
             text-align: center; 
-            background: linear-gradient(to bottom, #000, var(--dark-bg));
+            background: #000;
             border-bottom: 1px solid #222;
         }
 
-        .logo { width: 120px; transition: 0.5s; }
-        .logo:hover { transform: rotateY(180deg); }
+        .logo { width: 100px; margin-bottom: 10px; }
 
         .search-container {
-            margin-top: 25px;
-            max-width: 500px;
+            margin-top: 20px;
+            max-width: 400px;
             margin-left: auto;
             margin-right: auto;
         }
@@ -45,113 +44,96 @@
             border: 1px solid #333;
             background: #1a1a1a;
             color: white;
-            font-size: 16px;
             outline: none;
-            transition: 0.3s;
         }
 
-        #searchInput:focus { border-color: var(--primary-red); box-shadow: 0 0 10px rgba(255,0,0,0.2); }
+        #searchInput:focus { border-color: var(--primary-red); }
 
         /* Grid System */
         .container { max-width: 1200px; margin: 20px auto; padding: 20px; }
 
         #duka { 
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
         }
 
         /* Project Cards */
         .kadi { 
             background: var(--card-bg); 
-            border-radius: 15px; 
+            border-radius: 12px; 
             overflow: hidden;
             border: 1px solid #222;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            opacity: 0; /* Kwa ajili ya animation ya kuingia */
+            transition: 0.3s;
+            opacity: 0;
             transform: translateY(20px);
         }
 
         .kadi.show { opacity: 1; transform: translateY(0); }
 
-        .kadi:hover { 
-            border-color: var(--primary-red); 
-            transform: scale(1.03);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.5);
-        }
+        .kadi:hover { border-color: var(--primary-red); transform: translateY(-5px); }
 
-        .img-container { position: relative; overflow: hidden; height: 220px; }
+        .product-img { width: 100%; height: 200px; object-fit: cover; }
         
-        .product-img { 
-            width: 100%; 
-            height: 100%; 
-            object-fit: cover;
-            transition: 0.5s;
-        }
-
-        .kadi:hover .product-img { transform: scale(1.1); }
-        
-        .kadi-info { padding: 20px; text-align: left; }
-        
-        .kadi-info h3 { 
-            margin: 0 0 15px 0; 
-            font-size: 20px; 
-            letter-spacing: 1px;
-            color: #efefef;
-        }
+        .kadi-info { padding: 15px; text-align: center; }
+        .kadi-info h3 { margin: 0 0 15px 0; font-size: 18px; text-transform: uppercase; }
 
         .btn-video { 
-            display: inline-flex; 
-            align-items: center;
-            justify-content: center;
+            display: block; 
             background: var(--primary-red); 
             color: white; 
             text-decoration: none; 
-            width: 100%;
-            padding: 12px; 
-            border-radius: 8px; 
+            padding: 10px; 
+            border-radius: 5px; 
             font-weight: bold;
-            text-transform: uppercase;
-            font-size: 14px;
+            font-size: 13px;
+        }
+
+        /* Footer & Social Buttons (YAKO YA ZAMANI) */
+        footer { 
+            background: #000; 
+            padding: 50px 20px; 
+            text-align: center; 
+            border-top: 1px solid #222;
+            margin-top: 50px;
+        }
+
+        .social-container { 
+            display: flex; 
+            flex-wrap: wrap; 
+            justify-content: center; 
+            gap: 12px; 
+            margin: 25px 0; 
+        }
+
+        .social-btn { 
+            display: flex; 
+            align-items: center; 
+            gap: 8px; 
+            background: #1a1a1a; 
+            padding: 10px 18px; 
+            border-radius: 50px; 
+            text-decoration: none; 
+            color: white; 
+            font-weight: bold; 
+            font-size: 13px; 
+            border: 1px solid #333;
             transition: 0.3s;
         }
 
-        .btn-video:hover { background: #cc0000; letter-spacing: 2px; }
+        .social-btn:hover { background: #333; border-color: var(--primary-red); }
 
-        /* Footer & Back to Top */
-        footer { text-align: center; padding: 60px 20px; color: var(--text-gray); border-top: 1px solid #222; }
-        
-        #backToTop {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: var(--primary-red);
-            color: white;
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            text-decoration: none;
-            font-weight: bold;
-            z-index: 1000;
-        }
-
-        @media (max-width: 600px) {
-            #duka { grid-template-columns: 1fr; }
-        }
+        .social-icon { width: 18px; height: 18px; }
     </style>
 </head>
 <body>
 
     <header>
         <img src="https://i.ibb.co/rRZvchrH/transparent-logo.png" alt="DEUSB Logo" class="logo">
-        <h1 style="margin:10px 0 0 0; letter-spacing: 3px;">DEUSB VISUALS</h1>
+        <h1 style="margin:0; letter-spacing: 2px;">DEUSB VISUALS</h1>
         
         <div class="search-container">
-            <input type="text" id="searchInput" placeholder="Tafuta mradi hapa (mfano: Wedding)..." onkeyup="searchProjects()">
+            <input type="text" id="searchInput" placeholder="Tafuta mradi..." onkeyup="searchProjects()">
         </div>
     </header>
 
@@ -160,30 +142,37 @@
             </div>
     </div>
 
-    <a href="#" id="backToTop">↑</a>
-
     <footer>
-        <p>DEUSB ENTERTAINMENT &copy; 2026</p>
-        <p style="font-size: 11px;">Designed for the best visual experience.</p>
+        <h3 style="margin-bottom: 10px;">Wasiliana Nasi</h3>
+        <div class="social-container">
+            <a href="https://wa.me/255748666409" class="social-btn">
+                <img src="https://i.ibb.co/tP3xXKN0/whatsapp.png" class="social-icon"> WhatsApp
+            </a>
+            <a href="https://www.instagram.com/deusb_entertainment" target="_blank" class="social-btn">
+                <img src="https://i.ibb.co/PZF184kz/instagram.png" class="social-icon"> Instagram
+            </a>
+            <a href="https://tiktok.com/@deusbentertainment" target="_blank" class="social-btn">
+                <img src="https://i.ibb.co/nMGgVbsT/tik-tok.png" class="social-icon"> TikTok
+            </a>
+            <a href="https://youtube.com/@deusbentertainment" target="_blank" class="social-btn">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/e/ef/Youtube_logo.png" class="social-icon"> YouTube
+            </a>
+        </div>
+        <p style="color: #555; font-size: 12px;">&copy; 2026 DEUSB STORE. Haki zote zimehifadhiwa.</p>
     </footer>
 
     <script>
-        // --- DATA YA MIRADI YAKO ---
+        // --- ONGEZA VIDEO ZAKO HAPA ---
         const miradi = [
             {
-                jina: "Wedding Highlights - Arusha",
-                picha: "https://via.placeholder.com/400x250/333/fff?text=Wedding+Photo",
+                jina: "Wedding Highlights",
+                picha: "https://via.placeholder.com/400x250/333/fff?text=Wedding",
                 video: "https://www.instagram.com/reel/EXAMPLE1"
             },
             {
-                jina: "Music Video: Bongo Flava",
-                picha: "https://via.placeholder.com/400x250/222/fff?text=Music+Video", 
+                jina: "Music Video",
+                picha: "https://via.placeholder.com/400x250/222/fff?text=Music", 
                 video: "https://www.tiktok.com/@example/video/1"
-            },
-            {
-                jina: "Corporate Event - Dar es Salaam",
-                picha: "https://via.placeholder.com/400x250/444/fff?text=Corporate+Event",
-                video: "https://youtube.com/shorts/example"
             }
         ];
 
@@ -195,37 +184,23 @@
 
             duka.innerHTML = filtered.map((m, index) => `
                 <div class="kadi" style="transition-delay: ${index * 0.1}s">
-                    <div class="img-container">
-                        <img src="${m.picha}" class="product-img" loading="lazy">
-                    </div>
+                    <img src="${m.picha}" class="product-img">
                     <div class="kadi-info">
                         <h3>${m.jina}</h3>
-                        <a href="${m.video}" target="_blank" class="btn-video">WATCH VIDEO</a>
+                        <a href="${m.video}" target="_blank" class="btn-video">TAZAMA VIDEO</a>
                     </div>
                 </div>
             `).join('');
 
-            // Trigger animation
             setTimeout(() => {
                 document.querySelectorAll('.kadi').forEach(el => el.classList.add('show'));
             }, 100);
         }
 
-        // Search Function
         function searchProjects() {
             const txt = document.getElementById('searchInput').value;
             jengaDuka(txt);
         }
-
-        // Back to top logic
-        window.onscroll = function() {
-            const btn = document.getElementById("backToTop");
-            if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
-                btn.style.display = "flex";
-            } else {
-                btn.style.display = "none";
-            }
-        };
 
         window.onload = () => jengaDuka();
     </script>

@@ -62,22 +62,7 @@
             gap: 15px;
         }
 
-        /* UPDATED BACK ARROW + MESSAGE STYLE */
-        .back-nav {
-            display: none; /* Hidden by default */
-            text-decoration: none;
-            color: var(--brand-red);
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.2s;
-            font-size: 18px;
-            align-items: center;
-            gap: 5px;
-        }
-        .back-nav:hover { transform: scale(1.1); }
-        .back-nav span { font-size: 24px; }
-
-        .btn-store-link {
+        .btn-store-link, .btn-back-link {
             display: inline-block;
             background: var(--brand-blue);
             color: var(--brand-yellow);
@@ -89,6 +74,14 @@
             border: 2px solid var(--brand-yellow);
             transition: 0.3s;
             text-transform: uppercase;
+            cursor: pointer;
+        }
+
+        .btn-back-link {
+            display: none; 
+            background: var(--brand-red); 
+            color: white;
+            border-color: var(--brand-red);
         }
 
         .container { max-width: 1200px; margin: 20px auto; padding: 0 15px; }
@@ -111,7 +104,6 @@
         .social-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin: 25px 0; }
         .social-btn { display: flex; align-items: center; gap: 10px; padding: 12px 22px; border-radius: 50px; text-decoration: none; color: white; font-weight: bold; font-size: 13px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); }
         .social-icon { width: 20px; height: 20px; object-fit: contain; }
-        .email-link { color: var(--brand-yellow); text-decoration: none; font-weight: bold; font-size: 16px; }
 
         .video-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); display: none; justify-content: center; align-items: center; z-index: 2000; }
         .modal-content { position: relative; width: 90%; max-width: 850px; aspect-ratio: 16/9; }
@@ -127,9 +119,7 @@
         <div class="search-container">
             <input type="text" id="searchInput" placeholder="Search..." onkeyup="searchFromInput()">
             <div class="nav-actions">
-                <a href="javascript:void(0)" id="backNav" class="back-nav" onclick="loadProjects()" title="Back to Projects">
-                    <span>←</span> Go Back
-                </a>
+                <a href="javascript:void(0)" id="btnBack" class="btn-back-link" onclick="loadProjects()">← Go Back</a>
                 <a href="javascript:void(0)" id="btnStore" class="btn-store-link" onclick="loadStore()">Got to store and purchase</a>
             </div>
         </div>
@@ -147,16 +137,11 @@
     </div>
 
     <footer>
-        <div style="margin-bottom: 20px; font-weight: bold; letter-spacing: 1px;">FOLLOW OUR ACCOUNTS</div>
         <div class="social-container">
             <a href="https://wa.me/255748666409" class="social-btn"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" class="social-icon"> WhatsApp</a>
             <a href="https://www.instagram.com/deusb_entertainment" target="_blank" class="social-btn"><img src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Instagram_logo_2016.svg" class="social-icon"> Instagram</a>
-            <a href="https://tiktok.com/@deusbentertainment" target="_blank" class="social-btn"><img src="https://www.svgrepo.com/show/333611/tiktok.svg" class="social-icon"> TikTok</a>
-            <a href="https://x.com/Deusb17" target="_blank" class="social-btn"><img src="https://upload.wikimedia.org/wikipedia/commons/c/ce/X_logo_2023.svg" class="social-icon"> X</a>
             <a href="https://youtube.com/@deusbentertainment" target="_blank" class="social-btn"><img src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg" class="social-icon"> YouTube</a>
         </div>
-        <p>Contact us via email:</p>
-        <a href="mailto:deusbentertainment@gmail.com" class="email-link">deusbentertainment@gmail.com</a>
         <p style="color: rgba(255,255,255,0.4); font-size: 11px; margin-top: 40px;">&copy; 2026 DEUSB ENTERTAINMENT. All Rights Reserved.</p>
     </footer>
 
@@ -165,13 +150,14 @@
         const storeSheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTjyYpymtplOkf4FK5Fwcfs9PnDMpldjLKiTftg4Sv518seWW188xS1v9aeJIQsbQbFS7HgiFb7SdV_/pub?gid=2113416306&single=true&output=csv';
         
         let allMiradi = [];
+        let allStoreProducts = [];
         let isStoreMode = false;
 
         async function loadProjects() {
             isStoreMode = false;
-            document.getElementById('backNav').style.display = 'none';
+            document.getElementById('searchInput').value = "";
+            document.getElementById('btnBack').style.display = 'none';
             document.getElementById('btnStore').style.display = 'inline-block';
-            document.getElementById('duka').innerHTML = '<div style="text-align:center; padding:50px;">Loading Projects...</div>';
             
             try {
                 const res = await fetch(projectSheetUrl);
@@ -182,39 +168,21 @@
                     return { jina: c[0], description: c[1], picha: c[2], type: c[3], link: c[4]?.trim() };
                 });
                 renderCards(allMiradi);
-            } catch (e) { document.getElementById('duka').innerHTML = "Error loading data."; }
+            } catch (e) { console.error(e); }
         }
 
         function loadStore() {
             isStoreMode = true;
+            document.getElementById('searchInput').value = "";
             document.getElementById('btnStore').style.display = 'none';
-            document.getElementById('backNav').style.display = 'flex'; // Use flex to align arrow and text
-            document.getElementById('duka').innerHTML = '<div style="text-align:center; padding:50px;">Opening Store...</div>';
+            document.getElementById('btnBack').style.display = 'inline-block';
             
             Papa.parse(storeSheetUrl, {
                 download: true,
                 header: true,
                 complete: function(results) {
-                    const data = results.data;
-                    let html = '';
-                    data.forEach(bidhaa => {
-                        if(bidhaa.Jina && bidhaa.Bei) {
-                            const picha = (bidhaa.PichaURL && bidhaa.PichaURL.includes('http')) ? bidhaa.PichaURL.trim() : '';
-                            html += `
-                                <div class="kadi">
-                                    ${picha ? `<img src="${picha}" class="product-img">` : ''}
-                                    <div class="kadi-info">
-                                        <h3>${bidhaa.Jina}</h3>
-                                        <span class="bei">TSH ${bidhaa.Bei}</span>
-                                        <p class="maelezo">${bidhaa.Maelezo || ''}</p>
-                                        <a class="btn-nunua" href="https://wa.me/255748666409?text=Habari DEUSB STORE, nahitaji: ${bidhaa.Jina} kwa TSH ${bidhaa.Bei}">
-                                            Nunua kwa WhatsApp
-                                        </a>
-                                    </div>
-                                </div>`;
-                        }
-                    });
-                    document.getElementById('duka').innerHTML = html || '<div style="text-align:center; padding:50px;">Store is empty.</div>';
+                    allStoreProducts = results.data.filter(b => b.Jina && b.Bei);
+                    renderStore(allStoreProducts);
                 }
             });
         }
@@ -232,13 +200,36 @@
             }).join('');
         }
 
-        function playVideo(id) { document.getElementById('youtubePlayer').src = `https://www.youtube.com/embed/${id}?autoplay=1`; document.getElementById('videoModal').style.display = 'flex'; document.body.style.overflow = 'hidden'; }
-        function closeVideo() { document.getElementById('youtubePlayer').src = ""; document.getElementById('videoModal').style.display = 'none'; document.body.style.overflow = 'auto'; }
-        function searchFromInput() { 
-            if(isStoreMode) return; 
-            const val = document.getElementById('searchInput').value.toLowerCase(); 
-            renderCards(allMiradi.filter(m => m.jina.toLowerCase().includes(val))); 
+        function renderStore(list) {
+            let html = list.map(bidhaa => {
+                const picha = (bidhaa.PichaURL && bidhaa.PichaURL.includes('http')) ? bidhaa.PichaURL.trim() : '';
+                return `
+                    <div class="kadi">
+                        ${picha ? `<img src="${picha}" class="product-img">` : ''}
+                        <div class="kadi-info">
+                            <h3>${bidhaa.Jina}</h3>
+                            <span class="bei">TSH ${bidhaa.Bei}</span>
+                            <p class="maelezo">${bidhaa.Maelezo || ''}</p>
+                            <a class="btn-nunua" href="https://wa.me/255748666409?text=Habari DEUSB STORE, nahitaji: ${bidhaa.Jina} kwa TSH ${bidhaa.Bei}">
+                                Nunua kwa WhatsApp
+                            </a>
+                        </div>
+                    </div>`;
+            }).join('');
+            document.getElementById('duka').innerHTML = html || '<div style="text-align:center; padding:50px;">Hakuna kilichopatikana.</div>';
         }
+
+        function searchFromInput() { 
+            const val = document.getElementById('searchInput').value.toLowerCase(); 
+            if(isStoreMode) {
+                renderStore(allStoreProducts.filter(p => p.Jina.toLowerCase().includes(val)));
+            } else {
+                renderCards(allMiradi.filter(m => m.jina.toLowerCase().includes(val))); 
+            }
+        }
+
+        function playVideo(id) { document.getElementById('youtubePlayer').src = `https://www.youtube.com/embed/${id}?autoplay=1`; document.getElementById('videoModal').style.display = 'flex'; }
+        function closeVideo() { document.getElementById('youtubePlayer').src = ""; document.getElementById('videoModal').style.display = 'none'; }
 
         window.onload = loadProjects;
     </script>

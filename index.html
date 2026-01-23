@@ -75,44 +75,22 @@
             cursor: pointer;
         }
 
-        .kadi-info { padding: 15px; text-align: center; }
+        .kadi-info { padding: 15px 15px 5px 15px; text-align: center; }
         .kadi-info h3 { margin: 0; font-size: 14px; text-transform: uppercase; color: var(--brand-blue); cursor: pointer; }
 
-        /* COMMENT SECTION STYLES */
-        .comment-section {
-            padding: 10px 15px 15px 15px;
-            border-top: 1px solid #eee;
-            background: #fdfdfd;
-        }
-
-        .comment-input {
-            width: 100%;
-            padding: 8px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 12px;
-            resize: none;
-            outline: none;
-            font-family: inherit;
-        }
-
-        .btn-comment {
-            width: 100%;
-            background: var(--brand-blue);
-            color: white;
-            border: none;
-            padding: 6px;
-            margin-top: 5px;
-            border-radius: 4px;
-            font-size: 11px;
-            font-weight: bold;
-            cursor: pointer;
+        /* DESCRIPTION STYLE */
+        .post-description {
+            padding: 0 15px 15px 15px;
+            font-size: 13px;
+            color: #555;
+            line-height: 1.4;
+            text-align: center;
         }
 
         .btn-play { 
             display: block; background: var(--brand-red); color: white; 
             padding: 12px; border-radius: 5px; font-weight: bold; font-size: 13px;
-            margin: 0 15px 10px 15px; text-align: center; border: none; cursor: pointer;
+            margin: 0 15px 15px 15px; text-align: center; border: none; cursor: pointer;
         }
 
         footer { 
@@ -170,75 +148,3 @@
             <a href="https://tiktok.com/@deusbentertainment" target="_blank" class="social-btn"><img src="https://www.svgrepo.com/show/333611/tiktok.svg" class="social-icon"> TikTok</a>
             <a href="https://x.com/Deusb17" target="_blank" class="social-btn"><img src="https://upload.wikimedia.org/wikipedia/commons/c/ce/X_logo_2023.svg" class="social-icon x-icon"> X</a>
             <a href="https://youtube.com/@deusbentertainment" target="_blank" class="social-btn"><img src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg" class="social-icon"> YouTube</a>
-        </div>
-        <p>Contact us via email:</p>
-        <a href="mailto:deusbentertainment@gmail.com" class="email-link">deusbentertainment@gmail.com</a>
-        <p style="color: rgba(255,255,255,0.4); font-size: 11px; margin-top: 40px;">&copy; 2026 DEUSB ENTERTAINMENT. All Rights Reserved.</p>
-    </footer>
-
-    <script>
-        const miradi = [
-            {
-                jina: "DEUSB LATEST ON TIKTOK",
-                picha: "https://i.ibb.co/VWyxjjXD/IMG-20250819-WA0013.jpg", 
-                type: "external",
-                link: "https://www.tiktok.com/@deusbentertainment/photo/7591227356354727179"
-            },
-            {
-                jina: "FIRST YEAR CAREER MISSION",
-                picha: "https://img.youtube.com/vi/nuutlljPD2s/maxresdefault.jpg",
-                type: "youtube",
-                link: "nuutlljPD2s"
-            },
-            {
-                jina: "ANIMATION OF A LOWPOLY HOUSE",
-                picha: "https://img.youtube.com/vi/HWblkG5km38/maxresdefault.jpg",
-                type: "youtube",
-                link: "HWblkG5km38"
-            },
-            {
-                jina: "DEUSB LATEST ON INSTAGRAM",
-                picha: "https://i.ibb.co/8nXBwsv0/1.png", 
-                type: "external",
-                link: "https://www.instagram.com/p/DTSedTMiAc0/"
-            }
-        ];
-
-        function jengaDuka(filterText = "") {
-            const duka = document.getElementById('duka');
-            const filtered = miradi.filter(m => m.jina.toLowerCase().includes(filterText.toLowerCase()));
-
-            duka.innerHTML = filtered.map((m, index) => {
-                const action = m.type === 'youtube' ? `onclick="playVideo('${m.link}')"` : `onclick="window.open('${m.link}', '_blank')"`;
-                const buttonText = m.type === 'youtube' ? 'PLAY VIDEO' : 'VIEW POST';
-                return `
-                <div class="kadi">
-                    <img src="${m.picha}" class="product-img" ${action}>
-                    <div class="kadi-info" ${action}><h3>${m.jina}</h3></div>
-                    <button class="btn-play" ${action}>${buttonText}</button>
-                    
-                    <div class="comment-section">
-                        <textarea class="comment-input" placeholder="Add a comment..." rows="2" id="input-${index}"></textarea>
-                        <button class="btn-comment" onclick="alert('Comment sent! Thank you.')">POST COMMENT</button>
-                    </div>
-                </div>
-            `}).join('');
-        }
-
-        function playVideo(id) {
-            document.getElementById('youtubePlayer').src = `https://www.youtube.com/embed/${id}?autoplay=1`;
-            document.getElementById('videoModal').style.display = 'flex';
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeVideo() {
-            document.getElementById('youtubePlayer').src = "";
-            document.getElementById('videoModal').style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }
-
-        function searchProjects() { jengaDuka(document.getElementById('searchInput').value); }
-        window.onload = () => jengaDuka();
-    </script>
-</body>
-</html>

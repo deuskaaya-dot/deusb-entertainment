@@ -92,8 +92,16 @@
             font-size: 18px;
         }
 
+        /* PROJECT & STORE GRID SYSTEM */
         #mainGrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 25px; }
+        .kadi { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.1); transition: 0.3s; }
+        .kadi:hover { transform: translateY(-5px); }
+        .product-img { width: 100%; height: 250px; object-fit: cover; }
+        .kadi-info { padding: 20px; text-align: left; }
+        .kadi-info h3 { margin: 0 0 10px 0; color: var(--brand-blue); }
+        .bei { color: var(--brand-red); font-weight: bold; font-size: 1.2rem; }
 
+        /* SERVICE CATALOGUE STYLING */
         .service-section { margin-bottom: 50px; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 10px 20px rgba(0,0,0,0.08); text-align: left; }
         .section-title { border-left: 5px solid var(--deusb-gold); padding-left: 15px; margin-bottom: 10px; color: var(--brand-blue); font-size: 22px; text-transform: uppercase; font-weight: 800; }
         .section-desc { color: #666; font-size: 14px; margin-bottom: 25px; font-style: italic; }
@@ -105,6 +113,7 @@
         .tier-card p { font-size: 14px; color: #555; line-height: 1.6; flex-grow: 1; margin-bottom: 15px; }
         .btn-req { background: #000; color: white; border: none; padding: 14px; border-radius: 50px; font-weight: bold; cursor: pointer; width: 100%; margin-top: auto; text-transform: uppercase; font-size: 11px; letter-spacing: 1px; }
 
+        /* MODAL & FORM */
         .modal { display: none; position: fixed; z-index: 3000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); overflow-y: auto; padding: 20px 0; }
         .modal-content { background: white; margin: auto; padding: 35px; border-radius: 15px; width: 95%; max-width: 650px; position: relative; }
         .close { position: absolute; right: 20px; top: 15px; font-size: 28px; cursor: pointer; }
@@ -149,12 +158,10 @@
 
                 <div class="upload-section">
                     <label style="font-weight: 800; color: var(--deusb-gold); display: block; margin-bottom: 10px;">MEDIA & ASSETS</label>
-                    
                     <div class="req-field">
                         <label>Upload Media (Images/Videos)</label>
                         <input type="file" id="directUpload" multiple style="background: white; border: 1px solid #ddd;">
                     </div>
-
                     <div class="req-field"><label>Link to Raw Video/Footage (Google Drive/Wetransfer)</label>
                     <input type="url" id="videoLink" placeholder="https://drive.google.com/..."></div>
                     <div class="req-field"><label>Link to Sample Photo/Inspiration/Reference</label>
@@ -355,10 +362,10 @@
                 <div class="service-section">
                     <h2 class="section-title">5. Our Terms of Engagement</h2>
                     <ul style="font-size: 14px; line-height: 1.8;">
-                        <li><strong>Payment:</strong> A 50% deposit is required to begin any project. The remaining balance is due upon final approval before files are delivered</li>
-                        <li><strong>Revisions:</strong> Basic: 2 Rounds of minor changes. Standard/Premium: Up to 4 Rounds of revisions.</li>
-                        <li><strong>Rush Jobs:</strong> If a "Standard" or "Premium" project is needed in "Basic" time, a 25% rush fee will be applied.</li>
-                        <li><strong>Communication:</strong> Clients must provide a clear "Brief" (instructions) before we start to ensure the 1-4 hour or 1-3day timelines are met.</li>
+                        <li><strong>Payment:</strong> A 50% deposit is required to begin any project. The remaining balance is due upon final approval before files are delivered [cite: 67-68].</li>
+                        <li><strong>Revisions:</strong> Basic: 2 Rounds of minor changes. Standard/Premium: Up to 4 Rounds of revisions [cite: 69-70].</li>
+                        <li><strong>Rush Jobs:</strong> If a "Standard" or "Premium" project is needed in "Basic" time, a 25% rush fee will be applied[cite: 71].</li>
+                        <li><strong>Communication:</strong> Clients must provide a clear "Brief" (instructions) before we start to ensure the 1-4 hour or 1-3day timelines are met[cite: 72].</li>
                     </ul>
                 </div>
             `;
@@ -369,14 +376,12 @@
             selCat = cat;
             document.getElementById('briefTitle').innerText = cat + " Requirement List";
             const qList = packageQuestions[cat] || ["Describe your needs in detail."];
-            
             document.getElementById('dynamicFields').innerHTML = qList.map(q => `
                 <div class="req-field">
                     <label>${q}</label>
                     <input type="text" class="dynamic-input" data-question="${q}" placeholder="Type answer here...">
                 </div>
             `).join('');
-            
             document.getElementById('briefModal').style.display = "block";
         }
 
@@ -384,22 +389,16 @@
 
         function sendGmail() {
             let body = `DEUSB PROJECT BRIEF\n------------------\nCategory: ${selCat}\nBrand: ${document.getElementById('bizName').value}\n\n`;
-            
             document.querySelectorAll('.dynamic-input').forEach(input => {
                 body += `Q: ${input.dataset.question}\nA: ${input.value}\n\n`;
             });
-
             const files = document.getElementById('directUpload').files;
             let fileInfo = "FILES SELECTED: ";
             if(files.length > 0) {
                 for(let i=0; i<files.length; i++) { fileInfo += files[i].name + (i === files.length - 1 ? "" : ", "); }
-            } else {
-                fileInfo += "None";
-            }
-
+            } else { fileInfo += "None"; }
             body += `ASSETS\n------------------\n${fileInfo}\nVideo/Footage Link: ${document.getElementById('videoLink').value}\nSample/Photo Link: ${document.getElementById('samplePhotoLink').value}\n\n`;
             body += `EXTRA INSTRUCTIONS\n------------------\n${document.getElementById('projDesc').value}`;
-            
             window.open(`https://mail.google.com/mail/?view=cm&fs=1&to=deusbentertainment@gmail.com&su=Brief: ${selCat}&body=${encodeURIComponent(body)}`);
         }
 

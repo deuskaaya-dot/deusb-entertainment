@@ -37,7 +37,7 @@
             border-bottom: 4px solid var(--brand-red);
         }
 
-        .logo { width: 100px; margin-bottom: 10px; }
+        .logo { width: 100px; height: auto; margin-bottom: 10px; }
 
         .brand-name { 
             font-family: 'Great Vibes', cursive;
@@ -109,24 +109,28 @@
 
         #btnBack { display: none; background: var(--brand-red); color: white; border-color: var(--brand-red); }
 
-        /* --- MASONRY LAYOUT FOR PC --- */
-        .container { 
-            max-width: 1400px; /* Wide view */
-            margin: 20px auto; 
-            padding: 0 15px; 
-            min-height: 400px; 
+        .container { max-width: 1200px; margin: 20px auto; padding: 0 15px; min-height: 400px; }
+        
+        #loadingMsg { 
+            text-align: center; 
+            padding: 50px; 
+            font-weight: bold; 
+            color: var(--brand-red); 
+            display: none;
+            font-size: 18px;
         }
 
+        /* --- STOO COLUMN GRID FOR MOBILE - REKEBISHO LA GAP --- */
         #mainGrid { 
-            column-count: 4; /* Default for wide screens */
-            column-gap: 20px;
-            width: 100%;
+            display: grid; 
+            grid-template-columns: repeat(2, 1fr); 
+            gap: 8px; /* Nafasi ndogo ya pembeni */
+            align-items: flex-start; 
         }
 
-        /* Responsive columns */
-        @media (max-width: 1200px) { #mainGrid { column-count: 3; } }
-        @media (max-width: 800px) { #mainGrid { column-count: 2; } }
-        @media (max-width: 500px) { #mainGrid { column-count: 1; } }
+        @media (min-width: 768px) {
+            #mainGrid { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; }
+        }
 
         .kadi { 
             background: white; 
@@ -134,9 +138,10 @@
             overflow: hidden; 
             box-shadow: 0 10px 20px rgba(0,0,0,0.1); 
             transition: 0.3s; 
-            display: block;
-            margin-bottom: 20px; /* Space between masonry rows */
-            break-inside: avoid; /* Essential for masonry */
+            display: flex; 
+            flex-direction: column;
+            cursor: pointer;
+            margin-bottom: 5px; /* Inapunguza nafasi ya juu na chini */
         }
 
         .kadi:hover { transform: translateY(-5px); }
@@ -154,20 +159,21 @@
         }
         
         .kadi-info { 
-            padding: 20px; 
+            padding: 10px; 
             text-align: left; 
         }
 
-        .kadi-info h3 { margin: 0 0 10px 0; color: var(--brand-blue); font-size: 18px; }
+        .kadi-info h3 { margin: 0 0 5px 0; color: var(--brand-blue); font-size: 14px; }
+        
         .kadi-info p { 
             margin: 0; 
-            font-size: 13px; 
-            line-height: 1.5; 
+            font-size: 11px; 
+            line-height: 1.3; 
             color: #444;
-            white-space: pre-wrap; 
+            white-space: normal;
+            word-wrap: break-word;
         }
 
-        /* --- CATALOGUE STYLING --- */
         .service-section { margin-bottom: 50px; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 10px 20px rgba(0,0,0,0.08); text-align: left; }
         .section-title { border-left: 5px solid var(--deusb-gold); padding-left: 15px; margin-bottom: 10px; color: var(--brand-blue); font-size: 22px; text-transform: uppercase; font-weight: 800; }
         .section-desc { color: #666; font-size: 14px; margin-bottom: 25px; font-style: italic; }
@@ -195,8 +201,6 @@
         .req-field input, .req-field textarea { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 8px; font-size: 14px; background: #fafafa; }
         .upload-section { background: #fef9ef; padding: 15px; border-radius: 10px; border: 1px dashed var(--deusb-gold); margin-top: 20px; }
         .btn-send { background: #d44638; color: white; border: none; padding: 18px; width: 100%; border-radius: 8px; font-weight: bold; cursor: pointer; margin-top: 20px; font-size: 16px; }
-
-        #loadingMsg { text-align: center; padding: 50px; font-weight: bold; color: var(--brand-red); display: none; font-size: 18px; }
     </style>
 </head>
 <body>
@@ -243,7 +247,10 @@
         <h3 class="brand-name" style="font-size: 2rem; color: var(--deusb-gold); margin-bottom: 10px;">Deusb Entertainment</h3>
         <div class="social-container">
             <a href="https://wa.me/255748666409" class="social-btn"><img src="https://i.ibb.co/tP3xXKN0/whatsapp.png" class="social-icon"> WhatsApp</a>
-            <a href="https://www.instagram.com/deusb_entertainment" target="_blank" class="social-btn"><img src="https://i.ibb.co/PZF184kz/instagram.png" class="social-icon"> Instagram</a>
+            <a href="https://www.instagram.com/deusb_entertainment?igsh=ajJ2aDY1MG1ycTY4" target="_blank" class="social-btn"><img src="https://i.ibb.co/PZF184kz/instagram.png" class="social-icon"> Instagram</a>
+            <a href="https://tiktok.com/@deusbentertainment" target="_blank" class="social-btn"><img src="https://i.ibb.co/nMGgVbsT/tik-tok.png" class="social-icon"> TikTok</a>
+            <a href="https://x.com/Deusb17" target="_blank" class="social-btn"><img src="https://i.ibb.co/FbWvjMxb/twitter.png" class="social-icon"> Twitter</a>
+            <a href="https://youtube.com/@deusbentertainment?si=N23cHeGqwjABfTgc" target="_blank" class="social-btn"><img src="https://upload.wikimedia.org/wikipedia/commons/e/ef/Youtube_logo.png" class="social-icon"> YouTube</a>
         </div>
         <p style="margin-top: 30px; font-size: 14px;">Inquiries: <a href="mailto:deusbentertainment@gmail.com" class="footer-email">deusbentertainment@gmail.com</a></p>
         <p style="font-size: 12px; color: #555;">&copy; 2026 DEUSB ENTERTAINMENT.</p>
@@ -315,7 +322,7 @@
                 if (type === 'project') {
                     html += `<div class="kadi" onclick="window.open('${i.link || '#'}')">
                         <div class="product-img-container">
-                            <img src="${i.img}" class="product-img" onerror="this.src='https://via.placeholder.com/600x400?text=Deusb+Entertainment'">
+                            <img src="${i.img}" class="product-img" onerror="this.src='https://via.placeholder.com/400x300?text=Image+Loading...'">
                         </div>
                         <div class="kadi-info"><h3>${i.name}</h3><p>${i.desc || ''}</p></div>
                     </div>`;
@@ -324,8 +331,8 @@
                         <div class="product-img-container">
                             <img src="${i.PichaURL}" class="product-img">
                         </div>
-                        <div class="kadi-info"><h3>${i.Jina}</h3><span style="color:var(--brand-red); font-weight:bold; font-size:1.2rem; display:block; margin-bottom:10px;">TSH ${i.Bei}</span><p>${i.Maelezo || ''}</p></div>
-                        <a href="https://wa.me/255748666409?text=Nahitaji:${i.Jina}" class="btn-nav" style="background:var(--whatsapp-green); border:none; display:block; text-align:center; margin:15px; border-radius:8px;">PURCHASE VIA WHATSAPP</a>
+                        <div class="kadi-info"><h3>${i.Jina}</h3><span style="color:var(--brand-red); font-weight:bold; font-size:1rem; display:block; margin-bottom:5px;">TSH ${i.Bei}</span><p>${i.Maelezo || ''}</p></div>
+                        <a href="https://wa.me/255748666409?text=Nahitaji:${i.Jina}" class="btn-nav" style="background:var(--whatsapp-green); border:none; display:block; text-align:center; margin:10px; border-radius:8px; padding: 10px;">WHATSAPP</a>
                     </div>`;
                 }
             });
@@ -474,7 +481,6 @@
             document.querySelectorAll('.dynamic-input').forEach(input => {
                 body += `Q: ${input.dataset.question}\nA: ${input.value}\n\n`;
             });
-            body += `FOOTAGE LINK: ${document.getElementById('videoLink').value}\n`;
             body += `EXTRA INSTRUCTIONS: ${document.getElementById('projDesc').value}`;
             window.open(`https://mail.google.com/mail/?view=cm&fs=1&to=deusbentertainment@gmail.com&su=Brief: ${selCat}&body=${encodeURIComponent(body)}`);
         }

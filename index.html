@@ -37,7 +37,7 @@
             border-bottom: 4px solid var(--brand-red);
         }
 
-        .logo { width: 100px; height: auto; margin-bottom: 10px; }
+        .logo { width: 100px; margin-bottom: 10px; }
 
         .brand-name { 
             font-family: 'Great Vibes', cursive;
@@ -109,35 +109,24 @@
 
         #btnBack { display: none; background: var(--brand-red); color: white; border-color: var(--brand-red); }
 
-        .container { max-width: 1200px; margin: 20px auto; padding: 0 15px; min-height: 400px; }
-        
-        #loadingMsg { 
-            text-align: center; 
-            padding: 50px; 
-            font-weight: bold; 
-            color: var(--brand-red); 
-            display: none;
-            font-size: 18px;
+        /* --- MASONRY LAYOUT FOR PC --- */
+        .container { 
+            max-width: 1400px; /* Wide view */
+            margin: 20px auto; 
+            padding: 0 15px; 
+            min-height: 400px; 
         }
 
-        /* --- MASONRY LAYOUT BORESHA --- */
         #mainGrid { 
-            column-count: 2; /* 2 columns on mobile */
-            column-gap: 12px;
+            column-count: 4; /* Default for wide screens */
+            column-gap: 20px;
             width: 100%;
         }
 
-        @media (min-width: 768px) {
-            #mainGrid { 
-                column-count: 3; /* 3 columns on tablets */
-            }
-        }
-
-        @media (min-width: 1024px) {
-            #mainGrid { 
-                column-count: 4; /* 4 columns on desktop */
-            }
-        }
+        /* Responsive columns */
+        @media (max-width: 1200px) { #mainGrid { column-count: 3; } }
+        @media (max-width: 800px) { #mainGrid { column-count: 2; } }
+        @media (max-width: 500px) { #mainGrid { column-count: 1; } }
 
         .kadi { 
             background: white; 
@@ -145,11 +134,9 @@
             overflow: hidden; 
             box-shadow: 0 10px 20px rgba(0,0,0,0.1); 
             transition: 0.3s; 
-            display: inline-block; /* Muhimu kwa masonry */
-            width: 100%;
-            margin-bottom: 12px; /* Nafasi ya chini kati ya box */
-            cursor: pointer;
-            break-inside: avoid; /* Inazuia kadi isikatike katikati ya column */
+            display: block;
+            margin-bottom: 20px; /* Space between masonry rows */
+            break-inside: avoid; /* Essential for masonry */
         }
 
         .kadi:hover { transform: translateY(-5px); }
@@ -167,21 +154,20 @@
         }
         
         .kadi-info { 
-            padding: 10px; 
+            padding: 20px; 
             text-align: left; 
         }
 
-        .kadi-info h3 { margin: 0 0 5px 0; color: var(--brand-blue); font-size: 14px; }
-        
+        .kadi-info h3 { margin: 0 0 10px 0; color: var(--brand-blue); font-size: 18px; }
         .kadi-info p { 
             margin: 0; 
-            font-size: 11px; 
-            line-height: 1.3; 
+            font-size: 13px; 
+            line-height: 1.5; 
             color: #444;
-            white-space: normal;
-            word-wrap: break-word;
+            white-space: pre-wrap; 
         }
 
+        /* --- CATALOGUE STYLING --- */
         .service-section { margin-bottom: 50px; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 10px 20px rgba(0,0,0,0.08); text-align: left; }
         .section-title { border-left: 5px solid var(--deusb-gold); padding-left: 15px; margin-bottom: 10px; color: var(--brand-blue); font-size: 22px; text-transform: uppercase; font-weight: 800; }
         .section-desc { color: #666; font-size: 14px; margin-bottom: 25px; font-style: italic; }
@@ -209,6 +195,8 @@
         .req-field input, .req-field textarea { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 8px; font-size: 14px; background: #fafafa; }
         .upload-section { background: #fef9ef; padding: 15px; border-radius: 10px; border: 1px dashed var(--deusb-gold); margin-top: 20px; }
         .btn-send { background: #d44638; color: white; border: none; padding: 18px; width: 100%; border-radius: 8px; font-weight: bold; cursor: pointer; margin-top: 20px; font-size: 16px; }
+
+        #loadingMsg { text-align: center; padding: 50px; font-weight: bold; color: var(--brand-red); display: none; font-size: 18px; }
     </style>
 </head>
 <body>
@@ -255,10 +243,7 @@
         <h3 class="brand-name" style="font-size: 2rem; color: var(--deusb-gold); margin-bottom: 10px;">Deusb Entertainment</h3>
         <div class="social-container">
             <a href="https://wa.me/255748666409" class="social-btn"><img src="https://i.ibb.co/tP3xXKN0/whatsapp.png" class="social-icon"> WhatsApp</a>
-            <a href="https://www.instagram.com/deusb_entertainment?igsh=ajJ2aDY1MG1ycTY4" target="_blank" class="social-btn"><img src="https://i.ibb.co/PZF184kz/instagram.png" class="social-icon"> Instagram</a>
-            <a href="https://tiktok.com/@deusbentertainment" target="_blank" class="social-btn"><img src="https://i.ibb.co/nMGgVbsT/tik-tok.png" class="social-icon"> TikTok</a>
-            <a href="https://x.com/Deusb17" target="_blank" class="social-btn"><img src="https://i.ibb.co/FbWvjMxb/twitter.png" class="social-icon"> Twitter</a>
-            <a href="https://youtube.com/@deusbentertainment?si=N23cHeGqwjABfTgc" target="_blank" class="social-btn"><img src="https://upload.wikimedia.org/wikipedia/commons/e/ef/Youtube_logo.png" class="social-icon"> YouTube</a>
+            <a href="https://www.instagram.com/deusb_entertainment" target="_blank" class="social-btn"><img src="https://i.ibb.co/PZF184kz/instagram.png" class="social-icon"> Instagram</a>
         </div>
         <p style="margin-top: 30px; font-size: 14px;">Inquiries: <a href="mailto:deusbentertainment@gmail.com" class="footer-email">deusbentertainment@gmail.com</a></p>
         <p style="font-size: 12px; color: #555;">&copy; 2026 DEUSB ENTERTAINMENT.</p>
@@ -328,10 +313,9 @@
             let html = `<div id="mainGrid">`;
             data.forEach(i => {
                 if (type === 'project') {
-                    // LINK INAWEZA KUWA YOUTUBE AU CHOCHOTE KUTOKA SHEET
-                    html += `<div class="kadi" onclick="window.open('${i.link || '#'}', '_blank')">
+                    html += `<div class="kadi" onclick="window.open('${i.link || '#'}')">
                         <div class="product-img-container">
-                            <img src="${i.img}" class="product-img" onerror="this.src='https://via.placeholder.com/400x300?text=Image+Loading...'">
+                            <img src="${i.img}" class="product-img" onerror="this.src='https://via.placeholder.com/600x400?text=Deusb+Entertainment'">
                         </div>
                         <div class="kadi-info"><h3>${i.name}</h3><p>${i.desc || ''}</p></div>
                     </div>`;
@@ -340,32 +324,14 @@
                         <div class="product-img-container">
                             <img src="${i.PichaURL}" class="product-img">
                         </div>
-                        <div class="kadi-info"><h3>${i.Jina}</h3><span style="color:var(--brand-red); font-weight:bold; font-size:1rem; display:block; margin-bottom:5px;">TSH ${i.Bei}</span><p>${i.Maelezo || ''}</p></div>
-                        <a href="https://wa.me/255748666409?text=Nahitaji:${i.Jina}" class="btn-nav" style="background:var(--whatsapp-green); border:none; display:block; text-align:center; margin:10px; border-radius:8px; padding: 10px;">WHATSAPP</a>
+                        <div class="kadi-info"><h3>${i.Jina}</h3><span style="color:var(--brand-red); font-weight:bold; font-size:1.2rem; display:block; margin-bottom:10px;">TSH ${i.Bei}</span><p>${i.Maelezo || ''}</p></div>
+                        <a href="https://wa.me/255748666409?text=Nahitaji:${i.Jina}" class="btn-nav" style="background:var(--whatsapp-green); border:none; display:block; text-align:center; margin:15px; border-radius:8px;">PURCHASE VIA WHATSAPP</a>
                     </div>`;
                 }
             });
             document.getElementById('viewContainer').innerHTML = html + `</div>`;
         }
 
-        function renderCatalogue() {
-            // (Catalogue rendering remains the same)
-            document.getElementById('viewContainer').innerHTML = `
-                <div class="service-section">
-                    <h2 class="section-title">1. Graphics & Branding (Logos & Flyers)</h2>
-                    <p class="section-desc">Visual communication designed to make your brand memorable.</p>
-                    <div class="tier-grid">
-                        <div class="tier-card"><h3>BASIC</h3><span class="tier-price">20,000 - 30,000</span><button class="btn-req" onclick="openBrief('Graphics Basic')">Requirement List</button></div>
-                        <div class="tier-card"><h3>STANDARD</h3><span class="tier-price">50,000 - 80,000</span><button class="btn-req" onclick="openBrief('Graphics Standard')">Requirement List</button></div>
-                        <div class="tier-card"><h3>PREMIUM</h3><span class="tier-price">120,000 - 250,000</span><button class="btn-req" onclick="openBrief('Graphics Premium')">Requirement List</button></div>
-                    </div>
-                </div>
-                `;
-            // I'm keeping the rest of the catalogue simplified here for brevity, but it functions as before.
-            changeView('catalogue_full'); // Triggering original full content logic
-        }
-
-        // Overriding the previous simplified renderCatalogue to keep your original content
         function renderCatalogue() {
             document.getElementById('viewContainer').innerHTML = `
                 <div class="service-section">
@@ -411,14 +377,14 @@
                             <h3>STANDARD</h3>
                             <span class="tier-price">80,000 - 150,000</span>
                             <span class="tier-time">1-2 Days</span>
-                            <p>Focus: Smooth transitions, professional color grading, and subtitles. Ideal for: Small business ads.</p>
+                            <p>Focus: Smooth transitions, professional color grading, and subtitles (essential for silent scrolling). Ideal for: Small business ads and professional social media content.</p>
                             <button class="btn-req" onclick="openBrief('Video Standard')">Requirement List</button>
                         </div>
                         <div class="tier-card">
                             <h3>PREMIUM</h3>
                             <span class="tier-price">200,000 – 400,000</span>
                             <span class="tier-time">3-7 Days</span>
-                            <p>Focus: Full production including Scripting + B-roll + Professional Voiceover.</p>
+                            <p>Focus: Full production including Scripting + B-roll (extra footage) + Professional Voiceover. Ideal for: High-budget marketing campaigns and TV Commercials.</p>
                             <button class="btn-req" onclick="openBrief('Video Premium')">Requirement List</button>
                         </div>
                     </div>
@@ -432,42 +398,46 @@
                             <h3>BASIC</h3>
                             <span class="tier-price">50,000 – 70,000</span>
                             <span class="tier-time">5-8 Hours</span>
-                            <p>Deliverable: 5-10 second Logo Animation.</p>
+                            <p>Deliverable: 5-10 second Logo Animation. Usage: Use this as an intro/outro for every video you ever make.</p>
                             <button class="btn-req" onclick="openBrief('Motion Basic')">Requirement List</button>
                         </div>
                         <div class="tier-card">
                             <h3>STANDARD</h3>
                             <span class="tier-price">150,000 – 250,000</span>
                             <span class="tier-time">3-5 Days</span>
-                            <p>Deliverable: 30-second 2D Explainer Video.</p>
+                            <p>Deliverable: 30-second 2D Explainer Video (using characters/icons). Usage: Perfect for teaching customers how to use your app or service.</p>
                             <button class="btn-req" onclick="openBrief('Motion Standard')">Requirement List</button>
                         </div>
                         <div class="tier-card">
                             <h3>PREMIUM</h3>
                             <span class="tier-price">350,000 – 600,000</span>
                             <span class="tier-time">2-3 Weeks</span>
-                            <p>Deliverable: 1-minute Full Motion Graphic Ad.</p>
+                            <p>Deliverable: 1-minute Full Motion Graphic Ad (Custom Storytelling). Usage: A high-end asset for corporate presentations or viral marketing.</p>
                             <button class="btn-req" onclick="openBrief('Motion Premium')">Requirement List</button>
                         </div>
                     </div>
                 </div>
 
                 <div class="service-section">
-                    <h2 class="section-title">4. Social Media Management</h2>
+                    <h2 class="section-title">4. Social Media Management (Monthly Retainers)</h2>
+                    <p class="section-desc">We don't just post; we grow your community.</p>
                     <div class="tier-grid">
                         <div class="tier-card">
                             <h3>LITE PLAN</h3>
                             <span class="tier-price">250,000 – 400,000 TSH/mo</span>
+                            <p>Platform: 1-2 (FB/IG). Content: 12 Posts per month + Caption writing. Goal: Keeping your page active so customers know you are open.</p>
                             <button class="btn-req" onclick="openBrief('Social Lite')">Requirement List</button>
                         </div>
                         <div class="tier-card">
                             <h3>GROWTH PLAN</h3>
                             <span class="tier-price">500,000 – 850,000 TSH/mo</span>
+                            <p>Platform: 3 (FB, IG, TikTok). Content: 20 Posts per month (includes 4 professional Reels/Videos). Strategy: Hashtag research, engagement with followers, and monthly reports.</p>
                             <button class="btn-req" onclick="openBrief('Social Growth')">Requirement List</button>
                         </div>
                         <div class="tier-card">
                             <h3>DOMINATION PLAN</h3>
                             <span class="tier-price">1,200,000+ TSH/mo</span>
+                            <p>Platform: All major platforms. Content: Daily posting + Weekly video shoots + DM management. Ads: Management of Facebook/Instagram/Google Ads (Ad spend paid by client).</p>
                             <button class="btn-req" onclick="openBrief('Social Domination')">Requirement List</button>
                         </div>
                     </div>
@@ -475,10 +445,12 @@
 
                 <div class="service-section">
                     <h2 class="section-title">5. Our Terms of Engagement</h2>
+                    <p class="section-desc">To ensure the best quality, we follow these professional standards:</p>
                     <ul style="font-size: 14px; line-height: 1.8;">
-                        <li><strong>1. Payment:</strong> A 50% deposit is required to begin.</li>
-                        <li><strong>2. Revisions:</strong> Basic: 2 Rounds. Standard/Premium: Up to 4 Rounds.</li>
-                        <li><strong>3. Rush Jobs:</strong> 25% rush fee applies.</li>
+                        <li><strong>1. Payment:</strong> A 50% deposit is required to begin any project. The remaining balance is due upon final approval before files are delivered.</li>
+                        <li><strong>2. Revisions:</strong> Basic: 2 Rounds of minor changes. Standard/Premium: Up to 4 Rounds of revisions.</li>
+                        <li><strong>3. Rush Jobs:</strong> If a "Standard" or "Premium" project is needed in "Basic" time, a 25% rush fee will be applied.</li>
+                        <li><strong>4. Communication:</strong> Clients must provide a clear "Brief" (instructions) before we start to ensure the 1-4 hour or 1-3day timelines are met.</li>
                     </ul>
                 </div>
             `;
@@ -502,6 +474,7 @@
             document.querySelectorAll('.dynamic-input').forEach(input => {
                 body += `Q: ${input.dataset.question}\nA: ${input.value}\n\n`;
             });
+            body += `FOOTAGE LINK: ${document.getElementById('videoLink').value}\n`;
             body += `EXTRA INSTRUCTIONS: ${document.getElementById('projDesc').value}`;
             window.open(`https://mail.google.com/mail/?view=cm&fs=1&to=deusbentertainment@gmail.com&su=Brief: ${selCat}&body=${encodeURIComponent(body)}`);
         }

@@ -109,7 +109,12 @@
 
         #btnBack { display: none; background: var(--brand-red); color: white; border-color: var(--brand-red); }
 
-        .container { max-width: 1200px; margin: 20px auto; padding: 0 15px; min-height: 400px; }
+        .container { 
+            max-width: 1600px; /* Aligned for 6 columns on wide screens */
+            margin: 20px auto; 
+            padding: 0 15px; 
+            min-height: 400px; 
+        }
         
         #loadingMsg { 
             text-align: center; 
@@ -120,7 +125,7 @@
             font-size: 18px;
         }
 
-        /* --- MASONRY LAYOUT UPDATES --- */
+        /* --- MASONRY LAYOUT UPDATED --- */
         #mainGrid { 
             column-count: 2;
             column-gap: 10px;
@@ -133,23 +138,26 @@
             overflow: hidden; 
             box-shadow: 0 10px 20px rgba(0,0,0,0.1); 
             transition: 0.3s; 
-            display: inline-block; /* Muhimu kwa masonry */
+            display: inline-block; 
             width: 100%;
-            margin-bottom: 15px; /* Nafasi ya chini kati ya kadi */
+            margin-bottom: 15px; 
             cursor: pointer;
-            break-inside: avoid; /* Inazuia kadi kukatika katikati */
+            break-inside: avoid; 
         }
 
+        /* Tablet View */
         @media (min-width: 768px) {
             #mainGrid { 
                 column-count: 3; 
-                column-gap: 20px; 
+                column-gap: 15px; 
             }
         }
 
-        @media (min-width: 1024px) {
+        /* Desktop View - 6 COLUMNS */
+        @media (min-width: 1200px) {
             #mainGrid { 
-                column-count: 4; 
+                column-count: 6; 
+                column-gap: 20px;
             }
         }
         /* ------------------------------ */
@@ -173,7 +181,7 @@
             text-align: left; 
         }
 
-        .kadi-info h3 { margin: 0 0 5px 0; color: var(--brand-blue); font-size: 14px; }
+        .kadi-info h3 { margin: 0 0 5px 0; color: var(--brand-blue); font-size: 13px; }
         
         .kadi-info p { 
             margin: 0; 
@@ -350,7 +358,7 @@
                         </div>
                         <div class="kadi-info">
                             <h3>${i.Jina}</h3>
-                            <span style="color:var(--brand-red); font-weight:bold; font-size:1rem; display:block; margin-bottom:5px;">TSH ${i.Bei}</span>
+                            <span style="color:var(--brand-red); font-weight:bold; font-size:0.9rem; display:block; margin-bottom:5px;">TSH ${i.Bei}</span>
                             <p>${i.Maelezo || ''}</p>
                         </div>
                         <a href="https://wa.me/255748666409?text=Nahitaji:${encodeURIComponent(i.Jina)}" class="btn-nav" style="background:var(--whatsapp-green); border:none; display:block; text-align:center; margin:10px; border-radius:8px; padding: 10px;">WHATSAPP</a>

@@ -109,10 +109,11 @@
 
         #btnBack { display: none; background: var(--brand-red); color: white; border-color: var(--brand-red); }
 
+        /* MUONEKANO WA KATI - UMEWEKWA KUJAA SCREEN */
         .container { 
-            max-width: 1600px; /* Aligned for 6 columns on wide screens */
+            max-width: 100%; 
             margin: 20px auto; 
-            padding: 0 15px; 
+            padding: 0 20px; 
             min-height: 400px; 
         }
         
@@ -125,7 +126,7 @@
             font-size: 18px;
         }
 
-        /* --- MASONRY LAYOUT UPDATED --- */
+        /* --- GRID LAYOUT --- */
         #mainGrid { 
             column-count: 2;
             column-gap: 10px;
@@ -153,10 +154,13 @@
             }
         }
 
-        /* Desktop View - 6 COLUMNS */
+        /* Desktop View - IMEWEKWA COLUMN 4 NA FULL WIDTH */
         @media (min-width: 1200px) {
+            .container {
+                padding: 0 50px; /* Nafasi kidogo pembeni mwa kioo */
+            }
             #mainGrid { 
-                column-count: 6; 
+                column-count: 4; 
                 column-gap: 20px;
             }
         }

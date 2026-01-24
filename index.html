@@ -122,13 +122,37 @@
         }
 
         #mainGrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; align-items: start; }
-        .kadi { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.1); transition: 0.3s; display: flex; flex-direction: column; }
+        
+        /* SEHEMU ILIYOREKEBISHWA ILI BOX LIADAPT */
+        .kadi { 
+            background: white; 
+            border-radius: 12px; 
+            overflow: hidden; 
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1); 
+            transition: 0.3s; 
+            display: flex; 
+            flex-direction: column;
+            height: auto; /* Box litarefuka kulingana na content */
+        }
         .kadi:hover { transform: translateY(-5px); }
         
-        .product-img { width: 100%; height: auto; display: block; object-fit: contain; background: #f0f0f0; }
+        .product-img { 
+            width: 100%; 
+            height: auto; /* Picha itajirekebisha yenyewe (Ratio) */
+            display: block; 
+            object-fit: contain; 
+            background: #f0f0f0; 
+        }
         
-        .kadi-info { padding: 20px; text-align: left; }
+        .kadi-info { 
+            padding: 20px; 
+            text-align: left;
+            flex-grow: 1; 
+        }
         .kadi-info h3 { margin: 0 0 10px 0; color: var(--brand-blue); font-size: 18px; }
+        .kadi-info p { margin: 0; line-height: 1.4; }
+        /* MWISHO WA MAREKEBISHO */
+
         .bei { color: var(--brand-red); font-weight: bold; font-size: 1.2rem; display: block; margin-bottom: 10px; }
 
         .service-section { margin-bottom: 50px; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 10px 20px rgba(0,0,0,0.08); text-align: left; }

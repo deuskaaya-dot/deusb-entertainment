@@ -124,7 +124,7 @@
             display: grid; 
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
             gap: 25px; 
-            align-items: stretch; 
+            align-items: flex-start; /* Inaruhusu card ziwe na urefu tofauti kulingana na picha */
         }
 
         .kadi { 
@@ -135,35 +135,26 @@
             transition: 0.3s; 
             display: flex; 
             flex-direction: column;
-            height: 100%; /* Keeps cards same height */
+            cursor: pointer;
         }
 
         .kadi:hover { transform: translateY(-5px); }
         
         .product-img-container {
             width: 100%;
-            height: 350px; /* Fixed height for consistency */
             background: #f8f8f8;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            flex-shrink: 0;
+            display: block; /* Imebadilishwa ili i-adapt picha yenyewe */
         }
 
         .product-img { 
             width: 100%; 
-            height: 100%; 
-            object-fit: cover; /* Ensures image fills the box without stretching */
+            height: auto; /* Inafanya picha i-fit iwe portrait au landscape */
             display: block; 
         }
         
         .kadi-info { 
             padding: 20px; 
             text-align: left; 
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
         }
 
         .kadi-info h3 { margin: 0 0 10px 0; color: var(--brand-blue); font-size: 18px; }
@@ -171,9 +162,9 @@
         .kadi-info p { 
             margin: 0; 
             font-size: 14px; 
-            line-height: 1.5; 
+            line-height: 1.6; 
             color: #444;
-            white-space: normal; /* Fixes comma/wrapping issues */
+            white-space: normal;
             word-wrap: break-word;
         }
 

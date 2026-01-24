@@ -123,7 +123,6 @@
 
         #mainGrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; align-items: start; }
 
-        /* REPAIRED SECTION FOR ADAPTIVE BOXES */
         .kadi { 
             background: white; 
             border-radius: 12px; 
@@ -132,18 +131,18 @@
             transition: 0.3s; 
             display: flex; 
             flex-direction: column;
-            height: auto; /* Inaruhusu box kukua kulingana na maelezo */
+            height: auto; 
         }
 
         .kadi:hover { transform: translateY(-5px); }
         
         .product-img { 
             width: 100%; 
-            height: auto; /* Inaruhusu picha kuonekana yote bila kujificha */
-            max-height: 350px; /* Inazuia picha kuwa ndefu kupitiliza */
+            height: auto; 
+            max-height: 450px; 
             display: block; 
-            object-fit: cover; 
-            background: #f0f0f0; 
+            object-fit: contain; 
+            background: #f8f8f8; 
         }
         
         .kadi-info { 
@@ -151,9 +150,16 @@
             text-align: left; 
             flex-grow: 1;
         }
-        /* END OF REPAIR */
 
         .kadi-info h3 { margin: 0 0 10px 0; color: var(--brand-blue); font-size: 18px; }
+        .kadi-info p { 
+            margin: 0; 
+            font-size: 13px; 
+            line-height: 1.5; 
+            color: #444;
+            white-space: pre-wrap; 
+        }
+        
         .bei { color: var(--brand-red); font-weight: bold; font-size: 1.2rem; display: block; margin-bottom: 10px; }
 
         .service-section { margin-bottom: 50px; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 10px 20px rgba(0,0,0,0.08); text-align: left; }
@@ -288,16 +294,20 @@
 
         async function loadProjects() {
             document.getElementById('loadingMsg').style.display = 'block';
-            try {
-                const res = await fetch(sheetUrls.projects);
-                const text = await res.text();
-                masterData.projects = text.split('\n').slice(1).map(l => {
-                    const c = l.split(',');
-                    return { name: c[0], desc: c[1], img: c[2], link: c[4]?.trim() };
-                }).filter(p => p.name);
-                renderList(masterData.projects, 'project');
-            } catch (e) {}
-            document.getElementById('loadingMsg').style.display = 'none';
+            Papa.parse(sheetUrls.projects, {
+                download: true,
+                header: true,
+                complete: (results) => {
+                    masterData.projects = results.data.map(row => ({
+                        name: row['Jina'] || row['Name'] || Object.values(row)[0],
+                        desc: row['Maelezo'] || row['Description'] || Object.values(row)[1],
+                        img: row['Picha'] || row['Image'] || row['PichaURL'] || Object.values(row)[2],
+                        link: row['Link'] || Object.values(row)[4]
+                    })).filter(p => p.name);
+                    renderList(masterData.projects, 'project');
+                    document.getElementById('loadingMsg').style.display = 'none';
+                }
+            });
         }
 
         async function loadStore() {
@@ -313,9 +323,16 @@
             let html = `<div id="mainGrid">`;
             data.forEach(i => {
                 if (type === 'project') {
-                    html += `<div class="kadi" onclick="window.open('${i.link || '#'}')"><img src="${i.img}" class="product-img"><div class="kadi-info"><h3>${i.name}</h3><p style="font-size:12px;">${i.desc || ''}</p></div></div>`;
+                    html += `<div class="kadi" onclick="window.open('${i.link || '#'}')">
+                        <img src="${i.img}" class="product-img" onerror="this.src='https://via.placeholder.com/400x300?text=Image+Loading...'">
+                        <div class="kadi-info"><h3>${i.name}</h3><p>${i.desc || ''}</p></div>
+                    </div>`;
                 } else {
-                    html += `<div class="kadi"><img src="${i.PichaURL}" class="product-img"><div class="kadi-info"><h3>${i.Jina}</h3><span class="bei">TSH ${i.Bei}</span><p style="font-size:12px;">${i.Maelezo || ''}</p></div><a href="https://wa.me/255748666409?text=Nahitaji:${i.Jina}" class="btn-nav" style="background:var(--whatsapp-green); border:none; display:block; text-align:center; margin:15px; border-radius:8px;">PURCHASE VIA WHATSAPP</a></div>`;
+                    html += `<div class="kadi">
+                        <img src="${i.PichaURL}" class="product-img">
+                        <div class="kadi-info"><h3>${i.Jina}</h3><span class="bei">TSH ${i.Bei}</span><p>${i.Maelezo || ''}</p></div>
+                        <a href="https://wa.me/255748666409?text=Nahitaji:${i.Jina}" class="btn-nav" style="background:var(--whatsapp-green); border:none; display:block; text-align:center; margin:15px; border-radius:8px;">PURCHASE VIA WHATSAPP</a>
+                    </div>`;
                 }
             });
             document.getElementById('viewContainer').innerHTML = html + `</div>`;
@@ -463,12 +480,6 @@
             document.querySelectorAll('.dynamic-input').forEach(input => {
                 body += `Q: ${input.dataset.question}\nA: ${input.value}\n\n`;
             });
-            const files = document.getElementById('directUpload').files;
-            let fileInfo = "FILES SELECTED: ";
-            if(files.length > 0) {
-                for(let i=0; i<files.length; i++) { fileInfo += files[i].name + (i === files.length - 1 ? "" : ", "); }
-            } else { fileInfo += "None"; }
-            body += `ASSETS\n------------------\n${fileInfo}\nVideo/Footage Link: ${document.getElementById('videoLink').value}\nSample Link: ${document.getElementById('samplePhotoLink').value}\n\n`;
             body += `EXTRA INSTRUCTIONS: ${document.getElementById('projDesc').value}`;
             window.open(`https://mail.google.com/mail/?view=cm&fs=1&to=deusbentertainment@gmail.com&su=Brief: ${selCat}&body=${encodeURIComponent(body)}`);
         }

@@ -120,15 +120,11 @@
             font-size: 18px;
         }
 
+        /* --- MASONRY LAYOUT UPDATES --- */
         #mainGrid { 
-            display: grid; 
-            grid-template-columns: repeat(2, 1fr); 
-            gap: 8px; 
-            align-items: flex-start; 
-        }
-
-        @media (min-width: 768px) {
-            #mainGrid { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; }
+            column-count: 2;
+            column-gap: 10px;
+            width: 100%;
         }
 
         .kadi { 
@@ -137,11 +133,26 @@
             overflow: hidden; 
             box-shadow: 0 10px 20px rgba(0,0,0,0.1); 
             transition: 0.3s; 
-            display: flex; 
-            flex-direction: column;
+            display: inline-block; /* Muhimu kwa masonry */
+            width: 100%;
+            margin-bottom: 15px; /* Nafasi ya chini kati ya kadi */
             cursor: pointer;
-            margin-bottom: 5px; 
+            break-inside: avoid; /* Inazuia kadi kukatika katikati */
         }
+
+        @media (min-width: 768px) {
+            #mainGrid { 
+                column-count: 3; 
+                column-gap: 20px; 
+            }
+        }
+
+        @media (min-width: 1024px) {
+            #mainGrid { 
+                column-count: 4; 
+            }
+        }
+        /* ------------------------------ */
 
         .kadi:hover { transform: translateY(-5px); }
         
@@ -319,10 +330,7 @@
             let html = `<div id="mainGrid">`;
             data.forEach(i => {
                 if (type === 'project') {
-                    // HAPA TUMERAYAHISISHA: Kadi nzima sasa ni clickable
-                    // Inatumia window.open kufungua link iliyo kwenye Google Sheet
                     let targetLink = i.link && i.link !== '#' ? i.link : 'javascript:void(0)';
-                    
                     html += `
                     <div class="kadi" onclick="window.open('${targetLink}', '_blank')">
                         <div class="product-img-container">
@@ -335,7 +343,6 @@
                         </div>
                     </div>`;
                 } else {
-                    // Sehemu ya Store inaendelea kubaki vile vile kwa ajili ya WhatsApp
                     html += `
                     <div class="kadi">
                         <div class="product-img-container">

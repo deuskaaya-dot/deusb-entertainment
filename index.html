@@ -120,7 +120,7 @@
             font-size: 18px;
         }
 
-        #mainGrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; align-items: start; }
+        #mainGrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; align-items: stretch; }
 
         .kadi { 
             background: white; 
@@ -130,24 +130,33 @@
             transition: 0.3s; 
             display: flex; 
             flex-direction: column;
-            height: auto; 
         }
 
         .kadi:hover { transform: translateY(-5px); }
         
+        .product-img-container {
+            width: 100%;
+            height: 450px; /* Fixed height for consistency */
+            background: #f8f8f8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
         .product-img { 
-            width: 100%; 
-            height: auto; 
-            max-height: 500px; 
+            max-width: 100%; 
+            max-height: 100%; 
+            object-fit: contain; /* Ensures images fit perfectly without being cut */
             display: block; 
-            object-fit: contain; 
-            background: #f8f8f8; 
         }
         
         .kadi-info { 
             padding: 20px; 
             text-align: left; 
             flex-grow: 1;
+            display: flex;
+            flex-direction: column;
         }
 
         .kadi-info h3 { margin: 0 0 10px 0; color: var(--brand-blue); font-size: 18px; }
@@ -158,7 +167,7 @@
             color: #444;
             white-space: pre-wrap; 
         }
-        
+
         .service-section { margin-bottom: 50px; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 10px 20px rgba(0,0,0,0.08); text-align: left; }
         .section-title { border-left: 5px solid var(--deusb-gold); padding-left: 15px; margin-bottom: 10px; color: var(--brand-blue); font-size: 22px; text-transform: uppercase; font-weight: 800; }
         .section-desc { color: #666; font-size: 14px; margin-bottom: 25px; font-style: italic; }
@@ -218,9 +227,9 @@
                 <div id="dynamicFields"></div>
                 <div class="upload-section">
                     <label style="font-weight: 800; color: var(--deusb-gold); display: block; margin-bottom: 10px;">MEDIA & ASSETS</label>
-                    <div class="req-field"><label>Upload Media</label><input type="file" id="directUpload" multiple></div>
-                    <div class="req-field"><label>Link to Raw Video/Footage</label><input type="url" id="videoLink" placeholder="Google Drive/Wetransfer"></div>
-                    <div class="req-field"><label>Link to Sample Photo</label><input type="url" id="samplePhotoLink" placeholder="Instagram reference"></div>
+                    <div class="req-field"><label>Upload Media (Images/Videos)</label><input type="file" id="directUpload" multiple></div>
+                    <div class="req-field"><label>Link to Raw Video/Footage (Google Drive/Wetransfer)</label><input type="url" id="videoLink" placeholder="Link to footage"></div>
+                    <div class="req-field"><label>Link to Sample Photo/Reference</label><input type="url" id="samplePhotoLink" placeholder="Instagram or Web reference"></div>
                 </div>
                 <div class="req-field" style="margin-top: 20px;"><label>Extra Instructions?</label><textarea id="projDesc" rows="3"></textarea></div>
                 <button class="btn-send" onclick="sendGmail()">SUBMIT VIA GMAIL</button>
@@ -303,13 +312,17 @@
             data.forEach(i => {
                 if (type === 'project') {
                     html += `<div class="kadi" onclick="window.open('${i.link || '#'}')">
-                        <img src="${i.img}" class="product-img" onerror="this.src='https://via.placeholder.com/400x300?text=Image+Loading...'">
+                        <div class="product-img-container">
+                            <img src="${i.img}" class="product-img" onerror="this.src='https://via.placeholder.com/400x300?text=Image+Loading...'">
+                        </div>
                         <div class="kadi-info"><h3>${i.name}</h3><p>${i.desc || ''}</p></div>
                     </div>`;
                 } else {
                     html += `<div class="kadi">
-                        <img src="${i.PichaURL}" class="product-img">
-                        <div class="kadi-info"><h3>${i.Jina}</h3><span class="bei">TSH ${i.Bei}</span><p>${i.Maelezo || ''}</p></div>
+                        <div class="product-img-container">
+                            <img src="${i.PichaURL}" class="product-img">
+                        </div>
+                        <div class="kadi-info"><h3>${i.Jina}</h3><span style="color:var(--brand-red); font-weight:bold; font-size:1.2rem; display:block; margin-bottom:10px;">TSH ${i.Bei}</span><p>${i.Maelezo || ''}</p></div>
                         <a href="https://wa.me/255748666409?text=Nahitaji:${i.Jina}" class="btn-nav" style="background:var(--whatsapp-green); border:none; display:block; text-align:center; margin:15px; border-radius:8px;">PURCHASE VIA WHATSAPP</a>
                     </div>`;
                 }
@@ -320,122 +333,122 @@
         function renderCatalogue() {
             document.getElementById('viewContainer').innerHTML = `
                 <div class="service-section">
-                    <h2 class="section-title">1. Graphics & Branding (Logos & Flyers) [cite: 6]</h2>
-                    <p class="section-desc">Visual communication designed to make your brand memorable. [cite: 7]</p>
+                    <h2 class="section-title">1. Graphics & Branding (Logos & Flyers)</h2>
+                    <p class="section-desc">Visual communication designed to make your brand memorable. Why the time difference? Basic is "design-on-demand." Standard/Premium involves market research and custom typography to ensure your logo isn't just "pretty," but unique to your business.</p>
                     <div class="tier-grid">
                         <div class="tier-card">
                             <h3>BASIC</h3>
-                            <span class="tier-price">20,000 - 30,000 [cite: 8]</span>
-                            <span class="tier-time">1-4 Hours [cite: 8]</span>
-                            <p>Deliverables: 1 Simple Flyer OR Basic Logo (2 revisions). Best For: Urgent sales/events. [cite: 8]</p>
+                            <span class="tier-price">20,000 - 30,000</span>
+                            <span class="tier-time">1-4 Hours</span>
+                            <p>Deliverables: 1 Simple Flyer OR Basic Logo (2 revisions). Best For: Urgent sales/events.</p>
                             <button class="btn-req" onclick="openBrief('Graphics Basic')">Requirement List</button>
                         </div>
                         <div class="tier-card">
                             <h3>STANDARD</h3>
-                            <span class="tier-price">50,000 - 80,000 [cite: 8]</span>
-                            <span class="tier-time">1-3 Days [cite: 8]</span>
-                            <p>Deliverables: 2 Flyers + Professional Logo + Source Files. Best For: Brand foundations. [cite: 8]</p>
+                            <span class="tier-price">50,000 - 80,000</span>
+                            <span class="tier-time">1-3 Days</span>
+                            <p>Deliverables: 2 Flyers + Professional Logo + Source Files. Best For: Brand foundations.</p>
                             <button class="btn-req" onclick="openBrief('Graphics Standard')">Requirement List</button>
                         </div>
                         <div class="tier-card">
                             <h3>PREMIUM</h3>
-                            <span class="tier-price">120,000 - 250,000 [cite: 8]</span>
-                            <span class="tier-time">5-10 Days [cite: 8]</span>
-                            <p>Deliverables: Full Branding (Logo + Biz Card + Identity). Best For: professional identities. [cite: 8]</p>
+                            <span class="tier-price">120,000 - 250,000</span>
+                            <span class="tier-time">5-10 Days</span>
+                            <p>Deliverables: Full Branding (Logo + Biz Card + Identity). Best For: professional identities.</p>
                             <button class="btn-req" onclick="openBrief('Graphics Premium')">Requirement List</button>
                         </div>
                     </div>
                 </div>
 
                 <div class="service-section">
-                    <h2 class="section-title">2. Video Editing (Short-form/Social Media/Ads) [cite: 13]</h2>
-                    <p class="section-desc">High-retention editing for TikTok, Instagram Reels, and TV Ads. [cite: 14]</p>
+                    <h2 class="section-title">2. Video Editing (Short-form/Social Media/Ads)</h2>
+                    <p class="section-desc">High-retention editing for TikTok, Instagram Reels, and TV Ads.</p>
                     <div class="tier-grid">
                         <div class="tier-card">
                             <h3>BASIC</h3>
-                            <span class="tier-price">40,000 - 60,000 [cite: 15]</span>
-                            <span class="tier-time">2-5 Hours [cite: 15]</span>
-                            <p>Focus: Simple cuts, background music, and basic color correction. Ideal for: Quick daily updates and personal vlogs. [cite: 17, 18]</p>
+                            <span class="tier-price">40,000 - 60,000</span>
+                            <span class="tier-time">2-5 Hours</span>
+                            <p>Focus: Simple cuts, background music, and basic color correction. Ideal for: Quick daily updates and personal vlogs.</p>
                             <button class="btn-req" onclick="openBrief('Video Basic')">Requirement List</button>
                         </div>
                         <div class="tier-card">
                             <h3>STANDARD</h3>
-                            <span class="tier-price">80,000 - 150,000 [cite: 19]</span>
-                            <span class="tier-time">1-2 Days [cite: 19]</span>
-                            <p>Focus: Smooth transitions, professional color grading, and subtitles (essential for silent scrolling). Ideal for: Small business ads and professional social media content. [cite: 20, 21]</p>
+                            <span class="tier-price">80,000 - 150,000</span>
+                            <span class="tier-time">1-2 Days</span>
+                            <p>Focus: Smooth transitions, professional color grading, and subtitles (essential for silent scrolling). Ideal for: Small business ads and professional social media content.</p>
                             <button class="btn-req" onclick="openBrief('Video Standard')">Requirement List</button>
                         </div>
                         <div class="tier-card">
                             <h3>PREMIUM</h3>
-                            <span class="tier-price">200,000 – 400,000 [cite: 21]</span>
-                            <span class="tier-time">3-7 Days [cite: 21]</span>
-                            <p>Focus: Full production including Scripting + B-roll (extra footage) + Professional Voiceover. Ideal for: High-budget marketing campaigns and TV Commercials. [cite: 22, 23]</p>
+                            <span class="tier-price">200,000 – 400,000</span>
+                            <span class="tier-time">3-7 Days</span>
+                            <p>Focus: Full production including Scripting + B-roll (extra footage) + Professional Voiceover. Ideal for: High-budget marketing campaigns and TV Commercials.</p>
                             <button class="btn-req" onclick="openBrief('Video Premium')">Requirement List</button>
                         </div>
                     </div>
                 </div>
 
                 <div class="service-section">
-                    <h2 class="section-title">3. Motion Graphics (Animations/Explainers) [cite: 28]</h2>
-                    <p class="section-desc">Using movement to explain complex ideas or add prestige. [cite: 29]</p>
+                    <h2 class="section-title">3. Motion Graphics (Animations/Explainers)</h2>
+                    <p class="section-desc">Using movement to explain complex ideas or add prestige.</p>
                     <div class="tier-grid">
                         <div class="tier-card">
                             <h3>BASIC</h3>
-                            <span class="tier-price">50,000 – 70,000 [cite: 30]</span>
-                            <span class="tier-time">5-8 Hours [cite: 30]</span>
-                            <p>Deliverable: 5-10 second Logo Animation. Usage: Use this as an intro/outro for every video you ever make. [cite: 32, 33]</p>
+                            <span class="tier-price">50,000 – 70,000</span>
+                            <span class="tier-time">5-8 Hours</span>
+                            <p>Deliverable: 5-10 second Logo Animation. Usage: Use this as an intro/outro for every video you ever make.</p>
                             <button class="btn-req" onclick="openBrief('Motion Basic')">Requirement List</button>
                         </div>
                         <div class="tier-card">
                             <h3>STANDARD</h3>
-                            <span class="tier-price">150,000 – 250,000 [cite: 34]</span>
-                            <span class="tier-time">3-5 Days [cite: 34]</span>
-                            <p>Deliverable: 30-second 2D Explainer Video (using characters/icons). Usage: Perfect for teaching customers how to use your app or service. [cite: 35, 36]</p>
+                            <span class="tier-price">150,000 – 250,000</span>
+                            <span class="tier-time">3-5 Days</span>
+                            <p>Deliverable: 30-second 2D Explainer Video (using characters/icons). Usage: Perfect for teaching customers how to use your app or service.</p>
                             <button class="btn-req" onclick="openBrief('Motion Standard')">Requirement List</button>
                         </div>
                         <div class="tier-card">
                             <h3>PREMIUM</h3>
-                            <span class="tier-price">350,000 – 600,000 [cite: 37]</span>
-                            <span class="tier-time">2-3 Weeks [cite: 37]</span>
-                            <p>Deliverable: 1-minute Full Motion Graphic Ad (Custom Storytelling). Usage: A high-end asset for corporate presentations or viral marketing. [cite: 38, 39, 40]</p>
+                            <span class="tier-price">350,000 – 600,000</span>
+                            <span class="tier-time">2-3 Weeks</span>
+                            <p>Deliverable: 1-minute Full Motion Graphic Ad (Custom Storytelling). Usage: A high-end asset for corporate presentations or viral marketing.</p>
                             <button class="btn-req" onclick="openBrief('Motion Premium')">Requirement List</button>
                         </div>
                     </div>
                 </div>
 
                 <div class="service-section">
-                    <h2 class="section-title">4. Social Media Management (Monthly Retainers) [cite: 45]</h2>
-                    <p class="section-desc">We don't just post; we grow your community. [cite: 46]</p>
+                    <h2 class="section-title">4. Social Media Management (Monthly Retainers)</h2>
+                    <p class="section-desc">We don't just post; we grow your community.</p>
                     <div class="tier-grid">
                         <div class="tier-card">
                             <h3>LITE PLAN</h3>
-                            <span class="tier-price">250,000 – 400,000 TSH/mo [cite: 48]</span>
-                            <p>Platform: 1-2 (FB/IG). Content: 12 Posts per month + Caption writing. Goal: Keeping your page active so customers know you are open. [cite: 49, 51, 52]</p>
+                            <span class="tier-price">250,000 – 400,000 TSH/mo</span>
+                            <p>Platform: 1-2 (FB/IG). Content: 12 Posts per month + Caption writing. Goal: Keeping your page active so customers know you are open.</p>
                             <button class="btn-req" onclick="openBrief('Social Lite')">Requirement List</button>
                         </div>
                         <div class="tier-card">
                             <h3>GROWTH PLAN</h3>
-                            <span class="tier-price">500,000 – 850,000 TSH/mo [cite: 53]</span>
-                            <p>Platform: 3 (FB, IG, TikTok). Content: 20 Posts per month (includes 4 professional Reels/Videos). Strategy: Hashtag research, engagement with followers, and monthly reports. [cite: 54, 55, 56]</p>
+                            <span class="tier-price">500,000 – 850,000 TSH/mo</span>
+                            <p>Platform: 3 (FB, IG, TikTok). Content: 20 Posts per month (includes 4 professional Reels/Videos). Strategy: Hashtag research, engagement with followers, and monthly reports.</p>
                             <button class="btn-req" onclick="openBrief('Social Growth')">Requirement List</button>
                         </div>
                         <div class="tier-card">
                             <h3>DOMINATION PLAN</h3>
-                            <span class="tier-price">1,200,000+ TSH/mo [cite: 57]</span>
-                            <p>Platform: All major platforms. Content: Daily posting + Weekly video shoots + DM management. Ads: Management of Facebook/Instagram/Google Ads (Ad spend paid by client). [cite: 58, 59, 60]</p>
+                            <span class="tier-price">1,200,000+ TSH/mo</span>
+                            <p>Platform: All major platforms. Content: Daily posting + Weekly video shoots + DM management. Ads: Management of Facebook/Instagram/Google Ads (Ad spend paid by client).</p>
                             <button class="btn-req" onclick="openBrief('Social Domination')">Requirement List</button>
                         </div>
                     </div>
                 </div>
 
                 <div class="service-section">
-                    <h2 class="section-title">5. Our Terms of Engagement [cite: 65]</h2>
-                    <p class="section-desc">To ensure the best quality, we follow these professional standards: [cite: 66]</p>
+                    <h2 class="section-title">5. Our Terms of Engagement</h2>
+                    <p class="section-desc">To ensure the best quality, we follow these professional standards:</p>
                     <ul style="font-size: 14px; line-height: 1.8;">
-                        <li><strong>1. Payment: [cite: 67]</strong> A 50% deposit is required to begin any project. [cite: 67] The remaining balance is due upon final approval before files are delivered. [cite: 68]</li>
-                        <li><strong>2. Revisions: [cite: 69]</strong> Basic: 2 Rounds of minor changes. [cite: 69] Standard/Premium: Up to 4 Rounds of revisions. [cite: 70]</li>
-                        <li><strong>3. Rush Jobs: [cite: 71]</strong> If a "Standard" or "Premium" project is needed in "Basic" time, a 25% rush fee will be applied. [cite: 71]</li>
-                        <li><strong>4. Communication: [cite: 72]</strong> Clients must provide a clear "Brief" (instructions) before we start to ensure the 1-4 hour or 1-3day timelines are met. [cite: 72]</li>
+                        <li><strong>1. Payment:</strong> A 50% deposit is required to begin any project. The remaining balance is due upon final approval before files are delivered.</li>
+                        <li><strong>2. Revisions:</strong> Basic: 2 Rounds of minor changes. Standard/Premium: Up to 4 Rounds of revisions.</li>
+                        <li><strong>3. Rush Jobs:</strong> If a "Standard" or "Premium" project is needed in "Basic" time, a 25% rush fee will be applied.</li>
+                        <li><strong>4. Communication:</strong> Clients must provide a clear "Brief" (instructions) before we start to ensure the 1-4 hour or 1-3day timelines are met.</li>
                     </ul>
                 </div>
             `;
@@ -455,11 +468,11 @@
         function closeModal() { document.getElementById('briefModal').style.display = "none"; }
 
         function sendGmail() {
-            let body = `DEUSB PROJECT BRIEF\nCategory: ${selCat}\nBrand: ${document.getElementById('bizName').value}\n\n`;
+            let body = `DEUSB PROJECT BRIEF\n------------------\nCategory: ${selCat}\nBrand: ${document.getElementById('bizName').value}\n\n`;
             document.querySelectorAll('.dynamic-input').forEach(input => {
                 body += `Q: ${input.dataset.question}\nA: ${input.value}\n\n`;
             });
-            body += `Instructions: ${document.getElementById('projDesc').value}`;
+            body += `EXTRA INSTRUCTIONS: ${document.getElementById('projDesc').value}`;
             window.open(`https://mail.google.com/mail/?view=cm&fs=1&to=deusbentertainment@gmail.com&su=Brief: ${selCat}&body=${encodeURIComponent(body)}`);
         }
 

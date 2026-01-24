@@ -120,11 +120,10 @@
             font-size: 18px;
         }
 
-        /* --- STOO COLUMN GRID FOR MOBILE - REKEBISHO LA GAP --- */
         #mainGrid { 
             display: grid; 
             grid-template-columns: repeat(2, 1fr); 
-            gap: 8px; /* Nafasi ndogo ya pembeni */
+            gap: 8px; 
             align-items: flex-start; 
         }
 
@@ -141,7 +140,7 @@
             display: flex; 
             flex-direction: column;
             cursor: pointer;
-            margin-bottom: 5px; /* Inapunguza nafasi ya juu na chini */
+            margin-bottom: 5px; 
         }
 
         .kadi:hover { transform: translateY(-5px); }
@@ -320,7 +319,8 @@
             let html = `<div id="mainGrid">`;
             data.forEach(i => {
                 if (type === 'project') {
-                    html += `<div class="kadi" onclick="window.open('${i.link || '#'}')">
+                    // HAPA NIMEWEKA KADI IFUNGUKE KWENYE TAB MPYA ILI IENDE YOUTUBE AU LINK YOYOTE ILIYOPO KWENYE SHEET
+                    html += `<div class="kadi" onclick="window.open('${i.link || '#'}', '_blank')">
                         <div class="product-img-container">
                             <img src="${i.img}" class="product-img" onerror="this.src='https://via.placeholder.com/400x300?text=Image+Loading...'">
                         </div>

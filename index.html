@@ -109,7 +109,8 @@
 
         #btnBack { display: none; background: var(--brand-red); color: white; border-color: var(--brand-red); }
 
-        .container { max-width: 1200px; margin: 20px auto; padding: 0 15px; min-height: 400px; }
+        /* CHANGED: Container max-width increased for PC Full-Width look */
+        .container { max-width: 95%; margin: 20px auto; padding: 0 10px; min-height: 400px; }
         
         #loadingMsg { 
             text-align: center; 
@@ -120,16 +121,21 @@
             font-size: 18px;
         }
 
-        /* --- STOO COLUMN GRID FOR MOBILE - REKEBISHO LA GAP --- */
+        /* --- MASONRY LAYOUT LOGIC --- */
         #mainGrid { 
             display: grid; 
             grid-template-columns: repeat(2, 1fr); 
-            gap: 8px; /* Nafasi ndogo ya pembeni */
-            align-items: flex-start; 
+            grid-template-rows: masonry; /* Native Masonry (Firefox/Future) */
+            gap: 10px; 
+            align-items: start; 
         }
 
+        /* PC Full Display & Masonry Columns */
         @media (min-width: 768px) {
-            #mainGrid { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; }
+            #mainGrid { 
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
+                gap: 20px; 
+            }
         }
 
         .kadi { 
@@ -141,7 +147,9 @@
             display: flex; 
             flex-direction: column;
             cursor: pointer;
-            margin-bottom: 5px; /* Inapunguza nafasi ya juu na chini */
+            margin-bottom: 10px;
+            break-inside: avoid; /* Prevents splitting in column-based masonry fallback */
+            height: fit-content;
         }
 
         .kadi:hover { transform: translateY(-5px); }
@@ -159,16 +167,16 @@
         }
         
         .kadi-info { 
-            padding: 10px; 
+            padding: 12px; 
             text-align: left; 
         }
 
-        .kadi-info h3 { margin: 0 0 5px 0; color: var(--brand-blue); font-size: 14px; }
+        .kadi-info h3 { margin: 0 0 5px 0; color: var(--brand-blue); font-size: 15px; }
         
         .kadi-info p { 
             margin: 0; 
-            font-size: 11px; 
-            line-height: 1.3; 
+            font-size: 12px; 
+            line-height: 1.4; 
             color: #444;
             white-space: normal;
             word-wrap: break-word;
@@ -320,7 +328,8 @@
             let html = `<div id="mainGrid">`;
             data.forEach(i => {
                 if (type === 'project') {
-                    html += `<div class="kadi" onclick="window.open('${i.link || '#'}')">
+                    // LINK GUIDES TO SITE: Added onclick window.open to ensure project links work
+                    html += `<div class="kadi" onclick="window.open('${i.link || '#'}', '_blank')">
                         <div class="product-img-container">
                             <img src="${i.img}" class="product-img" onerror="this.src='https://via.placeholder.com/400x300?text=Image+Loading...'">
                         </div>
